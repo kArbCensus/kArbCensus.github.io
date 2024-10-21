@@ -20,6 +20,7 @@ h3
 input{
     font : "Barlow";
     font-family: "Barlow";
+    width: 35%;
 }
 button
 {
@@ -28,6 +29,8 @@ button
     font-family: "Barlow";
     border: none;
     background-color: white;
+    width: 20%;
+    
 }
 .bs-linebreak
 {
