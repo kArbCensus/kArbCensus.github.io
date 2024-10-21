@@ -1,28 +1,39 @@
 h1
 {
-    color: #266624;
+    color: White;
     text-align: center;
     font : "Barlow";
     font-family: "Barlow";
     font-weight: 900;
+    font-size: 3000;
     
 }
 h3
 {
-    color: #266624;
+    color: White;
     text-align: center;
     font : "Barlow";
     font-family: "Barlow";
+    font-weight: 200;
    
-    
+}
+input{
+    font : "Barlow";
+    font-family: "Barlow";
 }
 button
 {
+    font-weight: 200;
+    font : "Barlow";
+    font-family: "Barlow";
     border: none;
-    background-color: #499a46;
-    color: white;
+    background-color: white;
 }
 .bs-linebreak
 {
-    height: 100px;
+    height: 75px;
+}
+body
+{
+    background-color: #357960;
 }
