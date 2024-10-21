@@ -2,4 +2,21 @@ h1
 {
     color: #266624;
     text-align: center;
+    font-family: 'Verdana';
+    font-weight: bold;
+}
+h3
+{
+    color: #266624;
+    text-align: center;
+    font-family: 'Verdana';
+    font-weight: bold;
+}
+input
+{
+   align-items: center; 
+}
+.bs-linebreak
+{
+    height: 100px;
 }
