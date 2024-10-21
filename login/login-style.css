@@ -2,19 +2,25 @@ h1
 {
     color: #266624;
     text-align: center;
-    font-family: 'Verdana';
-    font-weight: bold;
+    font : "Barlow";
+    font-family: "Barlow";
+    font-weight: 900;
+    
 }
 h3
 {
     color: #266624;
     text-align: center;
-    font-family: 'Verdana';
-    font-weight: bold;
+    font : "Barlow";
+    font-family: "Barlow";
+   
+    
 }
-input
+button
 {
-   align-items: center; 
+    border: none;
+    background-color: #499a46;
+    color: white;
 }
 .bs-linebreak
 {
