@@ -20,6 +20,82 @@
 
     <script src="../banner-script.js" type="text/javascript"></script>
 
+
+    <div class="container">
+
+
+        <!--Banner-->
+        <div class="row" style="background-color: white;">
+
+            <!--Specific style changes-->
+            <style>
+                a {
+                    font: "Barlow";
+                    font-family: "Barlow";
+                    width: 5%;
+                    height: 100%;
+                    font-size: 200%;
+                    font-weight: bold;
+                    margin-right: 40px;
+                    color: black;
+                    text-decoration: none;
+                    margin-right: 2%;
+                    font-size: 25px;
+                }
+
+                button {
+                    width: 5%;
+                    height: 100%;
+                    background: none;
+                    font-size: 200%;
+                    font-weight: bold;
+                    margin-right: 40px;
+                }
+
+                h1 {
+                    margin-left: 15px;
+                }
+
+                body {
+                    overflow: hidden;
+                }
+            </style>
+
+            <!--Banner Items-->
+            <div class="col text-start">
+                <h1>Kalamazoo Arboretum Survey</h1>
+            </div>
+            <div class="col text-end">
+
+                <button onclick="changeVis('banner')">≣</button>
+            </div>
+        </div>
+
+        <!--Banner drop down menu-->
+        <div id="banner" style="visibility: hidden;">
+
+            <div class="row">
+                <div class="col bg-light"></div>
+                <div class="col-auto bg-light">
+                    <a href="../survey/">Survey</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col bg-light"></div>
+                <div class="col-auto bg-light">
+                    <a href="../settings/">Settings</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col bg-light"></div>
+                <div class="col-auto bg-light">
+                    <a href="../admin/">Admin</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
