@@ -5,7 +5,7 @@ h1
     font : "Barlow";
     font-family: "Barlow";
     font-weight: 900;
-    font-size: 400%;
+    font-size: 350%;
     
 }
 h3
@@ -36,10 +36,10 @@ button
 }
 .bs-linebreak
 {
-    height: 75px;
+    height: 80px;
 }
 body
 {
     background-color: #357960;
-    overflow: hidden;
+
 }
