@@ -30,6 +30,8 @@ button
     border: none;
     background-color: white;
     width: 25%;
+    border-radius: 50px;
+   
     
 }
 .bs-linebreak
