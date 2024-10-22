@@ -12,10 +12,13 @@
 </head>
 
 <body>
+    <!--Scripts for further use-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    
+    <script src="../banner-script.js"></script>
 
     <div class="container">
 
@@ -48,13 +51,12 @@
                 <h1>Kalamazoo Arboretum Survey</h1>
             </div>
             <div class="col text-end">
-                <button onclick="">≣</button>
-                </select>
+                <button onclick="changeVis('banner')">≣</button>
             </div>
         </div>
 
         <!--Banner drop down menu-->
-        <div id="banner" style="visibility: visible;">
+        <div id="banner" style="visibility: hidden;">
 
             <div class="row">
                 <div class="col bg-light"></div>
