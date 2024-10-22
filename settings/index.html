@@ -16,45 +16,64 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    <!--Banner-->
-    <div class="row">
 
-        <!--Specific style changes-->
-        <style>
-            button {
-                width: 5%;
-                height: 100%;
-                background: none;
-                font-size: 200%;
-                font-weight: bold;
-                margin-right: 40px;
-            }
+    <div class="container">
 
-            h1 {
-                margin-left: 15px;
-            }
 
-            body {
-                overflow: hidden;
-            }
-        </style>
+        <!--Banner-->
+        <div class="row" style="background-color: white;">
 
-        <!--Banner Items-->
-        <div class="col bg-light text-start">
-            <h1>Kalamazoo Arboretum Survey</h1>
+            <!--Specific style changes-->
+            <style>
+                button {
+                    width: 5%;
+                    height: 100%;
+                    background: none;
+                    font-size: 200%;
+                    font-weight: bold;
+                    margin-right: 40px;
+                }
+
+                h1 {
+                    margin-left: 15px;
+                }
+
+                body {
+                    overflow: hidden;
+                }
+            </style>
+
+            <!--Banner Items-->
+            <div class="col text-start">
+                <h1>Kalamazoo Arboretum Survey</h1>
+            </div>
+            <div class="col text-end">
+                <button onclick="">≣</button>
+                </select>
+            </div>
         </div>
-        <div class="col bg-light text-end">
-            <script src="https://karbcensus.github.io/banner-script.js"></script>
-            <button onclick="">≣</button>
-            </select>
+
+        <!--Banner drop down menu-->
+        <div id="banner" style="visibility: visible;">
+
+            <div class="row">
+                <div class="col-xs-4 bg-light text-end">
+                    <button style="margin-right: 5%">Survey</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 bg-light text-end">
+                    <button style="margin-right: 5%">Settings</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 bg-light text-end">
+                    <button style="margin-right: 5%">Admin</button>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!--Banner drop down menu-->
-    <div class="row">
 
     </div>
-
 
 </body>
 
