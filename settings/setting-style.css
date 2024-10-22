@@ -38,4 +38,5 @@ button
 body
 {
     background-color: #357960;
+    overflow: hidden;
 }
