@@ -7,9 +7,17 @@ h1
     font-size: 100;
     
 }
+h2
+{
+    font : "Barlow";
+    font-family: "Barlow";
+    font-weight: 200;
+    font-size: 250%;
+    padding: 2%;
+}
 h3
 {
-    color: White;
+    color: black;
     text-align: center;
     font : "Barlow";
     font-family: "Barlow";
@@ -20,6 +28,7 @@ input{
     font : "Barlow";
     font-family: "Barlow";
     width: 75%;
+    margin-bottom: 2%;
 }
 button
 {
