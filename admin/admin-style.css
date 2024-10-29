@@ -1,41 +1,58 @@
-h1
-{
+h1 {
     color: black;
-    font : "Barlow";
+    font: "Barlow";
     font-family: "Barlow";
     font-weight: 900;
     font-size: 100;
-    
+
 }
-h3
-{
+
+h3 {
     color: White;
     text-align: center;
-    font : "Barlow";
+    font: "Barlow";
     font-family: "Barlow";
     font-weight: 200;
-   
+
 }
-input{
-    font : "Barlow";
+
+input {
+    font: "Barlow";
     font-family: "Barlow";
     width: 75%;
 }
-button
-{
+
+button {
     font-weight: 200;
-    font : "Barlow";
+    font: "Barlow";
     font-family: "Barlow";
     border: none;
     background-color: white;
     width: 25%;
-    
 }
-.bs-linebreak
-{
+
+.bs-linebreak {
     height: 75px;
 }
-body
-{
+
+body {
     background-color: #357960;
+}
+
+.btn {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+#admin-button{
+    font-size: 150%;
+    padding: 3%;
+    font-weight: 200;
+    border: solid;
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+    font-family: 'Barlow';
 }
