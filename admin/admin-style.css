@@ -11971,6 +11971,7 @@ h1, .h1 {
   font-family: "Barlow";
   font-weight: 900;
   font-size: 100;
+  margin-top: 1%;
   font-size: calc(1.375rem + 1.5vw);
 }
 @media (min-width: 1200px) {
@@ -12043,7 +12044,6 @@ button {
   font-family: "Barlow";
   width: 5%;
   height: 100%;
-  font-size: 200%;
   font-weight: bold;
   margin-right: 40px;
   color: black;
