@@ -12048,6 +12048,7 @@ button {
   margin-right: 40px;
   color: black;
   text-decoration: none;
+  text-wrap: nowrap;
   margin-right: 2%;
   font-size: calc(1.275rem + 0.3vw);
 }
