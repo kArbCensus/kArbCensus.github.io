@@ -20,48 +20,18 @@
 
 
 <body>
-    <div class="container">
+    <div class="container-fluid full-width">
 
         <!--Banner-->
         <div class="sticky-top">
 
-            <!--Specific style changes-->
-            <style>
-                a {
-                    font: "Barlow";
-                    font-family: "Barlow";
-                    width: 5%;
-                    height: 100%;
-                    font-size: 200%;
-                    font-weight: bold;
-                    margin-right: 40px;
-                    color: black;
-                    text-decoration: none;
-                    margin-right: 2%;
-                    font-size: 25px;
-                }
-
-                button {
-                    width: 5%;
-                    height: 100%;
-                    background: none;
-                    font-size: 200%;
-                    font-weight: bold;
-                    margin-right: 40px;
-                }
-
-                h1 {
-                    margin-left: 15px;
-                }
-            </style>
-
             <!--Banner Items-->
             <div class="row" style="background-color: white;">
                 <div class="col text-start">
-                    <h1>Kalamazoo Arboretum Survey</h1>
+                    <h1 style="margin-left: 15px;">Kalamazoo Arboretum Survey</h1>
                 </div>
                 <div class="col text-end">
-                    <button onclick="changeVis('banner')">≣</button>
+                    <button onclick="changeVis('banner')" id="to-drop-down-button">≣</button>
                 </div>
             </div>
 
@@ -72,23 +42,26 @@
                 <div class="row">
                     <div class="col bg-light"></div>
                     <div class="col-auto bg-light">
-                        <a href="../survey/">Survey</a>
+                        <a href="../survey/" id="banner-drop-option">Survey</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col bg-light"></div>
                     <div class="col-auto bg-light">
-                        <a href="../settings/">Settings</a>
+                        <a href="../settings/" id="banner-drop-option">Settings</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col bg-light"></div>
                     <div class="col-auto bg-light">
-                        <a href="../admin/">Admin</a>
+                        <a href="../admin/" id="banner-drop-option">Admin</a>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
 
         <!--Line Break-->
         <div class="row">
@@ -105,13 +78,17 @@
                     <div class="panel-body">
                         <a class="btn" href="https://www.google.co.uk/" id="admin-button"> Download database content as a CSV<a>
                                 <br>
+                                <br>
                                 <a class="btn " href="https://www.google.co.uk/" id="admin-button">Create a new student
                                     account<a>
+                                        <br>
+                                        <br>
                                         <br>
                                         <h3>Current census: ___</h3>
                                         <a class="btn " href="https://www.google.co.uk/" id="admin-button"> Start new
                                             census
                                             <a>
+                                                <br>
                                                 <br>
                                                 <a class="btn " href="https://www.google.co.uk/" id="admin-button">
                                                     End current census

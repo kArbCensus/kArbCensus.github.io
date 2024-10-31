@@ -1,0 +1,82 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+h1 {
+    color: black;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 900;
+    font-size: 100;
+    @include font-size(2.5rem);
+}
+
+h3 {
+    color: White;
+    text-align: center;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 200;
+    @include font-size(2rem);
+}
+
+input {
+    font: "Barlow";
+    font-family: "Barlow";
+    width: 75%;
+}
+
+.bs-linebreak {
+    height: 75px;
+}
+
+body {
+    background-color: #357960;
+}
+
+button{
+    font-weight: 200;
+    font: "Barlow";
+    font-family: "Barlow";
+    border: none;
+    background-color: white;
+    width: 25%;
+}
+
+.btn {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+#admin-button {
+    @include font-size(2rem);
+    padding: 3%;
+    border: solid;
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+    font-family: 'Barlow';
+}
+
+#banner-drop-option {
+    font: "Barlow";
+    font-family: "Barlow";
+    width: 5%;
+    height: 100%;
+    font-size: 200%;
+    font-weight: bold;
+    margin-right: 40px;
+    color: black;
+    text-decoration: none;
+    margin-right: 2%;
+    font-size: 25px; 
+}
+
+#to-drop-down-button {
+    width: 5%;
+    height: 100%;
+    background: none;
+    @include font-size(2.5rem);
+    font-weight: bold;
+    margin-right: 40px;
+}
