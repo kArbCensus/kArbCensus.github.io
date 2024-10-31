@@ -138,11 +138,14 @@
             const logoutButton = document.getElementById("logout");
 
             logoutButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            auth0Client.logout({
-                returnTo: window.location.protocol + "//" + window.location.host + "/login/",
-                client_id: "2kldI7VhApWNbFemvlgfavjne4alLCZz"
-            });
+                e.preventDefault();
+                auth0Client.logout({
+                    clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
+                    logoutParams: {
+                        returnTo:
+                        window.location.protocol + "//" + window.location.host + "/login/",
+                    },
+                });
             });
 
             // Get authentication data
