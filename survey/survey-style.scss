@@ -1,0 +1,72 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+h1 {
+    color: black;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 900;
+    font-size: 100;
+    margin-top: 1%;
+    @include font-size(2.5rem);
+}
+
+h3 {
+    color: White;
+    text-align: center;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 200;
+    @include font-size(2rem);
+}
+
+input {
+    font: "Barlow";
+    font-family: "Barlow";
+    width: 75%;
+}
+
+body {
+    background-color: #357960;
+}
+
+button {
+    font-weight: 200;
+    font: "Barlow";
+    font-family: "Barlow";
+    border: none;
+    background-color: white;
+    width: 25%;
+}
+
+.bs-linebreak {
+    height: 75px;
+}
+
+.btn {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+#banner-drop-option {
+    font: "Barlow";
+    font-family: "Barlow";
+    width: 5%;
+    height: 100%;
+    font-weight: bold;
+    margin-right: 40px;
+    color: black;
+    text-decoration: none;
+    text-wrap: nowrap;
+    margin-right: 2%;
+    @include font-size(1.5rem);
+}
+
+#to-drop-down-button {
+    width: 5%;
+    height: 100%;
+    background: none;
+    @include font-size(2.5rem);
+    font-weight: bold;
+    margin-right: 40px;
+}
