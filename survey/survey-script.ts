@@ -12,3 +12,14 @@ function createPlotOptions() {
         select?.appendChild(option);
     }
 }
+
+// Updating the table for a new plot choice
+function updateSurveyTable()
+{
+    const surveyTable = document.getElementById("survey-table");
+
+    if(surveyTable.style.visibility == "hidden")
+    {
+        surveyTable.style.visibility = "visible";
+    }
+}

@@ -9,4 +9,11 @@ function createPlotOptions() {
         select === null || select === void 0 ? void 0 : select.appendChild(option);
     }
 }
+// Updating the table for a new plot choice
+function updateSurveyTable() {
+    var surveyTable = document.getElementById("survey-table");
+    if (surveyTable.style.visibility == "hidden") {
+        surveyTable.style.visibility = "visible";
+    }
+}
 //# sourceMappingURL=survey-script.js.map

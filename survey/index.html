@@ -86,7 +86,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-                <select name="plot" id="plot-select" class="form-select">
+                <select name="plot" id="plot-select" class="form-select" onchange="updateSurveyTable()">
                     <option value="ChosePlot">Chose a plot here</option>
                 </select>
             </div>
@@ -101,7 +101,7 @@
         <br>
 
         <!--The interactive table-->
-        <div class="row" id="survey-table">
+        <div class="row" id="survey-table" style="visibility: hidden;">
             <div class="col"></div>
             <div class="col-9">
                 <table class="table">
