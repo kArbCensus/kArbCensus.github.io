@@ -1,6 +1,6 @@
-// Toggles element visibility by id
-function changeVis(id) {
-    var dropDown = document.getElementById(id);
+// Toggles drop down for the banner
+function changeVis() {
+    var dropDown = document.getElementById("banner");
     if (dropDown.style.visibility == "visible") {
         dropDown.style.visibility = "hidden";
     }
