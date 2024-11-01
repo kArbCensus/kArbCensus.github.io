@@ -15,5 +15,9 @@ function updateSurveyTable() {
     if (surveyTable.style.visibility == "hidden") {
         surveyTable.style.visibility = "visible";
     }
+    // Getting our plot
+    var selection = document.getElementById("plot-select");
+    var chosenPlot = parseInt(selection.options[selection.selectedIndex].value);
+    console.log(chosenPlot);
 }
 //# sourceMappingURL=survey-script.js.map
