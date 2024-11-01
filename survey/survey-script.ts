@@ -33,7 +33,8 @@ function updateSurveyTable()
 
 
     //TODO: Do an API call to get all of the trees in the chosen plot
-    
+    const test = new tableItems();
+    console.log(test);
 
     //TODO: Clear out the current items in the table
 
@@ -41,3 +42,39 @@ function updateSurveyTable()
 
 
 // Setting the current array to contain the values from a json file
+
+
+class tableItems
+{
+    plotId: number;
+    specied: string;
+    recentTag: number;
+    status: string;
+    DBH: number;
+    comments: string;
+    treeSize: size;
+    matchNum: match;
+
+    constructor()
+    {
+        
+    }
+
+}
+
+// Aspects of trees
+enum size
+{
+    small,
+    medium, 
+    big,
+}
+
+enum match
+{
+    definitely,
+    probably,
+    newTree,
+    oldTree,
+    lost,
+}

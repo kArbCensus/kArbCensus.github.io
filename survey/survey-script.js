@@ -20,7 +20,28 @@ function updateSurveyTable() {
     const select = document.getElementById("plot-select");
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
     //TODO: Do an API call to get all of the trees in the chosen plot
+    const test = new tableItems();
+    console.log(test);
     //TODO: Clear out the current items in the table
 }
 // Setting the current array to contain the values from a json file
+class tableItems {
+    constructor() {
+    }
+}
+// Aspects of trees
+var size;
+(function (size) {
+    size[size["small"] = 0] = "small";
+    size[size["medium"] = 1] = "medium";
+    size[size["big"] = 2] = "big";
+})(size || (size = {}));
+var match;
+(function (match) {
+    match[match["definitely"] = 0] = "definitely";
+    match[match["probably"] = 1] = "probably";
+    match[match["newTree"] = 2] = "newTree";
+    match[match["oldTree"] = 3] = "oldTree";
+    match[match["lost"] = 4] = "lost";
+})(match || (match = {}));
 //# sourceMappingURL=survey-script.js.map
