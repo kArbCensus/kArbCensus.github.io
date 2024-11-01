@@ -85,3 +85,9 @@ button {
     border: none;
     position: relative;
 }
+
+table
+{
+    font-family: "Barlow";
+    @include font-size(1rem);
+}
