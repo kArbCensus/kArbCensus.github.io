@@ -28,4 +28,9 @@ function updateSurveyTable()
     const chosenPlot = parseInt(selection.options[selection.selectedIndex].value);
 
     console.log(chosenPlot);
+
+
+    //TODO: Do an API call to get all of the trees in the chosen plot
+    
+
 }
