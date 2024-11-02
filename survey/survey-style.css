@@ -12105,7 +12105,7 @@ table thead {
 
 th,
 td {
-  width: 30%;
+  width: 28%;
   min-width: 200px;
   white-space: nowrap;
 }
@@ -12116,5 +12116,7 @@ td {
   font-family: "Barlow";
   border-radius: 50px;
   border: none;
-  scale: 125%;
+  scale: 120%;
+  color: white;
+  padding: 1%;
 }/*# sourceMappingURL=survey-style.css.map */
