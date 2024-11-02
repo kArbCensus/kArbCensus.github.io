@@ -21,7 +21,7 @@ function updateSurveyTable() {
     const select = document.getElementById("plot-select");
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
     //TODO: Use API to get a JSON file for the provided plot
-    changeArrFromJson( /*JSON file goes in here*/);
+    changeArrFromJson( /*JSON obj goes in here*/);
     //Clear out the current items in the table
     const body = document.getElementById("table-body");
     body.innerHTML = '';
@@ -30,8 +30,15 @@ function updateSurveyTable() {
         let newRow = document.createElement('tr');
         newRow.id = "" + i;
         let tree = currentTrees[i];
+        // The view button
         let updater = document.createElement('td');
-        updater.appendChild(document.createTextNode("Button here!"));
+        let button = document.createElement('button');
+        updater.style.width = "10%";
+        button.id = "table-button";
+        //button.onclick = "";
+        button.appendChild(document.createTextNode("Info"));
+        // Each other aspect of the button
+        updater.appendChild(button);
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
         let size = document.createElement('td');
@@ -46,7 +53,9 @@ function updateSurveyTable() {
     }
 }
 // Setting the current array to contain the values from a json file
-function changeArrFromJson( /*JSON file goes in here*/) {
+function changeArrFromJson( /*JSON objs goes in here*/) {
+    //cats over the json strings with its attributes into the custom class
+    //each obj into the array 
     currentTrees = [new tableItems(), new tableItems()];
 }
 // Class for storing objects to represent a tree from the DB
