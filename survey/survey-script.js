@@ -34,6 +34,7 @@ function updateSurveyTable() {
         let updater = document.createElement('td');
         let button = document.createElement('button');
         updater.style.width = "10%";
+        updater.style.minWidth = "150px";
         button.id = "table-button";
         //button.onclick = "";
         button.appendChild(document.createTextNode("Info"));
