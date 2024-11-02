@@ -1,5 +1,5 @@
 // All of the trees for a chosen plot
-
+let currentTrees = new Array<tableItems>();
 
 // Populating the plot drop down
 function createPlotOptions() {
@@ -8,22 +8,20 @@ function createPlotOptions() {
 
 
     //TODO: have this not be a set #, but rather do an API call to get the total number of plots
-    for (let i = 1; i < 41; i++)
-    {
+    for (let i = 1; i < 41; i++) {
         const option = document.createElement('option');
-        option.value=""+i;
-        option?.appendChild(document.createTextNode(""+i));
+        option.value = "" + i;
+        option?.appendChild(document.createTextNode("" + i));
         select.appendChild(option);
     }
 }
 
+
 // Updating the table for a new plot choice
-function updateSurveyTable()
-{
+function updateSurveyTable() {
     const surveyTable = document.getElementById("survey-table");
 
-    if(surveyTable.style.visibility == "hidden")
-    {
+    if (surveyTable.style.visibility == "hidden") {
         surveyTable.style.visibility = "visible";
     }
 
@@ -32,22 +30,53 @@ function updateSurveyTable()
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
 
 
-    //TODO: Do an API call to get all of the trees in the chosen plot
-    const test = new tableItems();
-    console.log(test);
+    //TODO: Use API to get a JSON file for the provided plot
 
-    //TODO: Clear out the current items in the table
+    changeArrFromJson(/*JSON file goes in here*/);
+
+
+    //Clear out the current items in the table
+    const body = document.getElementById("table-body");
+    body.innerHTML = '';
+
+    // Adds the new items to the body
+    for (let i = 0; i < currentTrees.length; i++) {
+        let newRow = document.createElement('tr');
+        newRow.id = "" + i;
+
+        let tree = currentTrees[i];
+
+        let updater = document.createElement('td');
+        updater.appendChild(document.createTextNode("Button here!"));
+        let tag = document.createElement('td');
+        tag.appendChild(document.createTextNode("" + tree.recentTag));
+        let size = document.createElement('td');
+        size.appendChild(document.createTextNode("" + tree.treeSize));
+        let species = document.createElement('td');
+        species.appendChild(document.createTextNode("" + tree.species));
+
+        newRow.appendChild(updater);
+        newRow.appendChild(tag);
+        newRow.appendChild(size);
+        newRow.appendChild(species);
+
+        body.appendChild(newRow);
+    }
 
 }
 
 
 // Setting the current array to contain the values from a json file
+function changeArrFromJson(/*JSON file goes in here*/) {
+    currentTrees = [new tableItems(), new tableItems()];
+}
 
 
-class tableItems
-{
+
+// Class for storing objects to represent a tree from the DB
+class tableItems {
     plotId: number;
-    specied: string;
+    species: string;
     recentTag: number;
     status: string;
     DBH: number;
@@ -55,23 +84,19 @@ class tableItems
     treeSize: size;
     matchNum: match;
 
-    constructor()
-    {
-        
-    }
+    constructor() {
 
+    }
 }
 
 // Aspects of trees
-enum size
-{
+enum size {
     small,
-    medium, 
+    medium,
     big,
 }
 
-enum match
-{
+enum match {
     definitely,
     probably,
     newTree,

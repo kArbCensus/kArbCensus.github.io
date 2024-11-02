@@ -1,4 +1,5 @@
 // All of the trees for a chosen plot
+let currentTrees = new Array();
 // Populating the plot drop down
 function createPlotOptions() {
     const select = document.getElementById("plot-select");
@@ -19,12 +20,36 @@ function updateSurveyTable() {
     // Getting our plot
     const select = document.getElementById("plot-select");
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
-    //TODO: Do an API call to get all of the trees in the chosen plot
-    const test = new tableItems();
-    console.log(test);
-    //TODO: Clear out the current items in the table
+    //TODO: Use API to get a JSON file for the provided plot
+    changeArrFromJson( /*JSON file goes in here*/);
+    //Clear out the current items in the table
+    const body = document.getElementById("table-body");
+    body.innerHTML = '';
+    // Adds the new items to the body
+    for (let i = 0; i < currentTrees.length; i++) {
+        let newRow = document.createElement('tr');
+        newRow.id = "" + i;
+        let tree = currentTrees[i];
+        let updater = document.createElement('td');
+        updater.appendChild(document.createTextNode("Button here!"));
+        let tag = document.createElement('td');
+        tag.appendChild(document.createTextNode("" + tree.recentTag));
+        let size = document.createElement('td');
+        size.appendChild(document.createTextNode("" + tree.treeSize));
+        let species = document.createElement('td');
+        species.appendChild(document.createTextNode("" + tree.species));
+        newRow.appendChild(updater);
+        newRow.appendChild(tag);
+        newRow.appendChild(size);
+        newRow.appendChild(species);
+        body.appendChild(newRow);
+    }
 }
 // Setting the current array to contain the values from a json file
+function changeArrFromJson( /*JSON file goes in here*/) {
+    currentTrees = [new tableItems(), new tableItems()];
+}
+// Class for storing objects to represent a tree from the DB
 class tableItems {
     constructor() {
     }
