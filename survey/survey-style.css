@@ -12090,7 +12090,6 @@ table {
   display: block;
   overflow-x: auto;
   white-space: nowrap;
-  table-layout: fixed;
   border-radius: 25px;
 }
 
@@ -12099,15 +12098,14 @@ table tbody {
   width: 100%;
 }
 
-th {
-  width: 25%;
-}
-
-td {
-  width: 25%;
-}
-
 table thead {
   display: table;
   width: 100%;
+}
+
+th,
+td {
+  width: 25%;
+  min-width: 200px;
+  white-space: nowrap;
 }/*# sourceMappingURL=survey-style.css.map */
