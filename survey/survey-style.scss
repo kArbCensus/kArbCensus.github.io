@@ -91,4 +91,28 @@ table
     font-family: "Barlow";
     @include font-size(1rem);
     border: none;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    table-layout: fixed;
+    border-radius: 25px;
+    
+}
+
+table tbody {
+    display: table;
+    width: 100%;
+
+}
+
+th{
+    width: 25%;
+}
+td{
+    width: 25%;
+}
+
+table thead{
+    display: table;
+    width: 100%;
 }
