@@ -12063,7 +12063,7 @@ button {
   width: 100%;
   background-color: white;
   color: black;
-  border-radius: 50px;
+  border-radius: 30px;
   font-family: "Barlow";
 }
 @media (min-width: 1200px) {

@@ -12073,7 +12073,7 @@ button {
 #plot-select {
   font-size: calc(1.275rem + 0.3vw);
   font-family: "Barlow";
-  border-radius: 50px;
+  border-radius: 20px;
   border: none;
   position: relative;
 }
@@ -12090,7 +12090,7 @@ table {
   display: block;
   overflow-x: auto;
   white-space: nowrap;
-  border-radius: 25px;
+  border-radius: 10px;
 }
 
 table tbody {
@@ -12115,9 +12115,23 @@ td {
   background-color: #357960;
   font-size: 1rem;
   font-family: "Barlow";
-  border-radius: 50px;
+  border-radius: 10px;
   border: none;
   scale: 120%;
   color: white;
   padding: 1%;
+}
+
+#add-new-tree-button {
+  font-size: calc(1.275rem + 0.3vw);
+  font-family: "Barlow";
+  border-radius: 15px;
+  padding: 1%;
+  border: none;
+  min-width: 130px;
+}
+@media (min-width: 1200px) {
+  #add-new-tree-button {
+    font-size: 1.5rem;
+  }
 }/*# sourceMappingURL=survey-style.css.map */

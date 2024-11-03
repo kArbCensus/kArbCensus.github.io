@@ -83,7 +83,7 @@ button {
 #plot-select {
     @include font-size(1.5rem);
     font-family: "Barlow";
-    border-radius: 50px;
+    border-radius: 20px;
     border: none;
     position: relative;
 }
@@ -95,7 +95,7 @@ table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-    border-radius: 25px;
+    border-radius: 10px;
 
 }
 
@@ -121,9 +121,19 @@ td {
     background-color: #357960;
     @include font-size(1rem);
     font-family: "Barlow";
-    border-radius: 50px;
+    border-radius: 10px;
     border: none;
     scale: 120%;
     color: white;
     padding: 1%;
+}
+
+#add-new-tree-button
+{
+    @include font-size(1.5rem);
+    font-family: "Barlow";
+    border-radius: 15px;
+    padding: 1%;
+    border: none;
+    min-width: 130px;
 }
