@@ -35,13 +35,13 @@
                     <h1 style="margin-left: 15px;">Kalamazoo Arboretum Survey</h1>
                 </div>
                 <div class="col text-end">
-                    <button onclick="changeVis()" id="to-drop-down-button">≣</button>
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#banner" aria-expanded="false" aria-controls="banner" id="to-drop-down-button">≣</button>
                 </div>
             </div>
 
 
             <!--Banner drop down menu-->
-            <div id="banner" style="visibility: hidden;">
+            <div id="banner" class="collapse container-fluid full-width" >
 
                 <div class="row">
                     <div class="col bg-light"></div>
@@ -73,7 +73,11 @@
 
 
         <!--THE SURVEY ITSELF!-->
-
+        <div class="row">
+            <div class="col-xs-12 bs-linebreak">
+            </div>
+        </div>
+        <br>
 
         <!--Choosing a plot-->
         <div class="row">
