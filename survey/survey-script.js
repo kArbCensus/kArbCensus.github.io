@@ -13,8 +13,13 @@ function createPlotOptions() {
 }
 // Updating the table for a new plot choice
 function updateSurveyTable() {
+    const addButton1 = document.getElementById("add-button-1");
+    const addButton2 = document.getElementById("add-button-2");
     const surveyTable = document.getElementById("survey-table");
+    // Making the survey visible
     if (surveyTable.style.visibility == "hidden") {
+        addButton1.style.visibility = "visible";
+        addButton2.style.visibility = "visible";
         surveyTable.style.visibility = "visible";
     }
     // Getting our plot
