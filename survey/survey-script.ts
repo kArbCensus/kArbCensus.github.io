@@ -31,8 +31,10 @@ function updateSurveyTable() {
 
 
     //TODO: Use API to get a JSON file for the provided plot
-
     changeArrFromJson(/*JSON obj goes in here*/);
+
+    //TODO: Use the an API call to get and set the year
+    const currentYear = 2025;
 
 
     //Clear out the current items in the table
@@ -55,7 +57,7 @@ function updateSurveyTable() {
         //button.onclick = "";
         button.appendChild(document.createTextNode("Info"))
 
-        // Each other aspect of the button
+        // Each other aspect of an entry
         updater.appendChild(button);
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
@@ -64,10 +66,18 @@ function updateSurveyTable() {
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
 
+
+        if (tree.year == currentYear) {
+            newRow.className = "table-active";
+        }
+
+        // Adding each entry aspect
         newRow.appendChild(updater);
         newRow.appendChild(tag);
         newRow.appendChild(size);
         newRow.appendChild(species);
+
+
 
         body.appendChild(newRow);
     }
@@ -79,7 +89,7 @@ function updateSurveyTable() {
 function changeArrFromJson(/*JSON objs goes in here*/) {
     //cats over the json strings with its attributes into the custom class
     //each obj into the array 
-    currentTrees = [new tableItems(), new tableItems()];
+    currentTrees = [new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems()];
 }
 
 
@@ -94,9 +104,10 @@ class tableItems {
     comments: string;
     treeSize: size;
     matchNum: match;
+    year: number;
 
     constructor() {
-
+        this.year = 2025
     }
 }
 
