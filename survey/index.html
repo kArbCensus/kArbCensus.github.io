@@ -33,7 +33,8 @@
                     <h1 style="margin-left: 15px;">Kalamazoo Arboretum Survey</h1>
                 </div>
                 <div class="col text-end">
-                    <button type="button" data-bs-toggle="collapse" data-bs-target="#banner" aria-expanded="false" aria-controls="banner" id="to-drop-down-button">≣</button>
+                    <button type="button" data-bs-toggle="collapse" data-bs-target="#banner" aria-expanded="false"
+                        aria-controls="banner" id="to-drop-down-button">≣</button>
                 </div>
             </div>
 
@@ -69,6 +70,24 @@
         </div>
 
 
+        <!--Survey table popups-->
+        <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Update & View</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        INFO WILL GO HERE
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" id="pop-up-update">Confirm Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--THE SURVEY ITSELF!-->
         <div class="row">
@@ -107,13 +126,13 @@
         <div class="row" id="add-button" style="visibility: hidden;">
             <div class="col-3 "></div>
             <div class="col-6 text-center">
-                <button id="add-new-tree-button">
+                <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up">
                     Add new tree
                 </button>
             </div>
             <div class="col-3"></div>
         </div>
-        
+
 
         <!--The interactive table-->
         <div class="row" id="survey-table" style="visibility: hidden;">

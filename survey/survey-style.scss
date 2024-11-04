@@ -137,3 +137,31 @@ td {
     border: none;
     min-width: 130px;
 }
+
+#pop-up-update
+{
+    @include font-size(1.2rem);
+    background-color: #357960;
+    font-family: 'Barlow';
+    border: none;
+    color: white;
+    width: 100%;
+}
+
+.modal
+{
+    font-family: 'Barlow';
+    font-weight: bold;
+
+}
+
+.modal-body
+{
+    font-weight: 300;
+}
+
+h5
+{
+    font-weight: bold;
+}
+
