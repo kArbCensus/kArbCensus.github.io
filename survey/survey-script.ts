@@ -58,7 +58,8 @@ function updateSurveyTable() {
         updater.style.width = "16%";
         updater.style.minWidth = "150px";
         button.id = "table-button";
-        //button.onclick = "";
+        button.setAttribute('data-bs-toggle', 'modal');
+        button.setAttribute('data-bs-target', '#pop-up');
         button.appendChild(document.createTextNode("Info"))
 
         // Each other aspect of an entry
