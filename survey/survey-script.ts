@@ -21,18 +21,6 @@ function createPlotOptions() {
     }
 }
 
-// Finds all tool tip spots in the code and passes them on to be created
-function setUpToolTips() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(createAToolTip);
-}
-
-// Initializes a tooltip at a marked spot
-function createAToolTip(tooltipTriggerEl) {
-    new bootstrap.Tooltip(tooltipTriggerEl);
-}
-
-
 
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 

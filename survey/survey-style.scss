@@ -117,7 +117,7 @@ td {
     white-space: nowrap;
 }
 
-#table-button{
+#table-button {
     background-color: #357960;
     @include font-size(1rem);
     font-family: "Barlow";
@@ -128,8 +128,7 @@ td {
     padding: 1%;
 }
 
-#add-new-tree-button
-{
+#add-new-tree-button {
     @include font-size(1.5rem);
     font-family: "Barlow";
     border-radius: 15px;
@@ -138,8 +137,7 @@ td {
     min-width: 130px;
 }
 
-#pop-up-update
-{
+#pop-up-update {
     @include font-size(1.2rem);
     background-color: #357960;
     font-family: 'Barlow';
@@ -148,20 +146,26 @@ td {
     width: 100%;
 }
 
-.modal
-{
+.modal {
     font-family: 'Barlow';
     font-weight: bold;
 
 }
 
-.modal-body
-{
+.modal-body {
     font-weight: 300;
 }
 
-h5
-{
+h5 {
     font-weight: bold;
 }
 
+h4 {
+    @include font-size(1.2rem);
+}
+
+.text-overflow-center {
+    margin-left: -100%;
+    margin-right: -100%;
+    text-align: center;
+}

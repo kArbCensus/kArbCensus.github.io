@@ -17,6 +17,20 @@
 
     <script src="survey-script.js" type="text/javascript"></script>
 
+    <script>
+        // Finds all tool tip spots in the code and passes them on to be created
+        function setUpToolTips() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(createAToolTip);
+        }
+
+        // Initializes a tooltip at a marked spot
+        function createAToolTip(tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        }
+
+    </script>
+
 
 </head>
 
@@ -94,12 +108,109 @@
                                         data-bs-title="The identified type of tree.">
                                         Species</h4>
                                 </div>
-                                <div class="col-4 text-center">
+                                <div class="col-4 text-center" id="given-specicies">
                                     <h4>____</h4>
                                 </div>
                                 <div class="col-2"></div>
-
                             </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="The last time this tree has been updated across the censuses.">
+                                        Updated</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 class="text-overflow-center" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="The most recent tag assigned to this tree.">
+                                        Recent Tag</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Which of the roughly 4 states the tree falls into.">
+                                        Status</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 class="text-overflow-center" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Which of the 3 size classes based on diameter the tree fits into.">
+                                        Size Class</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="The diameter in centimeters from breast height.">
+                                        DBH</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="1: Confident this is the same tree as last census,
+                                        2: Probably the same tree as last census,
+                                        3: Likely a new tree,
+                                        4: Definitely an old tree but it can't be matched OR the tag is not registered for the previous census,
+                                        5: A Lost tree.">
+                                        Match #</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Other important notes to mention about the tree or the info entered above.">
+                                        Comments</h4>
+                                </div>
+                                <div class="col-4 text-center" id="given-specicies">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+
                         </div>
                     </div>
 

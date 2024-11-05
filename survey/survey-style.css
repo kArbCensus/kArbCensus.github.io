@@ -12157,4 +12157,14 @@ td {
 
 h5, .h5 {
   font-weight: bold;
+}
+
+h4, .h4 {
+  font-size: 1.2rem;
+}
+
+.text-overflow-center {
+  margin-left: -100%;
+  margin-right: -100%;
+  text-align: center;
 }/*# sourceMappingURL=survey-style.css.map */
