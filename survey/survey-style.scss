@@ -35,7 +35,7 @@ input {
     text-align: center;
     width: 90%;
     @include font-size(1.2rem);
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 body {
@@ -95,7 +95,7 @@ button {
 }
 
 select {
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 5px;
     width: 90%;
     text-align: center;
@@ -183,6 +183,7 @@ h5 {
 }
 
 h4 {
+    margin-top: 4%;
     @include font-size(1.2rem);
 }
 
