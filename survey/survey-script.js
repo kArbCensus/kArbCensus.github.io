@@ -12,8 +12,6 @@ function createPlotOptions() {
         select.appendChild(option);
     }
 }
-// Executing when the finished loading in
-document.addEventListener('DOMContentLoaded', setUpToolTips);
 // Finds all tool tip spots in the code and passes them on to be created
 function setUpToolTips() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
