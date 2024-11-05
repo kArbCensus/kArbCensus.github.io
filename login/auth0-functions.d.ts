@@ -1,5 +1,6 @@
 // Use in-line import to keep declaration "ambient"
 type Auth0Client = import("@auth0/auth0-spa-js").Auth0Client;
+type Auth0ClientOptions = import("@auth0/auth0-spa-js").Auth0ClientOptions;
 
-declare function initializeAuth0(): Promise<Auth0Client>;
+declare function createAuth0Client(options: Auth0ClientOptions): Promise<Auth0Client>;
 declare function useAuth0(auth0Client: Auth0Client): Promise<void>;

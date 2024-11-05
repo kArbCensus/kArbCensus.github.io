@@ -2,16 +2,8 @@
  * Creates and returns a configured Auth0Client
  * @returns {Promise<Auth0Client>}
  */
-function initializeAuth0() {
-  // TODO: Fetch domain and clientId from /auth_config.json
-
-  return auth0.createAuth0Client({
-    domain: "dev-i8zcr46nupiabdjj.us.auth0.com",
-    clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
-    authorizationParams: {
-      redirect_uri: window.location.href,
-    },
-  });
+function createAuth0Client(options) {
+  return auth0.createAuth0Client(options);
 }
 
 // TODO: Further break responsibility into individual functions
