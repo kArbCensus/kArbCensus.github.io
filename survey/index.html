@@ -89,25 +89,29 @@
                         <div class="container-fluid">
 
 
-                            <!--Tooltip setup-->
+                            <!--Tooltip setup, in JS instead of TS cause imports were causing issues-->
                             <script>
-                                function createAToolTip(tooltipTriggerEl) {
-                                    new bootstrap.Tooltip(tooltipTriggerEl);
-                                }
+                                // Executing when the finished loading in
+                                document.addEventListener('DOMContentLoaded', setUpToolTips);
 
+                                // Finds all tool tip spots in the code and passes them on to be created
                                 function setUpToolTips() {
                                     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
                                     tooltipTriggerList.forEach(createAToolTip);
                                 }
 
-                                document.addEventListener('DOMContentLoaded', setUpToolTips);
+                                // Initializes a tooltip at a marked spot
+                                function createAToolTip(tooltipTriggerEl) {
+                                    new bootstrap.Tooltip(tooltipTriggerEl);
+                                }
+
                             </script>
 
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-4 text-center">
                                     <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The identified type of tree">
+                                        data-bs-title="The identified type of tree.">
                                         Species</h4>
                                 </div>
                                 <div class="col-4 text-center">
