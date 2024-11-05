@@ -12097,6 +12097,8 @@ select {
   font-size: 1.2rem;
   border-color: black;
   padding: 2%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 option {

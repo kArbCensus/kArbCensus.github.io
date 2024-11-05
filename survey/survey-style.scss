@@ -94,7 +94,7 @@ button {
     width: 100%;
 }
 
-select{
+select {
     border: 2px solid black;
     border-radius: 5px;
     width: 90%;
@@ -102,9 +102,11 @@ select{
     @include font-size(1.2rem);
     border-color: black;
     padding: 2%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
-option
-{
+
+option {
     font-family: "Barlow";
 }
 
@@ -192,7 +194,6 @@ h4 {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-
