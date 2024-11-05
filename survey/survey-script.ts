@@ -122,7 +122,7 @@ class tableItem {
     plotId: number;
     species: string;
     recentTag: number;
-    status: string;
+    status: state;
     DBH: number;
     comments: string;
     treeSize: size;
@@ -135,6 +135,13 @@ class tableItem {
 }
 
 // Aspects of trees
+enum state{
+    Alive,
+    Sick,
+    Dead,
+    Fallen
+}
+
 enum size {
     Small,
     Medium,
@@ -148,3 +155,5 @@ enum match {
     OldTree,
     Lost,
 }
+
+

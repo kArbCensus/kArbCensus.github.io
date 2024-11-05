@@ -81,6 +81,13 @@ class tableItem {
     }
 }
 // Aspects of trees
+var state;
+(function (state) {
+    state[state["Alive"] = 0] = "Alive";
+    state[state["Sick"] = 1] = "Sick";
+    state[state["Dead"] = 2] = "Dead";
+    state[state["Fallen"] = 3] = "Fallen";
+})(state || (state = {}));
 var size;
 (function (size) {
     size[size["Small"] = 0] = "Small";
