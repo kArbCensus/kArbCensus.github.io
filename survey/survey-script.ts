@@ -1,6 +1,12 @@
 // All of the trees for a chosen plot
 let currentTrees = new Array<tableItems>();
 
+
+
+//////////// LOAD IN PAGE FUNCTIONS ////////////
+
+
+
 // Populating the plot drop down
 function createPlotOptions() {
 
@@ -14,6 +20,26 @@ function createPlotOptions() {
         select.appendChild(option);
     }
 }
+
+
+// Executing when the finished loading in
+document.addEventListener('DOMContentLoaded', setUpToolTips);
+
+// Finds all tool tip spots in the code and passes them on to be created
+function setUpToolTips() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(createAToolTip);
+}
+
+// Initializes a tooltip at a marked spot
+function createAToolTip(tooltipTriggerEl) {
+    new bootstrap.Tooltip(tooltipTriggerEl);
+}
+
+
+
+//////////// CONSTANTLY CALLED FUNCTIONS ////////////
+
 
 
 // Updating the table for a new plot choice
@@ -104,7 +130,10 @@ function changeArrFromJson(/*JSON objs goes in here*/) {
 
 
 
-// Class for storing objects to represent a tree from the DB
+//////////// CLASS TO MAKE INFO FROM DB WORK ////////////
+
+
+// Outline for the items themselves
 class tableItems {
     plotId: number;
     species: string;
