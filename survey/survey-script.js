@@ -35,7 +35,7 @@ function updateSurveyTable() {
         let newRow = document.createElement('tr');
         newRow.id = "" + i;
         let tree = currentTrees[i];
-        // The view button
+        // Forming each view button
         let updater = document.createElement('td');
         let button = document.createElement('button');
         updater.style.width = "16%";
@@ -62,6 +62,8 @@ function updateSurveyTable() {
         newRow.appendChild(species);
         body.appendChild(newRow);
     }
+    //Enable the tooltips
+    document.querySelectorAll('[data-bs-toggle="tooltip"]');
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {

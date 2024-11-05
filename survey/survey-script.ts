@@ -6,7 +6,6 @@ function createPlotOptions() {
 
     const select = document.getElementById("plot-select") as HTMLSelectElement;
 
-
     //TODO: have this not be a set #, but rather do an API call to get the total number of plots
     for (let i = 1; i < 41; i++) {
         const option = document.createElement('option');
@@ -52,7 +51,7 @@ function updateSurveyTable() {
 
         let tree = currentTrees[i];
 
-        // The view button
+        // Forming each view button
         let updater = document.createElement('td');
         let button = document.createElement('button');
         updater.style.width = "16%";
@@ -87,7 +86,13 @@ function updateSurveyTable() {
         body.appendChild(newRow);
     }
 
+
+    //Enable the tooltips
+    document.querySelectorAll('[data-bs-toggle="tooltip"]');
+
 }
+
+
 
 
 // Setting the current array to contain the values from a json file

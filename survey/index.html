@@ -70,31 +70,76 @@
         </div>
 
 
+
+
         <!--Survey table popups-->
         <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
+
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Update & View</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
+
                     <div class="modal-body">
-                        INFO WILL GO HERE
+                        <div class="container-fluid">
+
+
+                            <!--Tooltip setup-->
+                            <script>
+                                function createAToolTip(tooltipTriggerEl) {
+                                    new bootstrap.Tooltip(tooltipTriggerEl);
+                                }
+
+                                function setUpToolTips() {
+                                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                                    tooltipTriggerList.forEach(createAToolTip);
+                                }
+
+                                document.addEventListener('DOMContentLoaded', setUpToolTips);
+                            </script>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4 text-center">
+                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="The identified type of tree">
+                                        Species</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h4>____</h4>
+                                </div>
+                                <div class="col-2"></div>
+
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn" id="pop-up-update">Confirm Update</button>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <!--THE SURVEY ITSELF!-->
+
+
+        <!--Line break-->
         <div class="row">
             <div class="col-xs-12 bs-linebreak">
             </div>
         </div>
         <br>
+
+
+
+        <!--THE SURVEY ITSELF!-->
 
         <!--Choosing a plot-->
         <div class="row">
@@ -113,6 +158,7 @@
             </div>
             <div class="col"></div>
         </div>
+
 
         <!--Line Break-->
         <div class="row">
