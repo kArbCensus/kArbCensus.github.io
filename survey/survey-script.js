@@ -71,11 +71,11 @@ function updateSurveyTable() {
 function changeArrFromJson( /*JSON objs goes in here*/) {
     //cats over the json strings with its attributes into the custom class
     //each obj into the array 
-    currentTrees = [new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems()];
+    currentTrees = [new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem()];
 }
 //////////// CLASS TO MAKE INFO FROM DB WORK ////////////
 // Outline for the items themselves
-class tableItems {
+class tableItem {
     constructor() {
         this.year = 2025;
     }
@@ -83,16 +83,16 @@ class tableItems {
 // Aspects of trees
 var size;
 (function (size) {
-    size[size["small"] = 0] = "small";
-    size[size["medium"] = 1] = "medium";
-    size[size["big"] = 2] = "big";
+    size[size["Small"] = 0] = "Small";
+    size[size["Medium"] = 1] = "Medium";
+    size[size["Big"] = 2] = "Big";
 })(size || (size = {}));
 var match;
 (function (match) {
-    match[match["definitely"] = 0] = "definitely";
-    match[match["probably"] = 1] = "probably";
-    match[match["newTree"] = 2] = "newTree";
-    match[match["oldTree"] = 3] = "oldTree";
-    match[match["lost"] = 4] = "lost";
+    match[match["Definitely"] = 0] = "Definitely";
+    match[match["Probably"] = 1] = "Probably";
+    match[match["NewTree"] = 2] = "NewTree";
+    match[match["OldTree"] = 3] = "OldTree";
+    match[match["Lost"] = 4] = "Lost";
 })(match || (match = {}));
 //# sourceMappingURL=survey-script.js.map

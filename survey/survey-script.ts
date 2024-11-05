@@ -1,5 +1,5 @@
 // All of the trees for a chosen plot
-let currentTrees = new Array<tableItems>();
+let currentTrees = new Array<tableItem>();
 
 
 
@@ -109,7 +109,7 @@ function updateSurveyTable() {
 function changeArrFromJson(/*JSON objs goes in here*/) {
     //cats over the json strings with its attributes into the custom class
     //each obj into the array 
-    currentTrees = [new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems(), new tableItems()];
+    currentTrees = [new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem()];
 }
 
 
@@ -118,7 +118,7 @@ function changeArrFromJson(/*JSON objs goes in here*/) {
 
 
 // Outline for the items themselves
-class tableItems {
+class tableItem {
     plotId: number;
     species: string;
     recentTag: number;
@@ -136,15 +136,15 @@ class tableItems {
 
 // Aspects of trees
 enum size {
-    small,
-    medium,
-    big,
+    Small,
+    Medium,
+    Big,
 }
 
 enum match {
-    definitely,
-    probably,
-    newTree,
-    oldTree,
-    lost,
+    Definitely,
+    Probably,
+    NewTree,
+    OldTree,
+    Lost,
 }
