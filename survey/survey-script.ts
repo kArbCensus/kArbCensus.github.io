@@ -96,10 +96,6 @@ function updateSurveyTable() {
         body.appendChild(newRow);
     }
 
-
-    //Enable the tooltips
-    document.querySelectorAll('[data-bs-toggle="tooltip"]');
-
 }
 
 

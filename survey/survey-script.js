@@ -64,8 +64,6 @@ function updateSurveyTable() {
         newRow.appendChild(species);
         body.appendChild(newRow);
     }
-    //Enable the tooltips
-    document.querySelectorAll('[data-bs-toggle="tooltip"]');
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {
