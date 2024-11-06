@@ -102,7 +102,8 @@ function updateSurveyTable() {
 
 function createNewTree() {
 
-    clearVaryingTypedTags();
+    // Resets the modal to take in new info
+    clearTags();
 
     const species = document.createElement("input");
     species.style.textAlign = "left";
@@ -112,13 +113,11 @@ function createNewTree() {
     year.type = "number";
     document.getElementById("give-date").appendChild(year);
 
-    // Resets the modal to take in new info
-
 }
 
 function updateCurrentTree(placement: number) {
 
-    clearVaryingTypedTags();
+    clearTags();
 
     const toUpdate = currentTrees[placement];
 
@@ -130,9 +129,30 @@ function updateCurrentTree(placement: number) {
     year.appendChild(document.createTextNode("" + toUpdate.year));
     document.getElementById("give-date").appendChild(year);
 
-    // Transfer info from array into modal
 
-    console.log("Test: " + placement);
+    // Transfer info from array into modal
+    const tag = document.getElementById("given-tag") as HTMLInputElement;
+    tag.value = "" + currentTrees[placement].recentTag;
+
+
+    const status = document.getElementById("given-status") as HTMLSelectElement;
+    status.value = "" + currentTrees[placement].status;
+
+
+    const sizeClass = document.getElementById("given-size-class") as HTMLSelectElement;
+    sizeClass.value = "" + currentTrees[placement].treeSize
+
+
+    const bdh = document.getElementById("given-bdh") as HTMLInputElement;
+    bdh.value = "" + currentTrees[placement].DBH;
+
+
+    const matchNum = document.getElementById("given-match-num") as HTMLSelectElement;
+    matchNum.value = "" + currentTrees[placement].matchNum;
+
+
+    const comment = document.getElementById("given-comment") as HTMLInputElement;
+    comment.value = "" + currentTrees[placement].comments;
 
 }
 
@@ -145,10 +165,17 @@ function confirmUpdate() {
     // Refreshes the page
 }
 
-function clearVaryingTypedTags() {
+function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
+    document.getElementById("given-tag").innerHTML = "";
+    (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
+    (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
+    document.getElementById("given-bdh").innerHTML = "";
+    (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
+    document.getElementById("given-comment").innerHTML = "";
 }
+
 
 
 // Setting the current array to contain the values from a json file
@@ -167,16 +194,25 @@ function changeArrFromJson(/*JSON objs goes in here*/) {
 class tableItem {
     plotId: number;
     species: string;
+    year: number;
     recentTag: number;
     status: state;
-    DBH: number;
-    comments: string;
     treeSize: size;
+    DBH: number;
     matchNum: match;
-    year: number;
+    comments: string;
+
 
     constructor() {
+        this.plotId = 1;
+        this.species = "TEST";
         this.year = 2025
+        this.recentTag = 1;
+        this.status = state.Dead;
+        this.treeSize = size.Big;
+        this.DBH = 1;
+        this.matchNum = match.Probably;
+        this.comments = "";
     }
 }
 

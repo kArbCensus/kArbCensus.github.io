@@ -69,17 +69,17 @@ function updateSurveyTable() {
     }
 }
 function createNewTree() {
-    clearVaryingTypedTags();
+    // Resets the modal to take in new info
+    clearTags();
     const species = document.createElement("input");
     species.style.textAlign = "left";
     document.getElementById("give-species").appendChild(species);
     const year = document.createElement("input");
     year.type = "number";
     document.getElementById("give-date").appendChild(year);
-    // Resets the modal to take in new info
 }
 function updateCurrentTree(placement) {
-    clearVaryingTypedTags();
+    clearTags();
     const toUpdate = currentTrees[placement];
     const species = document.createElement("h4");
     species.appendChild(document.createTextNode("" + toUpdate.species));
@@ -88,7 +88,18 @@ function updateCurrentTree(placement) {
     year.appendChild(document.createTextNode("" + toUpdate.year));
     document.getElementById("give-date").appendChild(year);
     // Transfer info from array into modal
-    console.log("Test: " + placement);
+    const tag = document.getElementById("given-tag");
+    tag.value = "" + currentTrees[placement].recentTag;
+    const status = document.getElementById("given-status");
+    status.value = "" + currentTrees[placement].status;
+    const sizeClass = document.getElementById("given-size-class");
+    sizeClass.value = "" + currentTrees[placement].treeSize;
+    const bdh = document.getElementById("given-bdh");
+    bdh.value = "" + currentTrees[placement].DBH;
+    const matchNum = document.getElementById("given-match-num");
+    matchNum.value = "" + currentTrees[placement].matchNum;
+    const comment = document.getElementById("given-comment");
+    comment.value = "" + currentTrees[placement].comments;
 }
 // How createNewTree() and updateCurrentTree(placement: number) actually add to our db
 function confirmUpdate() {
@@ -96,9 +107,15 @@ function confirmUpdate() {
     // Sends tableItem to the API
     // Refreshes the page
 }
-function clearVaryingTypedTags() {
+function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
+    document.getElementById("given-tag").innerHTML = "";
+    document.getElementById("given-status").value = "Alive";
+    document.getElementById("given-size-class").value = "Small";
+    document.getElementById("given-bdh").innerHTML = "";
+    document.getElementById("given-match-num").value = "1";
+    document.getElementById("given-comment").innerHTML = "";
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {
@@ -110,7 +127,15 @@ function changeArrFromJson( /*JSON objs goes in here*/) {
 // Outline for the items themselves
 class tableItem {
     constructor() {
+        this.plotId = 1;
+        this.species = "TEST";
         this.year = 2025;
+        this.recentTag = 1;
+        this.status = state.Dead;
+        this.treeSize = size.Big;
+        this.DBH = 1;
+        this.matchNum = match.Probably;
+        this.comments = "";
     }
 }
 // Aspects of trees
