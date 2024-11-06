@@ -12159,6 +12159,12 @@ td {
   }
 }
 
+#gray-warning {
+  color: white;
+  font-style: italic;
+  font-size: 0.5rem;
+}
+
 #pop-up-update {
   font-size: 1.2rem;
   background-color: #357960;

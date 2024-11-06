@@ -16,10 +16,12 @@ function createPlotOptions() {
 // Updating the table for a new plot choice
 function updateSurveyTable() {
     const addButton = document.getElementById("add-button");
+    const grayWarning = document.getElementById("gray-warning");
     const surveyTable = document.getElementById("survey-table");
     // Making the survey visible
     if (surveyTable.style.visibility == "hidden") {
         addButton.style.visibility = "visible";
+        grayWarning.style.visibility = "visible";
         surveyTable.style.visibility = "visible";
     }
     // Getting our plot
