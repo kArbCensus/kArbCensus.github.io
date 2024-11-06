@@ -180,6 +180,8 @@ td {
 
 h5 {
     font-weight: bold;
+    @include font-size(1.2rem);
+    font-family: 'Barlow';
 }
 
 h4 {
