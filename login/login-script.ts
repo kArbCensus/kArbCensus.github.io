@@ -19,4 +19,43 @@ function initializeAuth0() {
   return createAuth0Client(options);
 }
 
-initializeAuth0().then((result: Auth0Client) => useAuth0(result));
+// TODO: Break into separate functions
+async function setupAuth0(client: Auth0Client) {
+  // Get login button and add function
+  const loginButton = document.getElementById("login");
+
+  loginButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await loginWithRedirect(client);
+  });
+
+  // Detect url parameters to trigger callback and remove parameters
+  if (
+    location.search.includes("state=") &&
+    (location.search.includes("code=") || location.search.includes("error="))
+  ) {
+    await handleRedirectCallback(client);
+    console.log("Handling redirect callback");
+    window.history.replaceState({}, document.title, "/");
+  }
+
+  // Get logout button and add function
+  const logoutButton = document.getElementById("logout");
+
+  logoutButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    logout(client, {
+      clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
+      logoutParams: {
+        returnTo:
+          window.location.protocol + "//" + window.location.host + "/login/",
+      },
+    });
+  });
+
+  // Get authentication data
+  const isAuth = await isAuthenticated(client);
+  console.log(`Authenticated: ${isAuth}`);
+}
+
+initializeAuth0().then((result: Auth0Client) => setupAuth0(result));
