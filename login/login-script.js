@@ -20,6 +20,7 @@ function initializeAuth0() {
         } });
     return createAuth0Client(options);
 }
+// TODO: Break into separate functions
 function setupAuth0(client) {
     return __awaiter(this, void 0, void 0, function* () {
         // Get login button and add function

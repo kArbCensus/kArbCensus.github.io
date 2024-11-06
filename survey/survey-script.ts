@@ -70,6 +70,7 @@ function updateSurveyTable() {
         button.id = "table-button";
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#pop-up');
+        button.onclick = function(){updateCurrentTree(i);}
         button.appendChild(document.createTextNode("Info"))
 
         // Each other aspect of an entry
@@ -99,6 +100,31 @@ function updateSurveyTable() {
 
 }
 
+function createNewTree()
+{
+    // Resets the modal to take in new info
+    console.log("Test: -1");
+}
+
+function updateCurrentTree(placement: number)
+{
+    const toUpdate = currentTrees[placement];
+
+    // Transfer info from array into modal
+
+    console.log("Test: "+ placement);
+
+}
+
+// How createNewTree() and updateCurrentTree(placement: number) actually add to our db
+function confirmUpdate()
+{
+    // Turns modal info into a tableItem
+
+    // Sends tableItem to the API
+
+    // Refreshes the page
+}
 
 
 
