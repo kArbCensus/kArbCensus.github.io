@@ -1,5 +1,5 @@
 import type { Auth0Client, Auth0ClientOptions } from "@auth0/auth0-spa-js";
-import "./auth0-functions.js";
+import "../_shared/auth0-functions.js";
 
 function initializeAuth0() {
   // TODO: Fetch domain and clientId from /auth_config.json
@@ -20,7 +20,7 @@ function initializeAuth0() {
 }
 
 // TODO: Break into separate functions
-async function setupAuth0(client: Auth0Client) {
+async function authenticate(client: Auth0Client) {
   // Get login button and add function
   const loginButton = document.getElementById("login");
 
@@ -58,4 +58,4 @@ async function setupAuth0(client: Auth0Client) {
   console.log(`Authenticated: ${isAuth}`);
 }
 
-initializeAuth0().then((result: Auth0Client) => setupAuth0(result));
+initializeAuth0().then((result: Auth0Client) => authenticate(result));

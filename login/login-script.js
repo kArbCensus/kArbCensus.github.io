@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import "./auth0-functions.js";
+import "../_shared/auth0-functions.js";
 function initializeAuth0() {
     // TODO: Fetch domain and clientId from /auth_config.json
     const config = {
@@ -21,7 +21,7 @@ function initializeAuth0() {
     return createAuth0Client(options);
 }
 // TODO: Break into separate functions
-function setupAuth0(client) {
+function authenticate(client) {
     return __awaiter(this, void 0, void 0, function* () {
         // Get login button and add function
         const loginButton = document.getElementById("login");
@@ -52,5 +52,5 @@ function setupAuth0(client) {
         console.log(`Authenticated: ${isAuth}`);
     });
 }
-initializeAuth0().then((result) => setupAuth0(result));
+initializeAuth0().then((result) => authenticate(result));
 //# sourceMappingURL=login-script.js.map
