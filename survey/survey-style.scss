@@ -159,11 +159,11 @@ td {
     min-width: 130px;
 }
 
-#gray-warning
+#gray-note
 {
     color: white;
     font-style: italic;
-    @include font-size(.5rem);
+    @include font-size(.9rem);
 }
 
 #pop-up-update {

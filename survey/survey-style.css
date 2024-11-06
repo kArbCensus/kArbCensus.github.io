@@ -12159,10 +12159,10 @@ td {
   }
 }
 
-#gray-warning {
+#gray-note {
   color: white;
   font-style: italic;
-  font-size: 0.5rem;
+  font-size: 0.9rem;
 }
 
 #pop-up-update {
