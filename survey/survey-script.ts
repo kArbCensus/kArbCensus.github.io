@@ -70,7 +70,7 @@ function updateSurveyTable() {
         button.id = "table-button";
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#pop-up');
-        button.onclick = function(){updateCurrentTree(i);}
+        button.onclick = function () { updateCurrentTree(i); }
         button.appendChild(document.createTextNode("Info"))
 
         // Each other aspect of an entry
@@ -100,25 +100,44 @@ function updateSurveyTable() {
 
 }
 
-function createNewTree()
-{
+function createNewTree() {
+
+    clearVaryingTypedTags();
+
+    const species = document.createElement("input");
+    species.style.textAlign = "left";
+    document.getElementById("give-species").appendChild(species);
+
+    const year = document.createElement("input");
+    year.type = "number";
+    document.getElementById("give-date").appendChild(year);
+
     // Resets the modal to take in new info
-    console.log("Test: -1");
+
 }
 
-function updateCurrentTree(placement: number)
-{
+function updateCurrentTree(placement: number) {
+
+    clearVaryingTypedTags();
+
     const toUpdate = currentTrees[placement];
+
+    const species = document.createElement("h4");
+    species.appendChild(document.createTextNode("" + toUpdate.species));
+    document.getElementById("give-species").appendChild(species);
+
+    const year = document.createElement("h4");
+    year.appendChild(document.createTextNode("" + toUpdate.year));
+    document.getElementById("give-date").appendChild(year);
 
     // Transfer info from array into modal
 
-    console.log("Test: "+ placement);
+    console.log("Test: " + placement);
 
 }
 
 // How createNewTree() and updateCurrentTree(placement: number) actually add to our db
-function confirmUpdate()
-{
+function confirmUpdate() {
     // Turns modal info into a tableItem
 
     // Sends tableItem to the API
@@ -126,6 +145,10 @@ function confirmUpdate()
     // Refreshes the page
 }
 
+function clearVaryingTypedTags() {
+    document.getElementById("give-species").innerHTML = "";
+    document.getElementById("give-date").innerHTML = "";
+}
 
 
 // Setting the current array to contain the values from a json file
@@ -158,7 +181,7 @@ class tableItem {
 }
 
 // Aspects of trees
-enum state{
+enum state {
     Alive,
     Sick,
     Dead,
