@@ -8,26 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import "./auth0-functions.js";
+var client = null;
 function initializeAuth0() {
-    // TODO: Fetch domain and clientId from /auth_config.json
-    const config = {
-        domain: "dev-i8zcr46nupiabdjj.us.auth0.com",
-        clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
-    };
-    // Create Auth0 client using configuration
-    const options = Object.assign(Object.assign({}, config), { authorizationParams: {
-            redirect_uri: window.location.href,
-        } });
-    return createAuth0Client(options);
+    return __awaiter(this, void 0, void 0, function* () {
+        // TODO: Fetch domain and clientId from /auth_config.json
+        const config = {
+            domain: "dev-i8zcr46nupiabdjj.us.auth0.com",
+            clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
+        };
+        // Create Auth0 client using configuration
+        const options = Object.assign(Object.assign({}, config), { authorizationParams: {
+                redirect_uri: window.location.href,
+            } });
+        client = yield createAuth0Client(options);
+    });
 }
 // TODO: Redirect when login required
-function checkAuth(client) {
+function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
         // Get authentication data
         const isAuth = yield isAuthenticated(client);
         console.log(`Authenticated: ${isAuth}`);
         try {
-            const token = yield client.getTokenSilently();
+            const token = yield getTokenSilently(client);
             console.log("Access Token: ", token);
         }
         catch (error) {
@@ -35,5 +38,5 @@ function checkAuth(client) {
         }
     });
 }
-initializeAuth0().then((result) => checkAuth(result));
+initializeAuth0().then(() => checkAuth());
 //# sourceMappingURL=authenticate.js.map

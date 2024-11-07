@@ -9,4 +9,4 @@ declare function loginWithRedirect(client: Auth0Client): Promise<void>;
 declare function handleRedirectCallback(client: Auth0Client): Promise<void>;
 declare function logout(client: Auth0Client, options: LogoutOptions): Promise<void>;
 declare function isAuthenticated(client: Auth0Client): Promise<boolean>;
-declare function getTokenSilently(client: Auth0Client, options: GetTokenSilentlyOptions): Promise<void>;
+declare function getTokenSilently(client: Auth0Client, options?: GetTokenSilentlyOptions): Promise<string>;
