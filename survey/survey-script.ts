@@ -78,7 +78,7 @@ function updateSurveyTable() {
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
         let size = document.createElement('td');
-        size.appendChild(document.createTextNode("" + tree.treeSize));
+        size.appendChild(document.createTextNode("" + tree.sizeClass));
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
 
@@ -136,11 +136,12 @@ function updateCurrentTree(placement: number) {
 
 
     const status = document.getElementById("given-status") as HTMLSelectElement;
-    status.value = "" + currentTrees[placement].status;
+    status.value = statusName.get(currentTrees[placement].status);
+    console.log(status.value);
 
 
     const sizeClass = document.getElementById("given-size-class") as HTMLSelectElement;
-    sizeClass.value = "" + currentTrees[placement].treeSize
+    sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
 
 
     const bdh = document.getElementById("given-bdh") as HTMLInputElement;
@@ -168,14 +169,13 @@ function confirmUpdate() {
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
-    document.getElementById("given-tag").innerHTML = "";
+    (document.getElementById("given-tag") as HTMLInputElement).value = "";
     (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
     (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
-    document.getElementById("given-bdh").innerHTML = "";
+    (document.getElementById("given-bdh") as HTMLInputElement).value = "";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
-    document.getElementById("given-comment").innerHTML = "";
+    (document.getElementById("given-comment") as HTMLInputElement).value = "";
 }
-
 
 
 // Setting the current array to contain the values from a json file
@@ -197,7 +197,7 @@ class tableItem {
     year: number;
     recentTag: number;
     status: state;
-    treeSize: size;
+    sizeClass: size;
     DBH: number;
     matchNum: match;
     comments: string;
@@ -209,10 +209,10 @@ class tableItem {
         this.year = 2025
         this.recentTag = 1;
         this.status = state.Dead;
-        this.treeSize = size.Big;
+        this.sizeClass = size.Big;
         this.DBH = 1;
         this.matchNum = match.Probably;
-        this.comments = "";
+        this.comments = "Test info";
     }
 }
 
@@ -239,3 +239,16 @@ enum match {
 }
 
 
+// Maps to access the aspects of each tree
+const statusName: Map<state, string> = new Map([
+    [state.Alive, "Alive"],
+    [state.Sick, "Sick"],
+    [state.Dead, "Dead"],
+    [state.Fallen, "Fallen"],
+]);
+
+const sizeClassName: Map<size, string> = new Map([
+    [size.Small, "Small"],
+    [size.Medium, "Medium"],
+    [size.Big, "Big"],
+]);

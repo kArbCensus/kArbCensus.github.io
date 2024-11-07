@@ -54,7 +54,7 @@ function updateSurveyTable() {
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
         let size = document.createElement('td');
-        size.appendChild(document.createTextNode("" + tree.treeSize));
+        size.appendChild(document.createTextNode("" + tree.sizeClass));
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
         if (tree.year == currentYear) {
@@ -91,9 +91,10 @@ function updateCurrentTree(placement) {
     const tag = document.getElementById("given-tag");
     tag.value = "" + currentTrees[placement].recentTag;
     const status = document.getElementById("given-status");
-    status.value = "" + currentTrees[placement].status;
+    status.value = statusName.get(currentTrees[placement].status);
+    console.log(status.value);
     const sizeClass = document.getElementById("given-size-class");
-    sizeClass.value = "" + currentTrees[placement].treeSize;
+    sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
     const bdh = document.getElementById("given-bdh");
     bdh.value = "" + currentTrees[placement].DBH;
     const matchNum = document.getElementById("given-match-num");
@@ -110,12 +111,12 @@ function confirmUpdate() {
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
-    document.getElementById("given-tag").innerHTML = "";
+    document.getElementById("given-tag").value = "";
     document.getElementById("given-status").value = "Alive";
     document.getElementById("given-size-class").value = "Small";
-    document.getElementById("given-bdh").innerHTML = "";
+    document.getElementById("given-bdh").value = "";
     document.getElementById("given-match-num").value = "1";
-    document.getElementById("given-comment").innerHTML = "";
+    document.getElementById("given-comment").value = "";
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {
@@ -132,10 +133,10 @@ class tableItem {
         this.year = 2025;
         this.recentTag = 1;
         this.status = state.Dead;
-        this.treeSize = size.Big;
+        this.sizeClass = size.Big;
         this.DBH = 1;
         this.matchNum = match.Probably;
-        this.comments = "";
+        this.comments = "Test info";
     }
 }
 // Aspects of trees
@@ -160,4 +161,16 @@ var match;
     match[match["OldTree"] = 3] = "OldTree";
     match[match["Lost"] = 4] = "Lost";
 })(match || (match = {}));
+// Maps to access the aspects of each tree
+const statusName = new Map([
+    [state.Alive, "Alive"],
+    [state.Sick, "Sick"],
+    [state.Dead, "Dead"],
+    [state.Fallen, "Fallen"],
+]);
+const sizeClassName = new Map([
+    [size.Small, "Small"],
+    [size.Medium, "Medium"],
+    [size.Big, "Big"],
+]);
 //# sourceMappingURL=survey-script.js.map

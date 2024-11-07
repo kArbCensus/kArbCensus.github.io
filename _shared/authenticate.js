@@ -20,6 +20,7 @@ function initializeAuth0() {
         } });
     return createAuth0Client(options);
 }
+// TODO: Redirect when login required
 function checkAuth(client) {
     return __awaiter(this, void 0, void 0, function* () {
         // Get authentication data
