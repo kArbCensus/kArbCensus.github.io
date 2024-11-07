@@ -164,9 +164,27 @@ function confirmUpdate() {
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
-    //TODO: Fix this
-    const species = "stub";
-    const year = 5;
+    
+    const getSpecies = document.getElementById("give-species");
+    let species = "";
+    if (getSpecies.firstChild instanceof HTMLInputElement) {
+        species = getSpecies.firstChild.value as string;
+    }
+    else if (getSpecies.firstChild instanceof HTMLHeadingElement){
+        species = getSpecies.firstChild.innerText as string;
+    }
+        
+    const getYear = document.getElementById("give-date");
+    let year = 2025;
+    if(getYear.firstChild instanceof HTMLInputElement)
+    {
+        year = parseInt(getYear.firstChild.value as string)
+    }
+    else if(getYear.firstChild instanceof HTMLHeadingElement)
+    {
+        year = parseInt(getYear.firstChild.innerText as string)
+    }
+
 
     const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
     const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
@@ -174,7 +192,7 @@ function confirmUpdate() {
     const dbh = parseInt((document.getElementById("given-match-num") as HTMLInputElement).value);
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
-    
+
     const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
 
 

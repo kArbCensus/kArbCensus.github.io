@@ -107,9 +107,22 @@ function confirmUpdate() {
     // Turns modal info into a tableItem
     const selectPlot = document.getElementById("plot-select");
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
-    //TODO: Fix this
-    const species = "stub";
-    const year = 5;
+    const getSpecies = document.getElementById("give-species");
+    let species = "";
+    if (getSpecies.firstChild instanceof HTMLInputElement) {
+        species = getSpecies.firstChild.value;
+    }
+    else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
+        species = getSpecies.firstChild.innerText;
+    }
+    const getYear = document.getElementById("give-date");
+    let year = 2025;
+    if (getYear.firstChild instanceof HTMLInputElement) {
+        year = parseInt(getYear.firstChild.value);
+    }
+    else if (getYear.firstChild instanceof HTMLHeadingElement) {
+        year = parseInt(getYear.firstChild.innerText);
+    }
     const recentTag = parseInt(document.getElementById("given-tag").value);
     const status = document.getElementById("given-status").selectedIndex;
     const sizeClass = document.getElementById("given-size-class").selectedIndex;
