@@ -36,7 +36,7 @@ async function authenticate(client: Auth0Client) {
   ) {
     await client.handleRedirectCallback();
     console.log("Handling redirect callback");
-    window.history.replaceState({}, document.title, "/");
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
   // Get logout button and add function
@@ -48,7 +48,7 @@ async function authenticate(client: Auth0Client) {
       clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
       logoutParams: {
         returnTo:
-          window.location.protocol + "//" + window.location.host + "/login/",
+          window.location.origin + "/login/",
       },
     });
   });

@@ -34,7 +34,7 @@ function authenticate(client) {
             (location.search.includes("code=") || location.search.includes("error="))) {
             yield client.handleRedirectCallback();
             console.log("Handling redirect callback");
-            window.history.replaceState({}, document.title, "/");
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
         // Get logout button and add function
         const logoutButton = document.getElementById("logout");
@@ -43,7 +43,7 @@ function authenticate(client) {
             client.logout({
                 clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
                 logoutParams: {
-                    returnTo: window.location.protocol + "//" + window.location.host + "/login/",
+                    returnTo: window.location.origin + "/login/",
                 },
             });
         });

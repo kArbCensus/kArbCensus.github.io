@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import "./auth0-functions.js";
 var client = null;
+var token = null;
 function initializeAuth0() {
     return __awaiter(this, void 0, void 0, function* () {
         // TODO: Fetch domain and clientId from /auth_config.json
@@ -23,18 +24,39 @@ function initializeAuth0() {
         client = yield createAuth0Client(options);
     });
 }
-// TODO: Redirect when login required
 function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
+        // Check if just logged in
+        yield checkCallback();
         // Get authentication data
         const isAuth = yield client.isAuthenticated();
         console.log(`Authenticated: ${isAuth}`);
-        try {
-            const token = yield client.getTokenSilently();
-            console.log("Access Token: ", token);
+        // If authenticated, get client token, else perform login
+        if (isAuth) {
+            try {
+                token = yield client.getTokenSilently();
+                // TODO: Remove debug log in production
+                console.log("Access Token: ", token);
+            }
+            catch (error) {
+                console.error("Token renewal failed: ", error.message);
+            }
         }
-        catch (error) {
-            console.error("Token renewal failed: ", error.message);
+        else {
+            yield client.loginWithRedirect();
+            console.log("Would log in");
+        }
+    });
+}
+function checkCallback() {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Detect url parameters to trigger callback and remove parameters
+        const isCalledBack = location.search.includes("state=") &&
+            (location.search.includes("code=") || location.search.includes("error="));
+        if (isCalledBack) {
+            yield client.handleRedirectCallback();
+            console.log("Handling redirect callback");
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
     });
 }
