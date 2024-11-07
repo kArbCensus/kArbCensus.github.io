@@ -161,9 +161,28 @@ function updateCurrentTree(placement: number) {
 function confirmUpdate() {
     // Turns modal info into a tableItem
 
-    // Sends tableItem to the API
+    const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
+    const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
-    // Refreshes the page
+    //TODO: Fix this
+    const species = "stub";
+    const year = 5;
+
+    const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
+    const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
+    const sizeClass = (document.getElementById("given-size-class") as HTMLSelectElement).selectedIndex as size;
+    const dbh = parseInt((document.getElementById("given-match-num") as HTMLInputElement).value);
+    const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
+    const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
+    
+    const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
+
+
+    //TODO: Sends tableItem to the API
+    currentTrees.push(treeToAPI); //TESTING FOR RN
+
+    // Refreshes the page (Uncomment when API is added)
+    // location.reload();
 }
 
 function clearTags() {
@@ -180,9 +199,12 @@ function clearTags() {
 
 // Setting the current array to contain the values from a json file
 function changeArrFromJson(/*JSON objs goes in here*/) {
-    //cats over the json strings with its attributes into the custom class
-    //each obj into the array 
-    currentTrees = [new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem()];
+
+    // Clear out current items
+    //currentTrees = new Array<tableItem>();
+
+    // TODO: traverse JSON file from API and add each obj into currentTrees
+
 }
 
 
@@ -203,17 +225,19 @@ class tableItem {
     comments: string;
 
 
-    constructor() {
-        this.plotId = 1;
-        this.species = "TEST";
-        this.year = 2025
-        this.recentTag = 1;
-        this.status = state.Dead;
-        this.sizeClass = size.Big;
-        this.DBH = 1;
-        this.matchNum = match.Probably;
-        this.comments = "Test info";
+    constructor(plotId: number, species: string, year: number, recentTag: number, status: state, sizeClass: size, DBH: number, matchNum: number, comment: string) {
+
+        this.plotId = plotId;
+        this.species = species;
+        this.year = year;
+        this.recentTag = recentTag;
+        this.status = status;
+        this.sizeClass = sizeClass;
+        this.DBH = DBH;
+        this.matchNum = matchNum;
+        this.comments = comment;
     }
+
 }
 
 // Aspects of trees
@@ -231,11 +255,11 @@ enum size {
 }
 
 enum match {
-    Definitely,
-    Probably,
-    NewTree,
-    OldTree,
-    Lost,
+    Definitely = 1,
+    Probably = 2,
+    NewTree = 3,
+    OldTree = 4,
+    Lost = 5,
 }
 
 

@@ -105,8 +105,22 @@ function updateCurrentTree(placement) {
 // How createNewTree() and updateCurrentTree(placement: number) actually add to our db
 function confirmUpdate() {
     // Turns modal info into a tableItem
-    // Sends tableItem to the API
-    // Refreshes the page
+    const selectPlot = document.getElementById("plot-select");
+    const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
+    //TODO: Fix this
+    const species = "stub";
+    const year = 5;
+    const recentTag = parseInt(document.getElementById("given-tag").value);
+    const status = document.getElementById("given-status").selectedIndex;
+    const sizeClass = document.getElementById("given-size-class").selectedIndex;
+    const dbh = parseInt(document.getElementById("given-match-num").value);
+    const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
+    const comment = document.getElementById("given-comment").value;
+    const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
+    //TODO: Sends tableItem to the API
+    currentTrees.push(treeToAPI); //TESTING FOR RN
+    // Refreshes the page (Uncomment when API is added)
+    // location.reload();
 }
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
@@ -120,23 +134,23 @@ function clearTags() {
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {
-    //cats over the json strings with its attributes into the custom class
-    //each obj into the array 
-    currentTrees = [new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem(), new tableItem()];
+    // Clear out current items
+    //currentTrees = new Array<tableItem>();
+    // TODO: traverse JSON file from API and add each obj into currentTrees
 }
 //////////// CLASS TO MAKE INFO FROM DB WORK ////////////
 // Outline for the items themselves
 class tableItem {
-    constructor() {
-        this.plotId = 1;
-        this.species = "TEST";
-        this.year = 2025;
-        this.recentTag = 1;
-        this.status = state.Dead;
-        this.sizeClass = size.Big;
-        this.DBH = 1;
-        this.matchNum = match.Probably;
-        this.comments = "Test info";
+    constructor(plotId, species, year, recentTag, status, sizeClass, DBH, matchNum, comment) {
+        this.plotId = plotId;
+        this.species = species;
+        this.year = year;
+        this.recentTag = recentTag;
+        this.status = status;
+        this.sizeClass = sizeClass;
+        this.DBH = DBH;
+        this.matchNum = matchNum;
+        this.comments = comment;
     }
 }
 // Aspects of trees
@@ -155,11 +169,11 @@ var size;
 })(size || (size = {}));
 var match;
 (function (match) {
-    match[match["Definitely"] = 0] = "Definitely";
-    match[match["Probably"] = 1] = "Probably";
-    match[match["NewTree"] = 2] = "NewTree";
-    match[match["OldTree"] = 3] = "OldTree";
-    match[match["Lost"] = 4] = "Lost";
+    match[match["Definitely"] = 1] = "Definitely";
+    match[match["Probably"] = 2] = "Probably";
+    match[match["NewTree"] = 3] = "NewTree";
+    match[match["OldTree"] = 4] = "OldTree";
+    match[match["Lost"] = 5] = "Lost";
 })(match || (match = {}));
 // Maps to access the aspects of each tree
 const statusName = new Map([
