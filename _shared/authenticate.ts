@@ -24,11 +24,11 @@ async function initializeAuth0() {
 // TODO: Redirect when login required
 async function checkAuth() {
   // Get authentication data
-  const isAuth = await isAuthenticated(client);
+  const isAuth = await client.isAuthenticated();
   console.log(`Authenticated: ${isAuth}`);
 
   try {
-    const token = await getTokenSilently(client);
+    const token = await client.getTokenSilently();
     console.log("Access Token: ", token);
   } catch (error) {
     console.error("Token renewal failed: ", (error as Error).message);

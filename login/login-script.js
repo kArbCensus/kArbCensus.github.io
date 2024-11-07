@@ -27,12 +27,12 @@ function authenticate(client) {
         const loginButton = document.getElementById("login");
         loginButton.addEventListener("click", (e) => __awaiter(this, void 0, void 0, function* () {
             e.preventDefault();
-            yield loginWithRedirect(client);
+            yield client.loginWithRedirect();
         }));
         // Detect url parameters to trigger callback and remove parameters
         if (location.search.includes("state=") &&
             (location.search.includes("code=") || location.search.includes("error="))) {
-            yield handleRedirectCallback(client);
+            yield client.handleRedirectCallback();
             console.log("Handling redirect callback");
             window.history.replaceState({}, document.title, "/");
         }
@@ -40,7 +40,7 @@ function authenticate(client) {
         const logoutButton = document.getElementById("logout");
         logoutButton.addEventListener("click", (e) => {
             e.preventDefault();
-            logout(client, {
+            client.logout({
                 clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
                 logoutParams: {
                     returnTo: window.location.protocol + "//" + window.location.host + "/login/",
@@ -48,7 +48,7 @@ function authenticate(client) {
             });
         });
         // Get authentication data
-        const isAuth = yield isAuthenticated(client);
+        const isAuth = yield client.isAuthenticated();
         console.log(`Authenticated: ${isAuth}`);
     });
 }

@@ -26,7 +26,7 @@ async function authenticate(client: Auth0Client) {
 
   loginButton.addEventListener("click", async (e) => {
     e.preventDefault();
-    await loginWithRedirect(client);
+    await client.loginWithRedirect();
   });
 
   // Detect url parameters to trigger callback and remove parameters
@@ -34,7 +34,7 @@ async function authenticate(client: Auth0Client) {
     location.search.includes("state=") &&
     (location.search.includes("code=") || location.search.includes("error="))
   ) {
-    await handleRedirectCallback(client);
+    await client.handleRedirectCallback();
     console.log("Handling redirect callback");
     window.history.replaceState({}, document.title, "/");
   }
@@ -44,7 +44,7 @@ async function authenticate(client: Auth0Client) {
 
   logoutButton.addEventListener("click", (e) => {
     e.preventDefault();
-    logout(client, {
+    client.logout({
       clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
       logoutParams: {
         returnTo:
@@ -54,7 +54,7 @@ async function authenticate(client: Auth0Client) {
   });
 
   // Get authentication data
-  const isAuth = await isAuthenticated(client);
+  const isAuth = await client.isAuthenticated();
   console.log(`Authenticated: ${isAuth}`);
 }
 

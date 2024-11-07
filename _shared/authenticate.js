@@ -27,10 +27,10 @@ function initializeAuth0() {
 function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
         // Get authentication data
-        const isAuth = yield isAuthenticated(client);
+        const isAuth = yield client.isAuthenticated();
         console.log(`Authenticated: ${isAuth}`);
         try {
-            const token = yield getTokenSilently(client);
+            const token = yield client.getTokenSilently();
             console.log("Access Token: ", token);
         }
         catch (error) {
