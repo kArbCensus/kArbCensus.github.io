@@ -95,7 +95,7 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Update & View</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="offModalWarning()"></button>
                     </div>
 
 
@@ -247,12 +247,12 @@
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-auto text-center">
-                                <h3 id="submission-notice">Please fill out all the form entirely before
+                                <h3 id="submission-notice" style="visibility: hidden;">Please fill out all the form entirely before
                                     submission!</h3>
                             </div>
                             <div class="col"></div>
                         </div>
-                        <button type="button" class="btn" id="pop-up-update" onclick="confirmUpdate()">Confirm
+                        <button type="button" class="btn" id="pop-up-update" onclick="confirmUpdate();">Confirm
                             Update</button>
                     </div>
 

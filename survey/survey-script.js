@@ -129,11 +129,17 @@ function confirmUpdate() {
     const dbh = parseInt(document.getElementById("given-match-num").value);
     const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
     const comment = document.getElementById("given-comment").value;
-    const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
-    //TODO: Sends tableItem to the API
-    currentTrees.push(treeToAPI); //TESTING FOR RN
-    // Refreshes the page (Uncomment when API is added)
-    // location.reload();
+    if (dbh == 0 || species == "") {
+        onModalWarning();
+    }
+    else {
+        offModalWarning();
+        const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
+        //TODO: Sends tableItem to the API
+        currentTrees.push(treeToAPI); //TESTING FOR RN
+        // Refreshes the page (Uncomment when API is added)
+        // location.reload();
+    }
 }
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
@@ -141,7 +147,7 @@ function clearTags() {
     document.getElementById("given-tag").value = "-1";
     document.getElementById("given-status").value = "Alive";
     document.getElementById("given-size-class").value = "Small";
-    document.getElementById("given-bdh").value = "";
+    document.getElementById("given-bdh").value = "0";
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
 }
@@ -150,6 +156,13 @@ function changeArrFromJson( /*JSON objs goes in here*/) {
     // Clear out current items
     //currentTrees = new Array<tableItem>();
     // TODO: traverse JSON file from API and add each obj into currentTrees
+}
+// Easy toggles for the warning notice
+function onModalWarning() {
+    document.getElementById("submission-notice").style.visibility = "visible";
+}
+function offModalWarning() {
+    document.getElementById("submission-notice").style.visibility = "hidden";
 }
 //////////// CLASS TO MAKE INFO FROM DB WORK ////////////
 // Outline for the items themselves

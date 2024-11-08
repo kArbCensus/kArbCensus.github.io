@@ -164,24 +164,22 @@ function confirmUpdate() {
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
-    
+
     const getSpecies = document.getElementById("give-species");
     let species = "";
     if (getSpecies.firstChild instanceof HTMLInputElement) {
         species = getSpecies.firstChild.value as string;
     }
-    else if (getSpecies.firstChild instanceof HTMLHeadingElement){
+    else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
         species = getSpecies.firstChild.innerText as string;
     }
-        
+
     const getYear = document.getElementById("give-date");
     let year = 2025;
-    if(getYear.firstChild instanceof HTMLInputElement)
-    {
+    if (getYear.firstChild instanceof HTMLInputElement) {
         year = parseInt(getYear.firstChild.value as string)
     }
-    else if(getYear.firstChild instanceof HTMLHeadingElement)
-    {
+    else if (getYear.firstChild instanceof HTMLHeadingElement) {
         year = parseInt(getYear.firstChild.innerText as string)
     }
 
@@ -189,18 +187,25 @@ function confirmUpdate() {
     const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
     const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
     const sizeClass = (document.getElementById("given-size-class") as HTMLSelectElement).selectedIndex as size;
-    const dbh = parseInt((document.getElementById("given-match-num") as HTMLInputElement).value);
+    const dbh = parseInt((document.getElementById("given-match-num") as HTMLInputElement).value) as number;
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
-    const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
+    if (dbh == 0 || species == "") {
+        onModalWarning();
+    }
+    else {
+        offModalWarning();
 
+        const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
 
-    //TODO: Sends tableItem to the API
-    currentTrees.push(treeToAPI); //TESTING FOR RN
+        //TODO: Sends tableItem to the API
+        currentTrees.push(treeToAPI); //TESTING FOR RN
 
-    // Refreshes the page (Uncomment when API is added)
-    // location.reload();
+        // Refreshes the page (Uncomment when API is added)
+        // location.reload();
+    }
+
 }
 
 function clearTags() {
@@ -209,7 +214,7 @@ function clearTags() {
     (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
     (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
     (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
-    (document.getElementById("given-bdh") as HTMLInputElement).value = "";
+    (document.getElementById("given-bdh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
 }
@@ -224,6 +229,16 @@ function changeArrFromJson(/*JSON objs goes in here*/) {
     // TODO: traverse JSON file from API and add each obj into currentTrees
 
 }
+
+// Easy toggles for the warning notice
+function onModalWarning() {
+    document.getElementById("submission-notice").style.visibility = "visible";
+}
+
+function offModalWarning() {
+    document.getElementById("submission-notice").style.visibility = "hidden";
+}
+
 
 
 
