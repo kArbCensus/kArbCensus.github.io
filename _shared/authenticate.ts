@@ -4,8 +4,10 @@ import "./auth0-functions.js";
 var client: Auth0Client = null;
 var token: string = null;
 
+/**
+ * Sets `client` to a new and configured Auth0Client.
+ */
 async function initializeAuth0() {
-  // TODO: Fetch domain and clientId from /auth_config.json
   const res: Response = await fetch("/auth_config.json");
   const config = (await res.json()) as Auth0ClientOptions;
 
@@ -20,6 +22,9 @@ async function initializeAuth0() {
   client = await createAuth0Client(options);
 }
 
+/**
+ * Handles logging in and setting `token` to a valid token string.
+ */
 async function checkAuth() {
   // Check if just logged in
   await checkCallback();
