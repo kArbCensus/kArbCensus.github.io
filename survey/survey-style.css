@@ -12064,13 +12064,13 @@ button {
   width: 5%;
   height: 100%;
   background: none;
-  font-size: calc(1.375rem + 1.5vw);
+  font-size: calc(1.325rem + 0.9vw);
   font-weight: bold;
   margin-right: 40px;
 }
 @media (min-width: 1200px) {
   #to-drop-down-button {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
