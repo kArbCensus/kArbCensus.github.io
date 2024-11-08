@@ -6,10 +6,8 @@ var token: string = null;
 
 async function initializeAuth0() {
   // TODO: Fetch domain and clientId from /auth_config.json
-  const config = {
-    domain: "dev-i8zcr46nupiabdjj.us.auth0.com",
-    clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
-  };
+  const res: Response = await fetch("/auth_config.json");
+  const config = (await res.json()) as Auth0ClientOptions;
 
   // Create Auth0 client using configuration
   const options: Auth0ClientOptions = {

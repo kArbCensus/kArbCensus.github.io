@@ -13,10 +13,8 @@ var token = null;
 function initializeAuth0() {
     return __awaiter(this, void 0, void 0, function* () {
         // TODO: Fetch domain and clientId from /auth_config.json
-        const config = {
-            domain: "dev-i8zcr46nupiabdjj.us.auth0.com",
-            clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
-        };
+        const res = yield fetch("/auth_config.json");
+        const config = (yield res.json());
         // Create Auth0 client using configuration
         const options = Object.assign(Object.assign({}, config), { authorizationParams: {
                 redirect_uri: window.location.href,
@@ -44,7 +42,6 @@ function checkAuth() {
         }
         else {
             yield client.loginWithRedirect();
-            console.log("Would log in");
         }
     });
 }
