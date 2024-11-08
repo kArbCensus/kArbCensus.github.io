@@ -10,9 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import "./auth0-functions.js";
 var client = null;
 var token = null;
+/**
+ * Sets `client` to a new and configured Auth0Client.
+ */
 function initializeAuth0() {
     return __awaiter(this, void 0, void 0, function* () {
-        // TODO: Fetch domain and clientId from /auth_config.json
         const res = yield fetch("/auth_config.json");
         const config = (yield res.json());
         // Create Auth0 client using configuration
@@ -22,6 +24,9 @@ function initializeAuth0() {
         client = yield createAuth0Client(options);
     });
 }
+/**
+ * Handles logging in and setting `token` to a valid token string.
+ */
 function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
         // Check if just logged in
