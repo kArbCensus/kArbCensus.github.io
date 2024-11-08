@@ -1,5 +1,7 @@
 // All of the trees for a chosen plot
 let currentTrees = new Array<tableItem>();
+//TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
+const currentCensusYear = 2025;
 
 
 
@@ -47,8 +49,6 @@ function updateSurveyTable() {
     //TODO: Use API to get a JSON file for the provided plot
     changeArrFromJson(/*JSON obj goes in here*/);
 
-    //TODO: Use the an API call to get and set the year
-    const currentYear = 2025;
 
 
     //Clear out the current items in the table
@@ -83,7 +83,7 @@ function updateSurveyTable() {
         species.appendChild(document.createTextNode("" + tree.species));
 
 
-        if (tree.year == currentYear) {
+        if (tree.year == currentCensusYear) {
             newRow.className = "table-active";
         }
 
@@ -109,48 +109,38 @@ function createNewTree() {
     species.style.textAlign = "left";
     document.getElementById("give-species").appendChild(species);
 
-    const year = document.createElement("input");
-    year.type = "number";
-    document.getElementById("give-date").appendChild(year);
-
 }
+
 
 function updateCurrentTree(placement: number) {
 
     clearTags();
 
+    // Transfer info from array into modal
     const toUpdate = currentTrees[placement];
 
     const species = document.createElement("h4");
     species.appendChild(document.createTextNode("" + toUpdate.species));
     document.getElementById("give-species").appendChild(species);
 
-    const year = document.createElement("h4");
-    year.appendChild(document.createTextNode("" + toUpdate.year));
-    document.getElementById("give-date").appendChild(year);
+    const year = document.getElementById("given-date") as HTMLHeadingElement;
+    year.innerHTML = "" + currentTrees[placement].year;
 
-
-    // Transfer info from array into modal
     const tag = document.getElementById("given-tag") as HTMLInputElement;
     tag.value = "" + currentTrees[placement].recentTag;
-
 
     const status = document.getElementById("given-status") as HTMLSelectElement;
     status.value = statusName.get(currentTrees[placement].status);
     console.log(status.value);
 
-
     const sizeClass = document.getElementById("given-size-class") as HTMLSelectElement;
     sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
 
-
-    const bdh = document.getElementById("given-bdh") as HTMLInputElement;
-    bdh.value = "" + currentTrees[placement].DBH;
-
+    const dbh = document.getElementById("given-dbh") as HTMLInputElement;
+    dbh.value = "" + currentTrees[placement].DBH;
 
     const matchNum = document.getElementById("given-match-num") as HTMLSelectElement;
     matchNum.value = "" + currentTrees[placement].matchNum;
-
 
     const comment = document.getElementById("given-comment") as HTMLInputElement;
     comment.value = "" + currentTrees[placement].comments;
@@ -160,7 +150,6 @@ function updateCurrentTree(placement: number) {
 // How createNewTree() and updateCurrentTree(placement: number) actually add to our db
 function confirmUpdate() {
     // Turns modal info into a tableItem
-
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
@@ -174,46 +163,34 @@ function confirmUpdate() {
         species = getSpecies.firstChild.innerText as string;
     }
 
-    const getYear = document.getElementById("give-date");
-    let year = 2025;
-    if (getYear.firstChild instanceof HTMLInputElement) {
-        year = parseInt(getYear.firstChild.value as string)
-    }
-    else if (getYear.firstChild instanceof HTMLHeadingElement) {
-        year = parseInt(getYear.firstChild.innerText as string)
-    }
-
 
     const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
     const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
     const sizeClass = (document.getElementById("given-size-class") as HTMLSelectElement).selectedIndex as size;
-    const dbh = parseInt((document.getElementById("given-match-num") as HTMLInputElement).value) as number;
+    const dbh = parseInt((document.getElementById("given-dbh") as HTMLInputElement).value) as number;
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
-    if (dbh == 0 || species == "") {
+
+    if (dbh <= 0 || species == "") {
         onModalWarning();
     }
     else {
         offModalWarning();
-
-        const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
-
+        const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
         currentTrees.push(treeToAPI); //TESTING FOR RN
-
-
     }
 
 }
 
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
-    document.getElementById("give-date").innerHTML = "";
+    (document.getElementById("given-date") as HTMLHeadingElement).innerText = "" + currentCensusYear;
     (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
     (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
     (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
-    (document.getElementById("given-bdh") as HTMLInputElement).value = "0";
+    (document.getElementById("given-dbh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
 }

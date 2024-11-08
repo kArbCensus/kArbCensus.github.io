@@ -34,7 +34,9 @@
         function closeModal() {
             if (document.getElementById("submission-notice").style.visibility == "hidden") {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
-                location.reload();
+                
+                //TURNED OFF FOR NOW FOR TESTING!
+                //location.reload(); 
             }
 
         }
@@ -131,11 +133,11 @@
                                 <div class="col-2"></div>
                                 <div class="col-4 text-center">
                                     <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The last time this tree has been updated across the censuses.">
+                                        data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree.">
                                         Updated</h4>
                                 </div>
-                                <div class="col-4 text-center" id="give-date">
-                                    <h4>2025</h4>
+                                <div class="col-4 text-center">
+                                    <h4 id="given-date">2025</h4>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -204,7 +206,7 @@
                                         DBH</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <input type="number" id="given-bdh">
+                                    <input type="number" id="given-dbh">
                                 </div>
                                 <div class="col-2"></div>
                             </div>
