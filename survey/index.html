@@ -10,6 +10,8 @@
     <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="survey-style.css">
 
+    <script src="https://kit.fontawesome.com/7af180cc8b.js" crossorigin="anonymous"></script>
+
     <!--Scripts for further use-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -34,7 +36,7 @@
         function closeModal() {
             if (document.getElementById("submission-notice").style.visibility == "hidden") {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
-                
+
                 //TURNED OFF FOR NOW FOR TESTING!
                 //location.reload(); 
             }
@@ -116,9 +118,12 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The identified type of tree.">
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" data-bs-title="The identified type of tree."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
                                         Species</h4>
                                 </div>
                                 <div class="col-4 text-center" id="give-species">
@@ -131,9 +136,12 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree.">
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
                                         Updated</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -146,10 +154,14 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 class="text-overflow-center" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify to trees with no tag.">
-                                        Recent Tag</h4>
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify to trees with no tag."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
+                                        Tag</h4>
                                 </div>
                                 <div class="col-4 text-center">
                                     <input type="number" id="given-tag">
@@ -161,9 +173,13 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Which of the roughly 4 states the tree falls into.">
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="Which of the roughly 4 states the tree falls into."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
                                         Status</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -181,10 +197,14 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 class="text-overflow-center" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Which of the 3 size classes based on diameter the tree fits into.">
-                                        Size Class</h4>
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="Which of the 3 size classes based on diameter the tree fits into."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
+                                        Size</h4>
                                 </div>
                                 <div class="col-4 text-center">
                                     <select id="given-size-class">
@@ -200,9 +220,13 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="The diameter in centimeters from breast height.">
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="The diameter in centimeters from breast height."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
                                         DBH</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -216,12 +240,17 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="1: Confident this is the same tree as last census,
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="1: Confident this is the same tree as last census,
                                         2: Probably the same tree as last census,
                                         3: Likely a new tree,
                                         4: Definitely an old tree but it can't be matched OR the tag is not registered for the previous census,
-                                        5: A Lost tree.">
+                                        5: A Lost tree."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
                                         Match #</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -240,9 +269,13 @@
 
                             <div class="row">
                                 <div class="col-2"></div>
-                                <div class="col-4 text-center">
-                                    <h4 data-bs-toggle="tooltip" data-bs-placement="top" style="margin-bottom: 4%;"
-                                        data-bs-title="Other important notes to mention about the tree or the info entered above.">
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-eye" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="Other important notes to mention about the tree or the info entered above."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4 style="margin-bottom: 4%;">
                                         Comments</h4>
                                 </div>
                                 <div class="col-4 text-center">
