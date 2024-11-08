@@ -4,6 +4,10 @@ import "./auth0-functions.js";
 var client: Auth0Client = null;
 var token: string = null;
 
+function authenticate() {
+  initializeAuth0().then(() => checkAuth());
+}
+
 /**
  * Sets `client` to a new and configured Auth0Client.
  */
@@ -60,4 +64,4 @@ async function checkCallback() {
   }
 }
 
-initializeAuth0().then(() => checkAuth());
+authenticate();

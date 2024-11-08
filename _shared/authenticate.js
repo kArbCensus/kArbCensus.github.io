@@ -10,6 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import "./auth0-functions.js";
 var client = null;
 var token = null;
+function authenticate() {
+    initializeAuth0().then(() => checkAuth());
+}
 /**
  * Sets `client` to a new and configured Auth0Client.
  */
@@ -62,5 +65,5 @@ function checkCallback() {
         }
     });
 }
-initializeAuth0().then(() => checkAuth());
+authenticate();
 //# sourceMappingURL=authenticate.js.map
