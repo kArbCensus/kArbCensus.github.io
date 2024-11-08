@@ -206,7 +206,7 @@ function confirmUpdate() {
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
-    (document.getElementById("given-tag") as HTMLInputElement).value = "";
+    (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
     (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
     (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
     (document.getElementById("given-bdh") as HTMLInputElement).value = "";

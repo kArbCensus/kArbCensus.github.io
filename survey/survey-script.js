@@ -138,7 +138,7 @@ function confirmUpdate() {
 function clearTags() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("give-date").innerHTML = "";
-    document.getElementById("given-tag").value = "";
+    document.getElementById("given-tag").value = "-1";
     document.getElementById("given-status").value = "Alive";
     document.getElementById("given-size-class").value = "Small";
     document.getElementById("given-bdh").value = "";
