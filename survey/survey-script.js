@@ -137,8 +137,6 @@ function confirmUpdate() {
         const treeToAPI = new tableItem(chosenPlot, species, year, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
         currentTrees.push(treeToAPI); //TESTING FOR RN
-        // Refreshes the page (Uncomment when API is added)
-        // location.reload();
     }
 }
 function clearTags() {

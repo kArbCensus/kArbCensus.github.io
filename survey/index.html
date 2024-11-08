@@ -17,6 +17,7 @@
 
     <script src="survey-script.js" type="text/javascript"></script>
 
+    <!--Extra scripts that TS was having issues with-->
     <script>
         // Finds all tool tip spots in the code and passes them on to be created
         function setUpToolTips() {
@@ -27,6 +28,15 @@
         // Initializes a tooltip at a marked spot
         function createAToolTip(tooltipTriggerEl) {
             new bootstrap.Tooltip(tooltipTriggerEl);
+        }
+
+        // User feedback: closing the modal and refreshing
+        function closeModal() {
+            if (document.getElementById("submission-notice").style.visibility == "hidden") {
+                bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
+                location.reload();
+            }
+
         }
 
     </script>
@@ -95,7 +105,8 @@
 
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Update & View</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="offModalWarning()"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="offModalWarning();"></button>
                     </div>
 
 
@@ -247,12 +258,14 @@
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-auto text-center">
-                                <h3 id="submission-notice" style="visibility: hidden;">Please fill out all the form entirely before
+                                <h3 id="submission-notice" style="visibility: hidden;">Please fill out all the form
+                                    entirely before
                                     submission!</h3>
                             </div>
                             <div class="col"></div>
                         </div>
-                        <button type="button" class="btn" id="pop-up-update" onclick="confirmUpdate();">Confirm
+                        <button type="button" class="btn" id="pop-up-update"
+                            onclick="confirmUpdate(); closeModal()">Confirm
                             Update</button>
                     </div>
 

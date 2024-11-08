@@ -202,8 +202,7 @@ function confirmUpdate() {
         //TODO: Sends tableItem to the API
         currentTrees.push(treeToAPI); //TESTING FOR RN
 
-        // Refreshes the page (Uncomment when API is added)
-        // location.reload();
+
     }
 
 }
