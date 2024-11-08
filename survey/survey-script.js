@@ -41,16 +41,16 @@ function updateSurveyTable() {
         let tree = currentTrees[i];
         // Forming each view button
         let updater = document.createElement('td');
-        let button = document.createElement('button');
+        let icon = document.createElement('i');
         updater.style.width = "16%";
         updater.style.minWidth = "150px";
-        button.id = "table-button";
-        button.setAttribute('data-bs-toggle', 'modal');
-        button.setAttribute('data-bs-target', '#pop-up');
-        button.onclick = function () { updateCurrentTree(i); };
-        button.appendChild(document.createTextNode("Info"));
+        icon.id = "table-icon";
+        icon.setAttribute('data-bs-toggle', 'modal');
+        icon.setAttribute('data-bs-target', '#pop-up');
+        icon.onclick = function () { updateCurrentTree(i); };
+        icon.className = "fas fa-circle-info";
         // Each other aspect of an entry
-        updater.appendChild(button);
+        updater.appendChild(icon);
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
         let size = document.createElement('td');

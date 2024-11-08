@@ -139,15 +139,10 @@ td {
     white-space: nowrap;
 }
 
-#table-button {
-    background-color: #357960;
+#table-icon {
+    color: #357960;
     @include font-size(1rem);
-    font-family: "Barlow";
-    border-radius: 10px;
-    border: none;
-    scale: 120%;
-    color: white;
-    padding: 1%;
+    scale: 150%;
 }
 
 #add-new-tree-button {
