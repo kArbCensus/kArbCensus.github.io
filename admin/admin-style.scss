@@ -28,6 +28,11 @@ h3 {
     @include font-size(2rem);
 }
 
+h4 {
+    @include font-size(1rem);
+    font-weight: 300;
+}
+
 input {
     font: "Barlow";
     font-family: "Barlow";
