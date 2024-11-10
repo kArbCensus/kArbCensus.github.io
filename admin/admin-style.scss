@@ -10,6 +10,15 @@ h1 {
     @include font-size(2.5rem);
 }
 
+h2 {
+    color: White;
+    text-align: center;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 400;
+    @include font-size(2.5rem);
+}
+
 h3 {
     color: White;
     text-align: center;
@@ -22,7 +31,11 @@ h3 {
 input {
     font: "Barlow";
     font-family: "Barlow";
-    width: 75%;
+    border-radius: 5px;
+    text-align: center;
+    width: 90%;
+    @include font-size(1.2rem);
+    border: 1px solid black;
 }
 
 body {
@@ -66,7 +79,7 @@ button {
     width: 5%;
     height: 100%;
     background: none;
-    @include font-size(2.5rem);
+    @include font-size(2rem);
     font-weight: bold;
     margin-right: 40px;
 }
