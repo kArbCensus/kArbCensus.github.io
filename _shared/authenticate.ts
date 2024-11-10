@@ -1,4 +1,5 @@
 import type { Auth0Client, Auth0ClientOptions } from "@auth0/auth0-spa-js";
+import type { JwtPayload } from "jwt-decode";
 import "./auth0-functions.js";
 
 var client: Auth0Client = null;
@@ -20,6 +21,7 @@ async function initializeAuth0() {
     ...config,
     authorizationParams: {
       redirect_uri: window.location.href,
+      audience: "https://yhtkatlrzobrazjjxqir.supabase.co/",
     },
   };
 
@@ -49,6 +51,8 @@ async function checkAuth() {
   } else {
     await client.loginWithRedirect();
   }
+
+  isAdmin();
 }
 
 async function checkCallback() {
@@ -62,6 +66,11 @@ async function checkCallback() {
     console.log("Handling redirect callback");
     window.history.replaceState({}, document.title, window.location.pathname);
   }
+}
+
+function isAdmin() {
+  const decodedToken = jwtDecode<JwtPayload>(token);
+  console.log("Decoded Token: ", decodedToken);
 }
 
 authenticate();

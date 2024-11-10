@@ -23,6 +23,7 @@ function initializeAuth0() {
         // Create Auth0 client using configuration
         const options = Object.assign(Object.assign({}, config), { authorizationParams: {
                 redirect_uri: window.location.href,
+                audience: "https://yhtkatlrzobrazjjxqir.supabase.co/",
             } });
         client = yield createAuth0Client(options);
     });
@@ -51,6 +52,7 @@ function checkAuth() {
         else {
             yield client.loginWithRedirect();
         }
+        isAdmin();
     });
 }
 function checkCallback() {
@@ -64,6 +66,10 @@ function checkCallback() {
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     });
+}
+function isAdmin() {
+    const decodedToken = jwtDecode(token);
+    console.log("Decoded Token: ", decodedToken);
 }
 authenticate();
 //# sourceMappingURL=authenticate.js.map
