@@ -14,18 +14,15 @@ function authenticate() {
  */
 async function initializeAuth0() {
   const res: Response = await fetch("/auth_config.json");
-  const config = (await res.json()) as Auth0ClientOptions;
+  var config = (await res.json()) as Auth0ClientOptions;
 
   // Create Auth0 client using configuration
-  const options: Auth0ClientOptions = {
-    ...config,
-    authorizationParams: {
-      redirect_uri: window.location.href,
-      audience: "https://yhtkatlrzobrazjjxqir.supabase.co/",
-    },
-  };
+  config.authorizationParams = {
+    ...config.authorizationParams,
+    redirect_uri: window.location.href,
+  }
 
-  client = await createAuth0Client(options);
+  client = await createAuth0Client(config);
 }
 
 /**
