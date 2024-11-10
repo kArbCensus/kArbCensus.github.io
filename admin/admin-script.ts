@@ -11,17 +11,27 @@ function censusStatusYearSetup() {
 }
 
 function confirmCreateNewCensus() {
-    setNewPopUpText("Are you sure you want to start a new census for the year: " + currentYear);
+    setNewPopUpText(true, "Are you sure you want to start a new census for the year: " + currentYear);
 }
 
 function confirmEndCurrentCensus() {
-    setNewPopUpText("Are you sure you want to end the current census.");
+    setNewPopUpText(false, "Are you sure you want to end the current census.");
 }
 
-function setNewPopUpText(text: string) {
+function setNewPopUpText(turnOn: boolean, text: string) {
     const popUp = document.getElementById("pop-up-text");
     popUp.innerHTML = "";
     popUp.appendChild(document.createTextNode(text));
+
+    const update = document.getElementById("pop-up-update");
+    if(turnOn)
+    {
+        update.onclick = function () { startCensus(); };
+    }
+    else
+    {
+        update.onclick = function () { endCensus(); };
+    }
 }
 
 function startCensus() {
