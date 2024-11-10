@@ -32,14 +32,11 @@ function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
         // Check if just logged in
         yield checkCallback();
-        // Get authentication data
-        const isAuth = yield client.isAuthenticated();
-        console.log(`Authenticated: ${isAuth}`);
         // If authenticated, get client token, else perform login
-        if (isAuth) {
+        if (yield isAuthenticated()) {
             try {
                 token = yield client.getTokenSilently();
-                // TODO: Remove debug log in production
+                // TODO: Remove debug logs in production
                 console.log("Access Token: ", token);
                 console.log(`Is admin? ${isAdmin()}`);
             }
@@ -69,10 +66,20 @@ function checkCallback() {
     });
 }
 /**
+ * Determines whether the current user is authenticated.
+ * @returns {Promise<boolean>} `true` if the user is authenticated
+ */
+function isAuthenticated() {
+    return client.isAuthenticated();
+}
+/**
  * Determines whether the current user has administrator permissions.
- * @returns {boolean} if the user is an administrator
+ * @returns {boolean} `true` if the user is an administrator
  */
 function isAdmin() {
+    if (!token) {
+        return false;
+    }
     const decodedToken = jwtDecode(token);
     // TODO: Remove debug log in production
     console.log("Decoded Token: ", decodedToken);

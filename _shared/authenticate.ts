@@ -36,15 +36,11 @@ async function checkAuth() {
   // Check if just logged in
   await checkCallback();
 
-  // Get authentication data
-  const isAuth: Boolean = await client.isAuthenticated();
-  console.log(`Authenticated: ${isAuth}`);
-
   // If authenticated, get client token, else perform login
-  if (isAuth) {
+  if (await isAuthenticated()) {
     try {
       token = await client.getTokenSilently();
-      // TODO: Remove debug log in production
+      // TODO: Remove debug logs in production
       console.log("Access Token: ", token);
       console.log(`Is admin? ${isAdmin()}`);
     } catch (error) {
@@ -73,10 +69,22 @@ async function checkCallback() {
 }
 
 /**
+ * Determines whether the current user is authenticated.
+ * @returns {Promise<boolean>} `true` if the user is authenticated
+ */
+function isAuthenticated(): Promise<boolean> {
+  return client.isAuthenticated();
+}
+
+/**
  * Determines whether the current user has administrator permissions.
- * @returns {boolean} if the user is an administrator
+ * @returns {boolean} `true` if the user is an administrator
  */
 function isAdmin(): boolean {
+  if (!token) {
+    return false;
+  }
+
   const decodedToken = jwtDecode<ArbJwtPayload>(token);
   // TODO: Remove debug log in production
   console.log("Decoded Token: ", decodedToken);
