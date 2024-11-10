@@ -17,6 +17,8 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    <script src="admin-script.js" type="text/javascript"></script>
+
     <script src="/_shared/jwt-decode.js"></script>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
@@ -134,13 +136,15 @@
                                         <br>
                                         <h3>Current census: ___</h3>
                                         <a class="btn d-inline-flex justify-content-center" id="admin-button"
-                                            data-bs-toggle="modal" data-bs-target="#pop-up"> Start new
+                                            data-bs-toggle="modal" data-bs-target="#pop-up"
+                                            onclick="confirmCreateNewCensus()"> Start new
                                             census
                                             <a>
                                                 <br>
                                                 <br>
                                                 <a class="btn d-inline-flex justify-content-center" id="admin-button"
-                                                    data-bs-toggle="modal" data-bs-target="#pop-up">
+                                                    data-bs-toggle="modal" data-bs-target="#pop-up"
+                                                    onclick="confirmEndCurrentCensus()">
                                                     End current census
                                                     <a>
                     </div>
