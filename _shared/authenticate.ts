@@ -2,6 +2,10 @@ import type { Auth0Client, Auth0ClientOptions } from "@auth0/auth0-spa-js";
 import type { JwtPayload } from "jwt-decode";
 import "./auth0-functions.js";
 
+interface ArbJwtPayload extends JwtPayload {
+  "https://kArbCensus.github.io/roles"?: Array<string>;
+}
+
 var client: Auth0Client = null;
 var token: string = null;
 
@@ -20,13 +24,13 @@ async function initializeAuth0() {
   config.authorizationParams = {
     ...config.authorizationParams,
     redirect_uri: window.location.href,
-  }
+  };
 
   client = await createAuth0Client(config);
 }
 
 /**
- * Handles logging in and setting `token` to a valid token string.
+ * Handles logging in and sets `token` to a valid token string.
  */
 async function checkAuth() {
   // Check if just logged in
@@ -42,22 +46,25 @@ async function checkAuth() {
       token = await client.getTokenSilently();
       // TODO: Remove debug log in production
       console.log("Access Token: ", token);
+      console.log(`Is admin? ${isAdmin()}`);
     } catch (error) {
       console.error("Token renewal failed: ", (error as Error).message);
     }
   } else {
     await client.loginWithRedirect();
   }
-
-  isAdmin();
 }
 
+/**
+ * Performs a redirect callback if necessary.
+ */
 async function checkCallback() {
-  // Detect url parameters to trigger callback and remove parameters
-  const isCalledBack: Boolean =
+  // Detect url parameters from redirect
+  const isCalledBack: boolean =
     location.search.includes("state=") &&
     (location.search.includes("code=") || location.search.includes("error="));
 
+  // Trigger callback and remove parameters
   if (isCalledBack) {
     await client.handleRedirectCallback();
     console.log("Handling redirect callback");
@@ -65,9 +72,16 @@ async function checkCallback() {
   }
 }
 
-function isAdmin() {
-  const decodedToken = jwtDecode<JwtPayload>(token);
+/**
+ * Determines whether the current user has administrator permissions.
+ * @returns {boolean} if the user is an administrator
+ */
+function isAdmin(): boolean {
+  const decodedToken = jwtDecode<ArbJwtPayload>(token);
+  // TODO: Remove debug log in production
   console.log("Decoded Token: ", decodedToken);
+
+  return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
 
 authenticate();

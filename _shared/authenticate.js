@@ -19,17 +19,14 @@ function authenticate() {
 function initializeAuth0() {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield fetch("/auth_config.json");
-        const config = (yield res.json());
+        var config = (yield res.json());
         // Create Auth0 client using configuration
-        const options = Object.assign(Object.assign({}, config), { authorizationParams: {
-                redirect_uri: window.location.href,
-                audience: "https://yhtkatlrzobrazjjxqir.supabase.co/",
-            } });
-        client = yield createAuth0Client(options);
+        config.authorizationParams = Object.assign(Object.assign({}, config.authorizationParams), { redirect_uri: window.location.href });
+        client = yield createAuth0Client(config);
     });
 }
 /**
- * Handles logging in and setting `token` to a valid token string.
+ * Handles logging in and sets `token` to a valid token string.
  */
 function checkAuth() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -44,6 +41,7 @@ function checkAuth() {
                 token = yield client.getTokenSilently();
                 // TODO: Remove debug log in production
                 console.log("Access Token: ", token);
+                console.log(`Is admin? ${isAdmin()}`);
             }
             catch (error) {
                 console.error("Token renewal failed: ", error.message);
@@ -52,14 +50,17 @@ function checkAuth() {
         else {
             yield client.loginWithRedirect();
         }
-        isAdmin();
     });
 }
+/**
+ * Performs a redirect callback if necessary.
+ */
 function checkCallback() {
     return __awaiter(this, void 0, void 0, function* () {
-        // Detect url parameters to trigger callback and remove parameters
+        // Detect url parameters from redirect
         const isCalledBack = location.search.includes("state=") &&
             (location.search.includes("code=") || location.search.includes("error="));
+        // Trigger callback and remove parameters
         if (isCalledBack) {
             yield client.handleRedirectCallback();
             console.log("Handling redirect callback");
@@ -67,9 +68,15 @@ function checkCallback() {
         }
     });
 }
+/**
+ * Determines whether the current user has administrator permissions.
+ * @returns {boolean} if the user is an administrator
+ */
 function isAdmin() {
     const decodedToken = jwtDecode(token);
+    // TODO: Remove debug log in production
     console.log("Decoded Token: ", decodedToken);
+    return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
 authenticate();
 //# sourceMappingURL=authenticate.js.map
