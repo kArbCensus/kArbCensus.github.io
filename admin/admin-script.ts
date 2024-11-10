@@ -1,9 +1,11 @@
 function confirmCreateNewCensus() {
-    setNewPopUpText("Test 1");
+    const currentYear = new Date().getFullYear();
+
+    setNewPopUpText("Are you sure you want to start a new census for the year: " + currentYear);
 }
 
 function confirmEndCurrentCensus() {
-    setNewPopUpText("Test 2");
+    setNewPopUpText("Are you sure you want to end the current census.");
 }
 
 function setNewPopUpText(text: string) {
