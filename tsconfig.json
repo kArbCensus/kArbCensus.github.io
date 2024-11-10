@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "rootDir": "./",
-    "allowJs": true
+    "allowJs": true,
+    "lib": ["es2016", "DOM"]
   },
   "include": [
     "./**/*.ts"  
