@@ -27,7 +27,7 @@
 </head>
 
 
-<body>
+<body onload="censusStatusYearSetup()">
     <div class="container-fluid full-width">
         <!--Banner-->
         <div class="sticky-top">
@@ -141,7 +141,7 @@
                                         <br>
                                         <br>
                                         <br>
-                                        <h3>Current census: ___</h3>
+                                        <h3 id="census-status-year">Current census: ___</h3>
                                         <a class="btn d-inline-flex justify-content-center" id="admin-button"
                                             data-bs-toggle="modal" data-bs-target="#pop-up"
                                             onclick="confirmCreateNewCensus()"> Start new
