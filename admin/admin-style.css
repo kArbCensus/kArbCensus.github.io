@@ -12088,4 +12088,13 @@ button {
   #admin-button {
     font-size: 2rem;
   }
+}
+
+#pop-up-update {
+  font-size: 1.2rem;
+  background-color: #357960;
+  font-family: "Barlow";
+  border: none;
+  color: white;
+  width: 100%;
 }/*# sourceMappingURL=admin-style.css.map */

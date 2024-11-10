@@ -84,6 +84,27 @@
         <br>
 
 
+        <!--Pop up confirmation-->
+        <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">CONFIRMATION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn" id="pop-up-update">Confirm</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
         <!--Possible actions for an admin to take-->
         <div class="row">
             <div class="col-3"></div>
@@ -103,13 +124,15 @@
                                         <br>
                                         <h3>Current census: ___</h3>
                                         <a class="btn d-inline-flex justify-content-center"
-                                            href="https://www.google.co.uk/" id="admin-button"> Start new
+                                            href="https://www.google.co.uk/" id="admin-button" data-bs-toggle="modal"
+                                            data-bs-target="#pop-up"> Start new
                                             census
                                             <a>
                                                 <br>
                                                 <br>
                                                 <a class="btn d-inline-flex justify-content-center"
-                                                    href="https://www.google.co.uk/" id="admin-button">
+                                                    href="https://www.google.co.uk/" id="admin-button"
+                                                    data-bs-toggle="modal" data-bs-target="#pop-up">
                                                     End current census
                                                     <a>
                     </div>
