@@ -11972,6 +11972,7 @@ h1, .h1 {
   font-weight: 900;
   font-size: 100;
   margin-top: 1%;
+  margin-left: 2%;
   font-size: calc(1.375rem + 1.5vw);
 }
 @media (min-width: 1200px) {
