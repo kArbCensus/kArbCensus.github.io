@@ -3,7 +3,7 @@ import type { JwtPayload } from "jwt-decode";
 import "./auth0-functions.js";
 
 interface ArbJwtPayload extends JwtPayload {
-  "https://kArbCensus.github.io/roles"?: Array<string>;
+  "https://kArbCensus.github.io/roles": Array<string>;
 }
 
 var client: Auth0Client = null;
