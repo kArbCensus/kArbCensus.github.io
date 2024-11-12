@@ -8,6 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import "./auth0-functions.js";
+globalThis.authToken = null;
+// Define promise that resolves once token is set
+let resolveAuthTokenReady;
+globalThis.authTokenReady = new Promise((resolve) => {
+    resolveAuthTokenReady = resolve;
+});
 var client = null;
 var token = null;
 function authenticate() {
@@ -36,6 +42,8 @@ function checkAuth() {
         if (yield isAuthenticated()) {
             try {
                 token = yield client.getTokenSilently();
+                globalThis.authToken = token;
+                resolveAuthTokenReady();
                 // TODO: Remove debug logs in production
                 console.log("Access Token: ", token);
                 console.log(`Is admin? ${isAdmin()}`);

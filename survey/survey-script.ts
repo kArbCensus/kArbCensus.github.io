@@ -7,15 +7,36 @@ const currentCensusYear = 2025;
 
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
-
+function setupSurvey()
+{
+    createPlotOptions()
+}
 
 // Populating the plot drop down
-function createPlotOptions() {
+async function createPlotOptions() {
+    // Wait for auth token to be ready
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    const configRes = await fetch("/api_config.json");
+    const { urlBase } = await configRes.json() as {urlBase: string};
+    const plotCountUrl = urlBase + "plot-count";
+    
+    // Make API call with authentication token
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+    const apiRes = await fetch(plotCountUrl, {
+        headers,
+        method: "GET",
+    });
+    const apiObj = await apiRes.json() as {value: number};
+    const plotCount: number = apiObj.value;
 
     const select = document.getElementById("plot-select") as HTMLSelectElement;
 
-    //TODO: have this not be a set #, but rather do an API call to get the total number of plots
-    for (let i = 1; i < 41; i++) {
+    // TODO: have this not be a set #, but rather do an API call to get the total number of plots
+    for (let i = 1; i <= plotCount; i++) {
         const option = document.createElement('option');
         option.value = "" + i;
         option?.appendChild(document.createTextNode("" + i));

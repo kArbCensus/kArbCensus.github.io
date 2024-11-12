@@ -2,6 +2,18 @@ import type { Auth0Client, Auth0ClientOptions } from "@auth0/auth0-spa-js";
 import type { JwtPayload } from "jwt-decode";
 import "./auth0-functions.js";
 
+declare global {
+  var authToken: string | null;
+  var authTokenReady: Promise<void>;
+}
+globalThis.authToken = null;
+
+// Define promise that resolves once token is set
+let resolveAuthTokenReady: () => void;
+globalThis.authTokenReady = new Promise((resolve) => {
+  resolveAuthTokenReady = resolve;
+});
+
 interface ArbJwtPayload extends JwtPayload {
   "https://kArbCensus.github.io/roles": Array<string>;
 }
@@ -40,6 +52,9 @@ async function checkAuth() {
   if (await isAuthenticated()) {
     try {
       token = await client.getTokenSilently();
+      globalThis.authToken = token;
+      resolveAuthTokenReady();
+
       // TODO: Remove debug logs in production
       console.log("Access Token: ", token);
       console.log(`Is admin? ${isAdmin()}`);
