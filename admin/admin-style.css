@@ -11965,6 +11965,11 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+#used-asset-link {
+  color: black;
+  font-family: "Barlow";
+}
+
 h1, .h1 {
   color: black;
   font: "Barlow";
