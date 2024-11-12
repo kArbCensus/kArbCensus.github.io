@@ -1,9 +1,13 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#used-asset-link
-{
+#used-asset-link {
     color: black;
     font-family: "Barlow";
+}
+
+footer {
+    padding: 1%;
+    margin: auto;
 }
 
 h1 {

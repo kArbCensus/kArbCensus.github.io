@@ -11970,6 +11970,11 @@ textarea.form-control-lg {
   font-family: "Barlow";
 }
 
+footer {
+  padding: 1%;
+  margin: auto;
+}
+
 h1, .h1 {
   color: black;
   font: "Barlow";

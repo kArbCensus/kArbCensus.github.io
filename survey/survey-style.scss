@@ -1,9 +1,13 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#used-asset-link
-{
+#used-asset-link {
     color: black;
     font-family: "Barlow";
+}
+
+footer {
+    padding: 1%;
+    margin: auto;
 }
 
 h1 {
@@ -161,8 +165,7 @@ td {
     min-width: 130px;
 }
 
-#gray-note
-{
+#gray-note {
     color: white;
     font-style: italic;
     @include font-size(.9rem);
@@ -210,8 +213,7 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-#submission-notice
-{
+#submission-notice {
     color: red;
     @include font-size(1rem);
     margin: auto;
