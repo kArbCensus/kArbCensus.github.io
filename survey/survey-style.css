@@ -11973,6 +11973,8 @@ textarea.form-control-lg {
 footer {
   padding: 1%;
   margin: auto;
+  color: white;
+  font-family: "Barlow";
 }
 
 h1, .h1 {
