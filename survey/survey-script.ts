@@ -3,7 +3,12 @@ let currentTrees = new Array<tableItem>();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
 const currentCensusYear = 2025;
 
-
+async function getApiUrlBase(): Promise<string>
+{
+    const configRes = await fetch("/api_config.json");
+    const { urlBase } = await configRes.json() as {urlBase: string};
+    return urlBase;
+}
 
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
@@ -18,10 +23,8 @@ async function createPlotOptions() {
     await globalThis.authTokenReady;
 
     // Get the API endpoint
-    const configRes = await fetch("/api_config.json");
-    const { urlBase } = await configRes.json() as {urlBase: string};
-    const plotCountUrl = urlBase + "plot-count";
-    
+    const plotCountUrl = await getApiUrlBase() + "plot-count";
+
     // Make API call with authentication token
     const headers = {
         "Authorization": `Bearer ${globalThis.authToken}`
@@ -239,8 +242,11 @@ function offModalWarning() {
 
 
 
-//////////// CLASS TO MAKE INFO FROM DB WORK ////////////
+//////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 
+interface PlotIds {
+    plotIds: number[];
+}
 
 // Outline for the items themselves
 class tableItem {

@@ -11,6 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 let currentTrees = new Array();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
 const currentCensusYear = 2025;
+function getApiUrlBase() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const configRes = yield fetch("/api_config.json");
+        const { urlBase } = yield configRes.json();
+        return urlBase;
+    });
+}
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 function setupSurvey() {
     createPlotOptions();
@@ -21,9 +28,7 @@ function createPlotOptions() {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
-        const configRes = yield fetch("/api_config.json");
-        const { urlBase } = yield configRes.json();
-        const plotCountUrl = urlBase + "plot-count";
+        const plotCountUrl = (yield getApiUrlBase()) + "plot-count";
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`
@@ -180,7 +185,6 @@ function onModalWarning() {
 function offModalWarning() {
     document.getElementById("submission-notice").style.visibility = "hidden";
 }
-//////////// CLASS TO MAKE INFO FROM DB WORK ////////////
 // Outline for the items themselves
 class tableItem {
     constructor(plotId, species, year, recentTag, status, sizeClass, DBH, matchNum, comment) {
