@@ -23,7 +23,7 @@ async function createPlotOptions() {
     await globalThis.authTokenReady;
 
     // Get the API endpoint
-    const plotCountUrl = await getApiUrlBase() + "plot-count";
+    const plotCountUrl = await getApiUrlBase() + "plot-ids";
 
     // Make API call with authentication token
     const headers = {
@@ -33,16 +33,15 @@ async function createPlotOptions() {
         headers,
         method: "GET",
     });
-    const apiObj = await apiRes.json() as {value: number};
-    const plotCount: number = apiObj.value;
+    const apiObj = await apiRes.json() as PlotIdsPayload;
+    const plotIds: number[] = apiObj.plotIds;
 
     const select = document.getElementById("plot-select") as HTMLSelectElement;
 
-    // TODO: have this not be a set #, but rather do an API call to get the total number of plots
-    for (let i = 1; i <= plotCount; i++) {
+    for (const plotId of plotIds) {
         const option = document.createElement('option');
-        option.value = "" + i;
-        option?.appendChild(document.createTextNode("" + i));
+        option.value = "" + plotId;
+        option?.appendChild(document.createTextNode("" + plotId));
         select.appendChild(option);
     }
 }
@@ -244,7 +243,7 @@ function offModalWarning() {
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 
-interface PlotIds {
+interface PlotIdsPayload {
     plotIds: number[];
 }
 

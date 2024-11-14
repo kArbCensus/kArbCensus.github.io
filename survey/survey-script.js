@@ -28,7 +28,7 @@ function createPlotOptions() {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
-        const plotCountUrl = (yield getApiUrlBase()) + "plot-count";
+        const plotCountUrl = (yield getApiUrlBase()) + "plot-ids";
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`
@@ -38,13 +38,12 @@ function createPlotOptions() {
             method: "GET",
         });
         const apiObj = yield apiRes.json();
-        const plotCount = apiObj.value;
+        const plotIds = apiObj.plotIds;
         const select = document.getElementById("plot-select");
-        // TODO: have this not be a set #, but rather do an API call to get the total number of plots
-        for (let i = 1; i <= plotCount; i++) {
+        for (const plotId of plotIds) {
             const option = document.createElement('option');
-            option.value = "" + i;
-            option === null || option === void 0 ? void 0 : option.appendChild(document.createTextNode("" + i));
+            option.value = "" + plotId;
+            option === null || option === void 0 ? void 0 : option.appendChild(document.createTextNode("" + plotId));
             select.appendChild(option);
         }
     });
