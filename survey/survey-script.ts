@@ -99,7 +99,7 @@ function updateSurveyTable() {
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
         let size = document.createElement('td');
-        size.appendChild(document.createTextNode("" + tree.sizeClass));
+        size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
 
