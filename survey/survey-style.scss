@@ -3,6 +3,7 @@
 #used-asset-link {
     color: black;
     font-family: "Barlow";
+    font: "Barlow";
 }
 
 footer {
@@ -10,12 +11,13 @@ footer {
     margin: auto;
     color: white;
     font-family: "Barlow";
+    font: "Barlow";
 }
 
 h1 {
     color: black;
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     font-weight: 900;
     font-size: 100;
     margin-top: 1%;
@@ -26,8 +28,8 @@ h1 {
 h2 {
     color: White;
     text-align: center;
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     font-weight: 400;
     @include font-size(2.5rem);
 }
@@ -35,15 +37,15 @@ h2 {
 h3 {
     color: White;
     text-align: center;
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     font-weight: 200;
     @include font-size(2rem);
 }
 
 input {
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     border-radius: 5px;
     text-align: center;
     width: 90%;
@@ -57,8 +59,8 @@ body {
 
 button {
     font-weight: 200;
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     border: none;
     background-color: white;
     width: 25%;
@@ -76,8 +78,8 @@ button {
 }
 
 #banner-drop-option {
-    font: "Barlow";
     font-family: "Barlow";
+    font: "Barlow";
     width: 5%;
     height: 100%;
     font-weight: bold;
@@ -101,6 +103,7 @@ button {
 #plot-select {
     @include font-size(1.5rem);
     font-family: "Barlow";
+    font: "Barlow";
     border-radius: 20px;
     border: none;
     position: relative;
@@ -116,16 +119,19 @@ select {
     @include font-size(1.2rem);
     border-color: black;
     padding: 2%;
+    color: black;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
 
 option {
     font-family: "Barlow";
+    font: "Barlow";
 }
 
 table {
     font-family: "Barlow";
+    font: "Barlow";
     @include font-size(1rem);
     border: none;
     display: block;
@@ -162,6 +168,7 @@ td {
 #add-new-tree-button {
     @include font-size(1.5rem);
     font-family: "Barlow";
+    font: "Barlow";
     border-radius: 15px;
     padding: 1%;
     border: none;
@@ -221,5 +228,6 @@ input::-webkit-inner-spin-button {
     @include font-size(1rem);
     margin: auto;
     font-family: "Barlow";
+    font: "Barlow";
     font-weight: bold;
 }
