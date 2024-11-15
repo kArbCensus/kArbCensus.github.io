@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // All of the trees for a chosen plot
 let currentTrees = new Array();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear = 2025;
+const currentCensusYear = -1;
 function getApiUrlBase() {
     return __awaiter(this, void 0, void 0, function* () {
         const configRes = yield fetch("/api_config.json");
@@ -19,6 +19,22 @@ function getApiUrlBase() {
     });
 }
 //////////// LOAD IN PAGE FUNCTIONS ////////////
+function setupModalButton() {
+    // Giving the user the option to update if appropriate
+    const updateButton = document.getElementById("pop-up-update");
+    updateButton.innerHTML = "";
+    if (currentCensusYear != -1) {
+        updateButton.style.backgroundColor = "#357960";
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Confirm Update"));
+    }
+    else {
+        updateButton.style.backgroundColor = "grey";
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Census Not Open"));
+        updateButton.onclick = () => { };
+    }
+}
 function setupSurvey() {
     createPlotOptions();
 }
@@ -170,23 +186,6 @@ function refreshPopUp() {
     document.getElementById("given-dbh").value = "0";
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
-    // Giving the user the option to update if appropriate
-    const footer = document.getElementById("bottom-of-modal");
-    if (currentCensusYear != -1) {
-        const updateButton = document.createElement("button");
-        updateButton.type = "button";
-        updateButton.className = "btn";
-        updateButton.id = "pop-up-update";
-        updateButton.onclick = () => { confirmUpdate(); };
-        updateButton.appendChild(document.createTextNode("Confirm Update"));
-        footer.appendChild(updateButton);
-    }
-    else {
-        const notOpen = document.createElement("h3");
-        notOpen.appendChild(document.createTextNode("No census is under way"));
-        notOpen.id = "submission-notice";
-        footer.appendChild(notOpen);
-    }
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {

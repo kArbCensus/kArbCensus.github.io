@@ -1,7 +1,7 @@
 // All of the trees for a chosen plot
 let currentTrees = new Array<tableItem>();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear = 2025 as number;
+const currentCensusYear = -1 as number;
 
 async function getApiUrlBase(): Promise<string> {
     const configRes = await fetch("/api_config.json");
@@ -10,6 +10,23 @@ async function getApiUrlBase(): Promise<string> {
 }
 
 //////////// LOAD IN PAGE FUNCTIONS ////////////
+
+function setupModalButton() {
+    // Giving the user the option to update if appropriate
+    const updateButton = document.getElementById("pop-up-update");
+    updateButton.innerHTML = "";
+    if (currentCensusYear != -1) {
+        updateButton.style.backgroundColor = "#357960";
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Confirm Update"));
+    }
+    else {
+        updateButton.style.backgroundColor = "grey"
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Census Not Open"));
+        updateButton.onclick = () => {/*Nothing*/};
+    }
+}
 
 function setupSurvey() {
     createPlotOptions()
@@ -215,26 +232,6 @@ function refreshPopUp() {
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
 
-    // Giving the user the option to update if appropriate
-    const footer = document.getElementById("bottom-of-modal")
-    if(currentCensusYear != -1)
-    {
-        const updateButton = document.createElement("button");
-        updateButton.type = "button";
-        updateButton.className = "btn";
-        updateButton.id = "pop-up-update";
-        updateButton.onclick = () => {confirmUpdate();};
-        updateButton.appendChild(document.createTextNode("Confirm Update"));
-        footer.appendChild(updateButton);
-    }
-    else
-    {
-        const notOpen = document.createElement("h3");
-        notOpen.appendChild(document.createTextNode("No census is under way"));
-        notOpen.id = "submission-notice";
-        footer.appendChild(notOpen);
-
-    }
 }
 
 
