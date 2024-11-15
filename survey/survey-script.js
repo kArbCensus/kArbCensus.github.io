@@ -115,7 +115,9 @@ function updateSurveyTable() {
             method: "GET",
         });
         const apiObj = yield apiRes.json();
+        // Update and sort current trees
         changeArrFromJson(apiObj, chosenPlot);
+        currentTrees.sort((a, b) => a.recentTag - b.recentTag);
         //Clear out the current items in the table
         const body = document.getElementById("table-body");
         body.innerHTML = '';
