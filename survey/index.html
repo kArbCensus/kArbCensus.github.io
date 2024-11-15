@@ -45,9 +45,7 @@
         function closeModal() {
             if (document.getElementById("submission-notice").style.visibility == "hidden") {
                 bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
-
-                //TURNED OFF FOR NOW FOR TESTING!
-                //location.reload(); 
+                updateSurveyTable();
             }
 
         }
