@@ -14,13 +14,7 @@ async function getApiUrlBase(): Promise<string> {
 function setupModalButton() {
     // Giving the user the option to update if appropriate
     const updateButton = document.getElementById("pop-up-update");
-    updateButton.innerHTML = "";
-    if (currentCensusYear != -1) {
-        updateButton.style.backgroundColor = "#357960";
-        updateButton.innerHTML = "";
-        updateButton.appendChild(document.createTextNode("Confirm Update"));
-    }
-    else {
+    if (currentCensusYear == -1) {
         updateButton.style.backgroundColor = "grey"
         updateButton.innerHTML = "";
         updateButton.appendChild(document.createTextNode("Census Not Open"));

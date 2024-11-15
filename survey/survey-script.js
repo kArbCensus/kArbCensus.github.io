@@ -22,13 +22,7 @@ function getApiUrlBase() {
 function setupModalButton() {
     // Giving the user the option to update if appropriate
     const updateButton = document.getElementById("pop-up-update");
-    updateButton.innerHTML = "";
-    if (currentCensusYear != -1) {
-        updateButton.style.backgroundColor = "#357960";
-        updateButton.innerHTML = "";
-        updateButton.appendChild(document.createTextNode("Confirm Update"));
-    }
-    else {
+    if (currentCensusYear == -1) {
         updateButton.style.backgroundColor = "grey";
         updateButton.innerHTML = "";
         updateButton.appendChild(document.createTextNode("Census Not Open"));
@@ -206,8 +200,6 @@ function refreshPopUp() {
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson(censusEntries, plotId) {
-    // Clear out current items
-    //currentTrees = new Array<tableItem>();
     currentTrees = censusEntries.map((entry) => (new tableItem(plotId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
     size[entry.sizeClass], // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
