@@ -99,7 +99,9 @@ async function updateSurveyTable() {
     });
     const apiObj = await apiRes.json() as EntryResponsePayload[];
 
+    // Update and sort current trees
     changeArrFromJson(apiObj, chosenPlot);
+    currentTrees.sort((a, b) => a.recentTag - b.recentTag);
 
 
     //Clear out the current items in the table
