@@ -67,7 +67,10 @@ async function createPlotOptions() {
 
 
 // Updating the table for a new plot choice
-function updateSurveyTable() {
+async function updateSurveyTable() {
+    // Wait for auth token to be ready
+    await globalThis.authTokenReady;
+
     const addButton = document.getElementById("add-button");
     const grayWarning = document.getElementById("gray-warning");
     const surveyTable = document.getElementById("survey-table");
@@ -84,9 +87,25 @@ function updateSurveyTable() {
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
 
 
-    //TODO: Use API to get a JSON file for the provided plot
-    changeArrFromJson(/*JSON obj goes in here*/);
+    // Get the API endpoint
+    let treesUrl = await getApiUrlBase() + "trees";
 
+    // Add query options
+    treesUrl += `?plot=${chosenPlot}&current_census=${currentCensusYear}`
+
+    // Add authentication token to headers
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+
+    // Make an API request for the tree entries
+    const apiRes = await fetch(treesUrl, {
+        headers,
+        method: "GET",
+    });
+    const apiObj = await apiRes.json() as EntryResponsePayload[];
+
+    changeArrFromJson(apiObj, chosenPlot);
 
 
     //Clear out the current items in the table
@@ -175,7 +194,7 @@ function updateCurrentTree(placement: number) {
     sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
 
     const dbh = document.getElementById("given-dbh") as HTMLInputElement;
-    dbh.value = "" + currentTrees[placement].DBH;
+    dbh.value = "" + currentTrees[placement].dbh;
 
     const matchNum = document.getElementById("given-match-num") as HTMLSelectElement;
     matchNum.value = "" + currentTrees[placement].matchNum;
@@ -236,13 +255,18 @@ function refreshPopUp() {
 
 
 // Setting the current array to contain the values from a json file
-function changeArrFromJson(/*JSON objs goes in here*/) {
-
-    // Clear out current items
-    //currentTrees = new Array<tableItem>();
-
-    // TODO: traverse JSON file from API and add each obj into currentTrees
-
+function changeArrFromJson(censusEntries: EntryResponsePayload[], plotId: number) {
+    currentTrees = censusEntries.map((entry) => (new tableItem(
+        plotId,
+        entry.species,
+        entry.year,
+        entry.recentTag,
+        state[entry.status as keyof typeof state], // Convert status to state type
+        size[entry.sizeClass as keyof typeof size], // Convert sizeClass to size type
+        entry.dbh,
+        entry.matchNum as match,
+        entry.comments
+    )));
 }
 
 // Easy toggles for the warning notice
@@ -263,6 +287,17 @@ interface PlotIdsPayload {
     plotIds: number[];
 }
 
+interface EntryResponsePayload {
+    species: string;
+    year: number;
+    recentTag: number;
+    status: string;
+    sizeClass: string;
+    dbh: number;
+    matchNum: number;
+    comments: string;
+}
+
 // Outline for the items themselves
 class tableItem {
     plotId: number;
@@ -271,12 +306,12 @@ class tableItem {
     recentTag: number;
     status: state;
     sizeClass: size;
-    DBH: number;
+    dbh: number;
     matchNum: match;
     comments: string;
 
 
-    constructor(plotId: number, species: string, year: number, recentTag: number, status: state, sizeClass: size, DBH: number, matchNum: number, comment: string) {
+    constructor(plotId: number, species: string, year: number, recentTag: number, status: state, sizeClass: size, dbh: number, matchNum: number, comment: string) {
 
         this.plotId = plotId;
         this.species = species;
@@ -284,7 +319,7 @@ class tableItem {
         this.recentTag = recentTag;
         this.status = status;
         this.sizeClass = sizeClass;
-        this.DBH = DBH;
+        this.dbh = dbh;
         this.matchNum = matchNum;
         this.comments = comment;
     }

@@ -67,56 +67,73 @@ function createPlotOptions() {
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 // Updating the table for a new plot choice
 function updateSurveyTable() {
-    const addButton = document.getElementById("add-button");
-    const grayWarning = document.getElementById("gray-warning");
-    const surveyTable = document.getElementById("survey-table");
-    // Making the survey visible
-    if (surveyTable.style.visibility == "hidden") {
-        addButton.style.visibility = "visible";
-        grayWarning.style.visibility = "visible";
-        surveyTable.style.visibility = "visible";
-    }
-    // Getting our plot
-    const select = document.getElementById("plot-select");
-    const chosenPlot = parseInt(select.options[select.selectedIndex].value);
-    //TODO: Use API to get a JSON file for the provided plot
-    changeArrFromJson( /*JSON obj goes in here*/);
-    //Clear out the current items in the table
-    const body = document.getElementById("table-body");
-    body.innerHTML = '';
-    // Adds the new items to the body
-    for (let i = 0; i < currentTrees.length; i++) {
-        let newRow = document.createElement('tr');
-        newRow.id = "" + i;
-        let tree = currentTrees[i];
-        // Forming each view button
-        let updater = document.createElement('td');
-        let icon = document.createElement('i');
-        updater.style.width = "16%";
-        updater.style.minWidth = "150px";
-        icon.id = "table-icon";
-        icon.setAttribute('data-bs-toggle', 'modal');
-        icon.setAttribute('data-bs-target', '#pop-up');
-        icon.onclick = function () { updateCurrentTree(i); };
-        icon.className = "fas fa-circle-info";
-        // Each other aspect of an entry
-        updater.appendChild(icon);
-        let tag = document.createElement('td');
-        tag.appendChild(document.createTextNode("" + tree.recentTag));
-        let size = document.createElement('td');
-        size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
-        let species = document.createElement('td');
-        species.appendChild(document.createTextNode("" + tree.species));
-        if (tree.year == currentCensusYear) {
-            newRow.className = "table-active";
+    return __awaiter(this, void 0, void 0, function* () {
+        // Wait for auth token to be ready
+        yield globalThis.authTokenReady;
+        const addButton = document.getElementById("add-button");
+        const grayWarning = document.getElementById("gray-warning");
+        const surveyTable = document.getElementById("survey-table");
+        // Making the survey visible
+        if (surveyTable.style.visibility == "hidden") {
+            addButton.style.visibility = "visible";
+            grayWarning.style.visibility = "visible";
+            surveyTable.style.visibility = "visible";
         }
-        // Adding each entry aspect
-        newRow.appendChild(updater);
-        newRow.appendChild(tag);
-        newRow.appendChild(size);
-        newRow.appendChild(species);
-        body.appendChild(newRow);
-    }
+        // Getting our plot
+        const select = document.getElementById("plot-select");
+        const chosenPlot = parseInt(select.options[select.selectedIndex].value);
+        // Get the API endpoint
+        let treesUrl = (yield getApiUrlBase()) + "trees";
+        // Add query options
+        treesUrl += `?plot=${chosenPlot}&current_census=${currentCensusYear}`;
+        // Add authentication token to headers
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        // Make an API request for the tree entries
+        const apiRes = yield fetch(treesUrl, {
+            headers,
+            method: "GET",
+        });
+        const apiObj = yield apiRes.json();
+        changeArrFromJson(apiObj, chosenPlot);
+        //Clear out the current items in the table
+        const body = document.getElementById("table-body");
+        body.innerHTML = '';
+        // Adds the new items to the body
+        for (let i = 0; i < currentTrees.length; i++) {
+            let newRow = document.createElement('tr');
+            newRow.id = "" + i;
+            let tree = currentTrees[i];
+            // Forming each view button
+            let updater = document.createElement('td');
+            let icon = document.createElement('i');
+            updater.style.width = "16%";
+            updater.style.minWidth = "150px";
+            icon.id = "table-icon";
+            icon.setAttribute('data-bs-toggle', 'modal');
+            icon.setAttribute('data-bs-target', '#pop-up');
+            icon.onclick = function () { updateCurrentTree(i); };
+            icon.className = "fas fa-circle-info";
+            // Each other aspect of an entry
+            updater.appendChild(icon);
+            let tag = document.createElement('td');
+            tag.appendChild(document.createTextNode("" + tree.recentTag));
+            let size = document.createElement('td');
+            size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
+            let species = document.createElement('td');
+            species.appendChild(document.createTextNode("" + tree.species));
+            if (tree.year == currentCensusYear) {
+                newRow.className = "table-active";
+            }
+            // Adding each entry aspect
+            newRow.appendChild(updater);
+            newRow.appendChild(tag);
+            newRow.appendChild(size);
+            newRow.appendChild(species);
+            body.appendChild(newRow);
+        }
+    });
 }
 function createNewTree() {
     // Resets the modal to take in new info
@@ -142,7 +159,7 @@ function updateCurrentTree(placement) {
     const sizeClass = document.getElementById("given-size-class");
     sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
     const dbh = document.getElementById("given-dbh");
-    dbh.value = "" + currentTrees[placement].DBH;
+    dbh.value = "" + currentTrees[placement].dbh;
     const matchNum = document.getElementById("given-match-num");
     matchNum.value = "" + currentTrees[placement].matchNum;
     const comment = document.getElementById("given-comment");
@@ -188,10 +205,12 @@ function refreshPopUp() {
     document.getElementById("given-comment").value = "";
 }
 // Setting the current array to contain the values from a json file
-function changeArrFromJson( /*JSON objs goes in here*/) {
+function changeArrFromJson(censusEntries, plotId) {
     // Clear out current items
     //currentTrees = new Array<tableItem>();
-    // TODO: traverse JSON file from API and add each obj into currentTrees
+    currentTrees = censusEntries.map((entry) => (new tableItem(plotId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
+    size[entry.sizeClass], // Convert sizeClass to size type
+    entry.dbh, entry.matchNum, entry.comments)));
 }
 // Easy toggles for the warning notice
 function onModalWarning() {
@@ -202,14 +221,14 @@ function offModalWarning() {
 }
 // Outline for the items themselves
 class tableItem {
-    constructor(plotId, species, year, recentTag, status, sizeClass, DBH, matchNum, comment) {
+    constructor(plotId, species, year, recentTag, status, sizeClass, dbh, matchNum, comment) {
         this.plotId = plotId;
         this.species = species;
         this.year = year;
         this.recentTag = recentTag;
         this.status = status;
         this.sizeClass = sizeClass;
-        this.DBH = DBH;
+        this.dbh = dbh;
         this.matchNum = matchNum;
         this.comments = comment;
     }
