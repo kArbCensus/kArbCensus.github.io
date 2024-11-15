@@ -1,7 +1,7 @@
 // All of the trees for a chosen plot
 let currentTrees = new Array<tableItem>();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear = 2025;
+const currentCensusYear = 2025 as number;
 
 async function getApiUrlBase(): Promise<string> {
     const configRes = await fetch("/api_config.json");
@@ -124,7 +124,7 @@ function updateSurveyTable() {
 function createNewTree() {
 
     // Resets the modal to take in new info
-    clearTags();
+    refreshPopUp();
 
     const species = document.createElement("input");
     species.style.textAlign = "left";
@@ -135,7 +135,7 @@ function createNewTree() {
 
 function updateCurrentTree(placement: number) {
 
-    clearTags();
+    refreshPopUp();
 
     // Transfer info from array into modal
     const toUpdate = currentTrees[placement];
@@ -205,7 +205,7 @@ function confirmUpdate() {
 
 }
 
-function clearTags() {
+function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
     (document.getElementById("given-date") as HTMLHeadingElement).innerText = "" + currentCensusYear;
     (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
@@ -214,6 +214,27 @@ function clearTags() {
     (document.getElementById("given-dbh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
+
+    // Giving the user the option to update if appropriate
+    const footer = document.getElementById("bottom-of-modal")
+    if(currentCensusYear != -1)
+    {
+        const updateButton = document.createElement("button");
+        updateButton.type = "button";
+        updateButton.className = "btn";
+        updateButton.id = "pop-up-update";
+        updateButton.onclick = () => {confirmUpdate();};
+        updateButton.appendChild(document.createTextNode("Confirm Update"));
+        footer.appendChild(updateButton);
+    }
+    else
+    {
+        const notOpen = document.createElement("h3");
+        notOpen.appendChild(document.createTextNode("No census is under way"));
+        notOpen.id = "submission-notice";
+        footer.appendChild(notOpen);
+
+    }
 }
 
 

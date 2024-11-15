@@ -104,13 +104,13 @@ function updateSurveyTable() {
 }
 function createNewTree() {
     // Resets the modal to take in new info
-    clearTags();
+    refreshPopUp();
     const species = document.createElement("input");
     species.style.textAlign = "left";
     document.getElementById("give-species").appendChild(species);
 }
 function updateCurrentTree(placement) {
-    clearTags();
+    refreshPopUp();
     // Transfer info from array into modal
     const toUpdate = currentTrees[placement];
     const species = document.createElement("h4");
@@ -161,7 +161,7 @@ function confirmUpdate() {
         currentTrees.push(treeToAPI); //TESTING FOR RN
     }
 }
-function clearTags() {
+function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("given-date").innerText = "" + currentCensusYear;
     document.getElementById("given-tag").value = "-1";
@@ -170,6 +170,23 @@ function clearTags() {
     document.getElementById("given-dbh").value = "0";
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
+    // Giving the user the option to update if appropriate
+    const footer = document.getElementById("bottom-of-modal");
+    if (currentCensusYear != -1) {
+        const updateButton = document.createElement("button");
+        updateButton.type = "button";
+        updateButton.className = "btn";
+        updateButton.id = "pop-up-update";
+        updateButton.onclick = () => { confirmUpdate(); };
+        updateButton.appendChild(document.createTextNode("Confirm Update"));
+        footer.appendChild(updateButton);
+    }
+    else {
+        const notOpen = document.createElement("h3");
+        notOpen.appendChild(document.createTextNode("No census is under way"));
+        notOpen.id = "submission-notice";
+        footer.appendChild(notOpen);
+    }
 }
 // Setting the current array to contain the values from a json file
 function changeArrFromJson( /*JSON objs goes in here*/) {
