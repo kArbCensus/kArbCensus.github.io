@@ -3,17 +3,15 @@ let currentTrees = new Array<tableItem>();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
 const currentCensusYear = 2025;
 
-async function getApiUrlBase(): Promise<string>
-{
+async function getApiUrlBase(): Promise<string> {
     const configRes = await fetch("/api_config.json");
-    const { urlBase } = await configRes.json() as {urlBase: string};
+    const { urlBase } = await configRes.json() as { urlBase: string };
     return urlBase;
 }
 
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
-function setupSurvey()
-{
+function setupSurvey() {
     createPlotOptions()
 }
 
