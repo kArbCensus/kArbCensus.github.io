@@ -5,6 +5,8 @@ import "./auth0-functions.js";
 declare global {
   var authToken: string | null;
   var authTokenReady: Promise<void>;
+  var promiseAdmin: Promise<void>;
+  var isAdmin: boolean;
 }
 globalThis.authToken = null;
 
@@ -13,6 +15,12 @@ let resolveAuthTokenReady: () => void;
 globalThis.authTokenReady = new Promise((resolve) => {
   resolveAuthTokenReady = resolve;
 });
+
+// Define a promise once the role based on if the user is an admin
+let resolvePromiseAdmin: () => void;
+globalThis.promiseAdmin = new Promise((resolve) => {
+  resolvePromiseAdmin = resolve;
+})
 
 interface ArbJwtPayload extends JwtPayload {
   "https://kArbCensus.github.io/roles": Array<string>;
@@ -54,10 +62,13 @@ async function checkAuth() {
       token = await client.getTokenSilently();
       globalThis.authToken = token;
       resolveAuthTokenReady();
+      globalThis.isAdmin = isAdmin();
+      resolvePromiseAdmin();
+      
 
       // TODO: Remove debug logs in production
       console.log("Access Token: ", token);
-      console.log(`Is admin? ${isAdmin()}`);
+      console.log(`Is admin? ${globalThis.isAdmin}`);
     } catch (error) {
       console.error("Token renewal failed: ", (error as Error).message);
     }

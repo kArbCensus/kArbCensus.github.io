@@ -24,8 +24,13 @@ function setupModalButton() {
 
 
 // Having the admin option appear in the drop down
-function addAdmin() {
-    if (true) {
+async function addAdmin() {
+
+    // Waiting for it to be known if the user is an admin
+    await globalThis.promiseAdmin;
+
+    // Adding admin option if applicable
+    if (globalThis.isAdmin) {
         const dropDown = document.getElementById("banner");
 
         const row = document.createElement("d");

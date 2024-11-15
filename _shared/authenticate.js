@@ -14,6 +14,11 @@ let resolveAuthTokenReady;
 globalThis.authTokenReady = new Promise((resolve) => {
     resolveAuthTokenReady = resolve;
 });
+// Define a promise once the role based on if the user is an admin
+let resolvePromiseAdmin;
+globalThis.promiseAdmin = new Promise((resolve) => {
+    resolvePromiseAdmin = resolve;
+});
 var client = null;
 var token = null;
 function authenticate() {
@@ -44,9 +49,11 @@ function checkAuth() {
                 token = yield client.getTokenSilently();
                 globalThis.authToken = token;
                 resolveAuthTokenReady();
+                globalThis.isAdmin = isAdmin();
+                resolvePromiseAdmin();
                 // TODO: Remove debug logs in production
                 console.log("Access Token: ", token);
-                console.log(`Is admin? ${isAdmin()}`);
+                console.log(`Is admin? ${globalThis.isAdmin}`);
             }
             catch (error) {
                 console.error("Token renewal failed: ", error.message);
