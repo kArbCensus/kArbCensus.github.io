@@ -1,4 +1,4 @@
-// Adding in shared elements
+// Adding in shared elements to html via JQueries
 $(function () {
     $('#banner-insert').load('../_shared/in-page/banner.html');
 })
@@ -7,7 +7,9 @@ $(function () {
 })
 
 
-// Having the admin option appear in the drop down
+/**
+ * Adding in the admin option to the survey banner based on the users role.
+ */
 async function addAdmin() {
 
     // Waiting for it to be known if the user is an admin

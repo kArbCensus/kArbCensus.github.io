@@ -19,6 +19,9 @@ function getApiUrlBase() {
     });
 }
 //////////// LOAD IN PAGE FUNCTIONS ////////////
+/**
+ * Adjusts the pop-up button based on whether or not there is an open census
+ */
 function setupModalButton() {
     // Giving the user the option to update if appropriate
     const updateButton = document.getElementById("pop-up-update");
@@ -30,10 +33,9 @@ function setupModalButton() {
         updateButton.onclick = () => { };
     }
 }
-function setupSurvey() {
-    createPlotOptions();
-}
-// Populating the plot drop down
+/**
+ * Populates the drop down options with each of the plots in the arb
+ */
 function createPlotOptions() {
     return __awaiter(this, void 0, void 0, function* () {
         // Wait for auth token to be ready
@@ -60,15 +62,18 @@ function createPlotOptions() {
     });
 }
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
-// Updating the table for a new plot choice
+/**
+ * Based on the currently selected plot chose, updates the potential
+ * options within the survey table.
+ */
 function updateSurveyTable() {
     return __awaiter(this, void 0, void 0, function* () {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
+        // Grabbing each of HTML elements to be made visible if applicable
         const addButton = document.getElementById("add-button");
         const grayWarning = document.getElementById("gray-warning");
         const surveyTable = document.getElementById("survey-table");
-        // Making the survey visible
         if (surveyTable.style.visibility == "hidden") {
             addButton.style.visibility = "visible";
             grayWarning.style.visibility = "visible";
@@ -108,6 +113,8 @@ function updateSurveyTable() {
             updater.style.width = "16%";
             updater.style.minWidth = "150px";
             icon.id = "table-icon";
+            icon.style.cursor = "pointer";
+            icon.ariaLabel = "See more info on the provided tree";
             icon.setAttribute('data-bs-toggle', 'modal');
             icon.setAttribute('data-bs-target', '#pop-up');
             icon.onclick = function () { updateCurrentTree(i); };
@@ -120,6 +127,7 @@ function updateSurveyTable() {
             size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
             let species = document.createElement('td');
             species.appendChild(document.createTextNode("" + tree.species));
+            // Seeing if a table option should be grayed out
             if (tree.year == currentCensusYear) {
                 newRow.className = "table-active";
             }
@@ -128,18 +136,27 @@ function updateSurveyTable() {
             newRow.appendChild(tag);
             newRow.appendChild(size);
             newRow.appendChild(species);
+            // Adding the constructed row to the table
             body.appendChild(newRow);
         }
     });
 }
+/**
+ * Sets up the modal for entering in info about a new tree.
+ */
 function createNewTree() {
     // Resets the modal to take in new info
     refreshPopUp();
+    // Adding in the ability to set a species name
     const species = document.createElement("input");
     species.style.textAlign = "left";
     species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
 }
+/**
+ * Sets up the modal to change information about a pre-existing tree.
+ * @param placement the index of the selected tree in our array of trees for the plot.
+ */
 function updateCurrentTree(placement) {
     refreshPopUp();
     // Transfer info from array into modal
@@ -163,9 +180,11 @@ function updateCurrentTree(placement) {
     const comment = document.getElementById("given-comment");
     comment.value = "" + currentTrees[placement].comments;
 }
-// How createNewTree() and updateCurrentTree(placement: number) actually add to our db
+/**
+ * Adding the information from a filled out survey modal to our database
+ */
 function confirmUpdate() {
-    // Turns modal info into a tableItem
+    // Turns modal info into a tableItem by grabbing each element from the modal
     const selectPlot = document.getElementById("plot-select");
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
     const getSpecies = document.getElementById("give-species");
@@ -182,6 +201,7 @@ function confirmUpdate() {
     const dbh = parseInt(document.getElementById("given-dbh").value);
     const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
     const comment = document.getElementById("given-comment").value;
+    // Ensuring no unfilled form is sent to the database
     if (dbh <= 0 || species == "") {
         onModalWarning();
     }
@@ -219,6 +239,9 @@ function putCensusEntry(item) {
         });
     });
 }
+/**
+ * Resets the survey modal.
+ */
 function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("given-date").innerText = "" + currentCensusYear;
@@ -235,7 +258,7 @@ function changeArrFromJson(censusEntries) {
     size[entry.sizeClass], // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
 }
-// Easy toggles for the warning notice
+// Easy toggles for the warning notices
 function onModalWarning() {
     document.getElementById("submission-notice").style.visibility = "visible";
 }
