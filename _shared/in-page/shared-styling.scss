@@ -57,3 +57,9 @@ body {
 .bs-linebreak {
     height: 75px;
 }
+
+.btn {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: normal;
+}

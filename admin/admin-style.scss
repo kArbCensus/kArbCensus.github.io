@@ -5,12 +5,6 @@ h4 {
     font-weight: 300;
 }
 
-.btn {
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: normal;
-}
-
 #admin-button {
     @include font-size(2rem);
     padding: 3%;
@@ -32,8 +26,7 @@ h4 {
     width: 100%;
 }
 
-#census-status-year
-{
+#census-status-year {
     color: white;
     text-align: center;
     font: "Barlow";

@@ -1,23 +1,5 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-h2 {
-    color: White;
-    text-align: center;
-    font-family: "Barlow";
-    font: "Barlow";
-    font-weight: 400;
-    @include font-size(2.5rem);
-}
-
-h3 {
-    color: White;
-    text-align: center;
-    font-family: "Barlow";
-    font: "Barlow";
-    font-weight: 200;
-    @include font-size(2rem);
-}
-
 input {
     font-family: "Barlow";
     font: "Barlow";
@@ -28,20 +10,13 @@ input {
     border: 1px solid black;
 }
 
-button {
-    font-weight: 200;
+#select-plot-note {
+    color: White;
+    text-align: center;
     font-family: "Barlow";
     font: "Barlow";
-    border: none;
-    background-color: white;
-    width: 25%;
-    color: black;
-}
-
-.btn {
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: normal;
+    font-weight: 400;
+    @include font-size(2.5rem);
 }
 
 #plot-select {
@@ -76,6 +51,7 @@ option {
 table {
     font-family: "Barlow";
     font: "Barlow";
+    overflow-x: scroll;
     @include font-size(1rem);
     border: none;
     display: block;
@@ -110,28 +86,34 @@ td {
 }
 
 #add-new-tree-button {
-    @include font-size(1.5rem);
+    font-weight: 200;
     font-family: "Barlow";
     font: "Barlow";
+    @include font-size(1.5rem);
     border-radius: 15px;
     padding: 1%;
     border: none;
     min-width: 130px;
+    background-color: white;
+    color: black;
+    width: 25%;
+}
+
+#pop-up-update {
+    font-weight: 200;
+    font-family: "Barlow";
+    font: "Barlow";
+    @include font-size(1.2rem);
+    background-color: #357960;
+    border: none;
+    color: white;
+    width: 100%;
 }
 
 #gray-note {
     color: white;
     font-style: italic;
     @include font-size(.9rem);
-}
-
-#pop-up-update {
-    @include font-size(1.2rem);
-    background-color: #357960;
-    font-family: 'Barlow';
-    border: none;
-    color: white;
-    width: 100%;
 }
 
 .modal {
@@ -144,10 +126,11 @@ td {
     font-weight: 300;
 }
 
-h5 {
+#staticBackdropLabel {
     font-weight: bold;
     @include font-size(1.2rem);
     font-family: 'Barlow';
+    font: 'Barlow';
 }
 
 h4 {
@@ -168,6 +151,7 @@ input::-webkit-inner-spin-button {
 }
 
 #submission-notice {
+    text-align: center;
     color: red;
     @include font-size(1rem);
     margin: auto;

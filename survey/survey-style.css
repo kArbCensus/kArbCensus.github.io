@@ -11965,34 +11965,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-h2, .h2 {
-  color: White;
-  text-align: center;
-  font-family: "Barlow";
-  font: "Barlow";
-  font-weight: 400;
-  font-size: calc(1.375rem + 1.5vw);
-}
-@media (min-width: 1200px) {
-  h2, .h2 {
-    font-size: 2.5rem;
-  }
-}
-
-h3, .h3 {
-  color: White;
-  text-align: center;
-  font-family: "Barlow";
-  font: "Barlow";
-  font-weight: 200;
-  font-size: calc(1.325rem + 0.9vw);
-}
-@media (min-width: 1200px) {
-  h3, .h3 {
-    font-size: 2rem;
-  }
-}
-
 input {
   font-family: "Barlow";
   font: "Barlow";
@@ -12003,20 +11975,18 @@ input {
   border: 1px solid black;
 }
 
-button {
-  font-weight: 200;
+#select-plot-note {
+  color: White;
+  text-align: center;
   font-family: "Barlow";
   font: "Barlow";
-  border: none;
-  background-color: white;
-  width: 25%;
-  color: black;
+  font-weight: 400;
+  font-size: calc(1.375rem + 1.5vw);
 }
-
-.btn {
-  white-space: normal;
-  word-wrap: break-word;
-  word-break: normal;
+@media (min-width: 1200px) {
+  #select-plot-note {
+    font-size: 2.5rem;
+  }
 }
 
 #plot-select {
@@ -12056,6 +12026,7 @@ option {
 table {
   font-family: "Barlow";
   font: "Barlow";
+  overflow-x: scroll;
   font-size: 1rem;
   border: none;
   display: block;
@@ -12090,13 +12061,17 @@ td {
 }
 
 #add-new-tree-button {
-  font-size: calc(1.275rem + 0.3vw);
+  font-weight: 200;
   font-family: "Barlow";
   font: "Barlow";
+  font-size: calc(1.275rem + 0.3vw);
   border-radius: 15px;
   padding: 1%;
   border: none;
   min-width: 130px;
+  background-color: white;
+  color: black;
+  width: 25%;
 }
 @media (min-width: 1200px) {
   #add-new-tree-button {
@@ -12104,19 +12079,21 @@ td {
   }
 }
 
+#pop-up-update {
+  font-weight: 200;
+  font-family: "Barlow";
+  font: "Barlow";
+  font-size: 1.2rem;
+  background-color: #357960;
+  border: none;
+  color: white;
+  width: 100%;
+}
+
 #gray-note {
   color: white;
   font-style: italic;
   font-size: 0.9rem;
-}
-
-#pop-up-update {
-  font-size: 1.2rem;
-  background-color: #357960;
-  font-family: "Barlow";
-  border: none;
-  color: white;
-  width: 100%;
 }
 
 .modal {
@@ -12128,10 +12105,11 @@ td {
   font-weight: 300;
 }
 
-h5, .h5 {
+#staticBackdropLabel {
   font-weight: bold;
   font-size: 1.2rem;
   font-family: "Barlow";
+  font: "Barlow";
 }
 
 h4, .h4 {
@@ -12152,6 +12130,7 @@ input::-webkit-inner-spin-button {
 }
 
 #submission-notice {
+  text-align: center;
   color: red;
   font-size: 1rem;
   margin: auto;
