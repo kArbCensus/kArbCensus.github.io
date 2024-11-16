@@ -195,6 +195,7 @@ function updateCurrentTree(placement: number) {
 
     // Transfer info from array into modal
     const toUpdate = currentTrees[placement];
+    // Set tableItem variable for confirm update to use
 
     const species = document.createElement("h4");
     species.appendChild(document.createTextNode("" + toUpdate.species));
@@ -256,6 +257,10 @@ function confirmUpdate() {
     }
     else {
         offModalWarning();
+
+        // Use a boolean to decide whether to PUT or POST
+
+        
         // TODO: Get put treeId instead of chosenPlot
         const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
