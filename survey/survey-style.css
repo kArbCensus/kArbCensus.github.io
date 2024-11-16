@@ -11975,6 +11975,10 @@ input {
   border: 1px solid black;
 }
 
+#given-date {
+  font-size: 1.2rem;
+}
+
 #select-plot-note {
   color: White;
   text-align: center;
@@ -12094,6 +12098,10 @@ td {
   color: white;
   font-style: italic;
   font-size: 0.9rem;
+}
+
+#tooltip-icon {
+  margin-top: 50%;
 }
 
 .modal {

@@ -26,7 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../_shared/in-page/in-page-script.js" type="text/javascript"></script>
-    
+
 
     <!--Authentication-->
     <script src="/_shared/jwt-decode.js"></script>
@@ -40,10 +40,12 @@
 
 
 <body onload="setupModalButton(); setupSurvey(); setupToolTips(); addAdmin();">
-    <div class="container-fluid full-width d-flex flex-column min-vh-100">
+    <div class="container-fluid flex-column min-vh-100">
 
         <!--Top of page banner-->
         <div id="banner-insert"></div>
+
+
 
         <!--Survey table popups-->
         <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
@@ -64,8 +66,8 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" data-bs-title="The identified type of tree."></i>
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon" data-bs-title="The identified type of tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
@@ -83,6 +85,7 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
                                         data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -100,8 +103,8 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
                                         data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify to trees with no tag."></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -109,7 +112,7 @@
                                         Tag</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <input type="number" id="given-tag">
+                                    <input type="number" id="given-tag" aria-label="Input tag number">
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -119,8 +122,8 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
                                         data-bs-title="Which of the roughly 4 states the tree falls into."></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -128,7 +131,7 @@
                                         Status</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <select id="given-status">
+                                    <select id="given-status" aria-label="Choose status type">
                                         <option>Alive</option>
                                         <option>Sick</option>
                                         <option>Dead</option>
@@ -143,8 +146,8 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
                                         data-bs-title="Which of the 3 size classes based on diameter the tree fits into."></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -152,7 +155,7 @@
                                         Size</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <select id="given-size-class">
+                                    <select id="given-size-class" aria-label="Choose how thr tree size class">
                                         <option>Small</option>
                                         <option>Medium</option>
                                         <option>Big</option>
@@ -166,8 +169,8 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
                                         data-bs-title="The diameter in centimeters from breast height."></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -175,7 +178,7 @@
                                         DBH</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <input type="number" id="given-dbh">
+                                    <input type="number" id="given-dbh" aria-label="Input the DBH">
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -186,7 +189,7 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" id="tooltip-icon"
                                         data-bs-placement="top" data-bs-title="1: Confident this is the same tree as last census,
                                         2: Probably the same tree as last census,
                                         3: Likely a new tree,
@@ -198,7 +201,7 @@
                                         Match #</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <select id="given-match-num">
+                                    <select id="given-match-num" aria-label="Select the corresponding match number">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -214,16 +217,17 @@
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" style="margin-top: 50%;" data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        data-bs-title="Other important notes to mention about the tree or the info entered above."></i>
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Other important notes to mention about the tree or the info entered above."
+                                        id="tooltip-icon"></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4 style="margin-bottom: 4%;">
                                         Comments</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <input style="text-align: left; margin-bottom: 4%;" id="given-comment">
+                                    <input style="text-align: left; margin-bottom: 4%;" id="given-comment"
+                                        aria-label="Enter any extra comments">
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -237,7 +241,8 @@
                         <h3 id="submission-notice" style="visibility: hidden;">Please fill out all the form
                             entirely before submission!</h3>
                         <button type="button" class="btn" id="pop-up-update"
-                            onclick="confirmUpdate(); closeModal()">Confirm Update</button>
+                            aria-label="Submit update for provided tree" onclick="confirmUpdate(); closeModal()">Confirm
+                            Update</button>
 
                     </div>
 
@@ -269,7 +274,8 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-                <select name="plot" id="plot-select" class="form-select" onchange="updateSurveyTable()">
+                <select name="plot" id="plot-select" class="form-select" aria-label="Choose a plot to look at"
+                    onchange="updateSurveyTable()">
                     <option value="ChosePlot">Chose a plot here</option>
                 </select>
             </div>
@@ -285,12 +291,12 @@
         <br>
 
 
-        <!--Add button part 1-->
+        <!--Add button-->
         <div class="row" id="add-button" style="visibility: hidden;">
             <div class="col-3 "></div>
             <div class="col-6 text-center">
-                <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up"
-                    onclick="createNewTree()">
+                <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up" 
+                    onclick="createNewTree()" aria-label="Add a new tree for the census">
                     Add new tree
                 </button>
             </div>
@@ -321,6 +327,8 @@
         <br>
         <br>
 
+
+        <!--Notice on what a gray column means-->
         <div class="row" id="gray-warning" style="visibility: hidden;">
             <div class="col-2 "></div>
             <div class="col-8 text-center">
@@ -331,6 +339,7 @@
         </div>
         <br>
 
+
         <!--Line Break-->
         <div class="row">
             <div class="col-xs-12 bs-linebreak">
@@ -339,6 +348,7 @@
         <br>
 
     </div>
+
 
 
     <!--Citing used assets-->

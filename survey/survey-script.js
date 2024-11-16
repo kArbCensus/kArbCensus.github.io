@@ -137,6 +137,7 @@ function createNewTree() {
     refreshPopUp();
     const species = document.createElement("input");
     species.style.textAlign = "left";
+    species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
 }
 function updateCurrentTree(placement) {
