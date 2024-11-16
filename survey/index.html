@@ -22,29 +22,11 @@
 
     <!--External scripts-->
     <script src="survey-script.js" type="text/javascript"></script>
+    <script src="extra-survey-script.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="../_shared/in-page/in-page-script.js" type="text/javascript"></script>
-    <script>
-        // Finds all tool tip spots in the code and passes them on to be created
-        function setupToolTips() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(createAToolTip);
-        }
-
-        // Initializes a tooltip at a marked spot
-        function createAToolTip(tooltipTriggerEl) {
-            new bootstrap.Tooltip(tooltipTriggerEl);
-        }
-
-        // User feedback: closing the modal and refreshing
-        function closeModal() {
-            if (document.getElementById("submission-notice").style.visibility == "hidden") {
-                bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
-                updateSurveyTable();
-            }
-        }
-    </script>
+    
 
     <!--Authentication-->
     <script src="/_shared/jwt-decode.js"></script>
