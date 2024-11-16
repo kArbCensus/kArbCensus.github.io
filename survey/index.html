@@ -21,6 +21,9 @@
 
     <!--External scripts-->
     <script src="survey-script.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../_shared/in-page/in-page-script.js" type="text/javascript"></script>
     <script>
         // Finds all tool tip spots in the code and passes them on to be created
         function setupToolTips() {
@@ -52,51 +55,12 @@
 </head>
 
 
+
 <body onload="setupModalButton(); setupSurvey(); setupToolTips(); addAdmin();">
     <div class="container-fluid full-width d-flex flex-column min-vh-100">
 
-        <!--Banner-->
-        <div class="sticky-top">
-
-            <!--Banner Items-->
-            <div class="row align-items-center" style="background-color: white;">
-                <div class="col text-start">
-                    <h1>Kalamazoo Arboretum Census</h1>
-                </div>
-                <div class="col text-end">
-                    <i class="fas fa-bars" data-bs-toggle="collapse" data-bs-target="#banner" aria-expanded="false"
-                        aria-controls="banner" id="to-drop-down-button"></i>
-
-                </div>
-            </div>
-
-
-            <!--Banner drop down menu-->
-            <div id="banner" class="collapse container-fluid full-width" style="position: absolute;">
-
-                <div class="row">
-                    <div class="col bg-light"></div>
-                    <div class="col-auto bg-light">
-                        <a href="../survey/" id="banner-drop-option">Survey</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col bg-light"></div>
-                    <div class="col-auto bg-light ">
-                        <a href="../settings/" id="banner-drop-option">Change Password</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col bg-light"></div>
-                    <div class="col-auto bg-light ">
-                        <a href="../login/" id="banner-drop-option">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
+        <!--Top of page banner-->
+        <div id="banner-insert"></div>
 
         <!--Survey table popups-->
         <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
@@ -395,13 +359,7 @@
 
 
     <!--Citing used assets-->
-    <footer class="mt-auto">
-        Tree by redemption_art from <a href="https://thenounproject.com/icon/tree-7359759/" target="_blank"
-            title="Tree Icons" id="used-asset-link" style="color: white;">Noun
-            Project</a> (CC BY 3.0)
-    </footer>
-
-
+    <div id="symbol-insert"></div>
 
 
 </body>
