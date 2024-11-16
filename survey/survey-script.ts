@@ -13,11 +13,12 @@ async function getApiUrlBase(): Promise<string> {
 
 function setupModalButton() {
     // Giving the user the option to update if appropriate
-    const updateButton = document.getElementById("pop-up-update");
+    const updateButton = document.getElementById("pop-up-update") as HTMLButtonElement;
     if (currentCensusYear == -1) {
         updateButton.style.backgroundColor = "grey"
         updateButton.innerHTML = "";
         updateButton.appendChild(document.createTextNode("Census Not Open"));
+        updateButton.disabled = true;
         updateButton.onclick = () => {/*Nothing*/ };
     }
 }
@@ -133,7 +134,7 @@ async function updateSurveyTable() {
     const apiObj = await apiRes.json() as EntryResponsePayload[];
 
     // Update and sort current trees
-    changeArrFromJson(apiObj, chosenPlot);
+    changeArrFromJson(apiObj);
     currentTrees.sort((a, b) => a.recentTag - b.recentTag);
 
 
@@ -263,11 +264,41 @@ function confirmUpdate() {
     }
     else {
         offModalWarning();
+        // TODO: Get put treeId instead of chosenPlot
         const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
         currentTrees.push(treeToAPI); //TESTING FOR RN
     }
 
+}
+
+async function putCensusEntry(item: tableItem)
+{
+    // Convert table item to payload
+    const payload: EntryPutPayload = {
+        year: item.year,
+        treeId: item.treeId,
+        recentTag: item.recentTag,
+        dbh: item.dbh,
+        status: statusName[item.status],
+        matchNum: item.matchNum,
+        comments: item.comments,
+    }
+
+    // Get the API endpoint
+    const treesUrl = await getApiUrlBase() + "trees";
+
+    // Add authentication token to headers
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+
+    // Make an API request to add/update the census entry
+    await fetch(treesUrl, {
+        headers,
+        method: "PUT",
+        body: JSON.stringify(payload)
+    });
 }
 
 function refreshPopUp() {
@@ -284,9 +315,9 @@ function refreshPopUp() {
 
 
 // Setting the current array to contain the values from a json file
-function changeArrFromJson(censusEntries: EntryResponsePayload[], plotId: number) {
+function changeArrFromJson(censusEntries: EntryResponsePayload[]) {
     currentTrees = censusEntries.map((entry) => (new tableItem(
-        plotId,
+        entry.treeId,
         entry.species,
         entry.year,
         entry.recentTag,
@@ -317,6 +348,7 @@ interface PlotIdsPayload {
 }
 
 interface EntryResponsePayload {
+    treeId: number;
     species: string;
     year: number;
     recentTag: number;
@@ -327,9 +359,19 @@ interface EntryResponsePayload {
     comments: string;
 }
 
+interface EntryPutPayload {
+    year: number;
+    treeId: number;
+    recentTag: number;
+    dbh: number;
+    status: string;
+    matchNum: number;
+    comments: string;
+}
+
 // Outline for the items themselves
 class tableItem {
-    plotId: number;
+    treeId: number;
     species: string;
     year: number;
     recentTag: number;
@@ -340,9 +382,9 @@ class tableItem {
     comments: string;
 
 
-    constructor(plotId: number, species: string, year: number, recentTag: number, status: state, sizeClass: size, dbh: number, matchNum: number, comment: string) {
+    constructor(treeId: number, species: string, year: number, recentTag: number, status: state, sizeClass: size, dbh: number, matchNum: number, comment: string) {
 
-        this.plotId = plotId;
+        this.treeId = treeId;
         this.species = species;
         this.year = year;
         this.recentTag = recentTag;

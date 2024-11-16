@@ -26,6 +26,7 @@ function setupModalButton() {
         updateButton.style.backgroundColor = "grey";
         updateButton.innerHTML = "";
         updateButton.appendChild(document.createTextNode("Census Not Open"));
+        updateButton.disabled = true;
         updateButton.onclick = () => { };
     }
 }
@@ -116,7 +117,7 @@ function updateSurveyTable() {
         });
         const apiObj = yield apiRes.json();
         // Update and sort current trees
-        changeArrFromJson(apiObj, chosenPlot);
+        changeArrFromJson(apiObj);
         currentTrees.sort((a, b) => a.recentTag - b.recentTag);
         //Clear out the current items in the table
         const body = document.getElementById("table-body");
@@ -210,10 +211,37 @@ function confirmUpdate() {
     }
     else {
         offModalWarning();
+        // TODO: Get put treeId instead of chosenPlot
         const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
         currentTrees.push(treeToAPI); //TESTING FOR RN
     }
+}
+function putCensusEntry(item) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Convert table item to payload
+        const payload = {
+            year: item.year,
+            treeId: item.treeId,
+            recentTag: item.recentTag,
+            dbh: item.dbh,
+            status: statusName[item.status],
+            matchNum: item.matchNum,
+            comments: item.comments,
+        };
+        // Get the API endpoint
+        const treesUrl = (yield getApiUrlBase()) + "trees";
+        // Add authentication token to headers
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        // Make an API request to add/update the census entry
+        yield fetch(treesUrl, {
+            headers,
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+    });
 }
 function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
@@ -226,8 +254,8 @@ function refreshPopUp() {
     document.getElementById("given-comment").value = "";
 }
 // Setting the current array to contain the values from a json file
-function changeArrFromJson(censusEntries, plotId) {
-    currentTrees = censusEntries.map((entry) => (new tableItem(plotId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
+function changeArrFromJson(censusEntries) {
+    currentTrees = censusEntries.map((entry) => (new tableItem(entry.treeId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
     size[entry.sizeClass], // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
 }
@@ -240,8 +268,8 @@ function offModalWarning() {
 }
 // Outline for the items themselves
 class tableItem {
-    constructor(plotId, species, year, recentTag, status, sizeClass, dbh, matchNum, comment) {
-        this.plotId = plotId;
+    constructor(treeId, species, year, recentTag, status, sizeClass, dbh, matchNum, comment) {
+        this.treeId = treeId;
         this.species = species;
         this.year = year;
         this.recentTag = recentTag;
