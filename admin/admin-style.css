@@ -11970,29 +11970,6 @@ textarea.form-control-lg {
   font-family: "Barlow";
 }
 
-footer {
-  padding: 1%;
-  margin: auto;
-  color: white;
-  font-family: "Barlow";
-}
-
-h1, .h1 {
-  color: black;
-  font: "Barlow";
-  font-family: "Barlow";
-  font-weight: 900;
-  font-size: 100;
-  margin-top: 1%;
-  margin-left: 2%;
-  font-size: calc(1.375rem + 1.5vw);
-}
-@media (min-width: 1200px) {
-  h1, .h1 {
-    font-size: 2.5rem;
-  }
-}
-
 h2, .h2 {
   color: White;
   text-align: center;
@@ -12036,10 +12013,6 @@ input {
   border: 1px solid black;
 }
 
-body {
-  background-color: #357960;
-}
-
 button {
   font-weight: 200;
   font: "Barlow";
@@ -12057,25 +12030,6 @@ button {
   white-space: normal;
   word-wrap: break-word;
   word-break: normal;
-}
-
-#banner-drop-option {
-  font: "Barlow";
-  font-family: "Barlow";
-  width: 5%;
-  height: 100%;
-  font-weight: bold;
-  margin-right: 40px;
-  color: black;
-  text-decoration: none;
-  text-wrap: nowrap;
-  margin-right: 2%;
-  font-size: calc(1.275rem + 0.3vw);
-}
-@media (min-width: 1200px) {
-  #banner-drop-option {
-    font-size: 1.5rem;
-  }
 }
 
 #to-drop-down-button {

@@ -28,6 +28,7 @@ async function addAdmin() {
         const adminLink = document.createElement("a");
         adminLink.href = "../admin/";
         adminLink.id = "banner-drop-option";
+        adminLink.ariaLabel = "Access the admin page";
         adminLink.appendChild(document.createTextNode("Admin"));
 
         adminOption.appendChild(adminLink);
