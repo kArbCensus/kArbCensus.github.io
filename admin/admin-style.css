@@ -11965,85 +11965,15 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-#used-asset-link {
-  color: black;
-  font-family: "Barlow";
-}
-
-h2, .h2 {
-  color: White;
-  text-align: center;
-  font: "Barlow";
-  font-family: "Barlow";
-  font-weight: 400;
-  font-size: calc(1.375rem + 1.5vw);
-}
-@media (min-width: 1200px) {
-  h2, .h2 {
-    font-size: 2.5rem;
-  }
-}
-
-h3, .h3 {
-  color: White;
-  text-align: center;
-  font: "Barlow";
-  font-family: "Barlow";
-  font-weight: 200;
-  font-size: calc(1.325rem + 0.9vw);
-}
-@media (min-width: 1200px) {
-  h3, .h3 {
-    font-size: 2rem;
-  }
-}
-
 h4, .h4 {
   font-size: 1.2rem;
   font-weight: 300;
-}
-
-input {
-  font: "Barlow";
-  font-family: "Barlow";
-  border-radius: 5px;
-  text-align: center;
-  width: 90%;
-  font-size: 1.2rem;
-  border: 1px solid black;
-}
-
-button {
-  font-weight: 200;
-  font: "Barlow";
-  font-family: "Barlow";
-  border: none;
-  background-color: white;
-  width: 25%;
-}
-
-.bs-linebreak {
-  height: 75px;
 }
 
 .btn {
   white-space: normal;
   word-wrap: break-word;
   word-break: normal;
-}
-
-#to-drop-down-button {
-  width: 5%;
-  height: 100%;
-  background: none;
-  font-size: calc(1.325rem + 0.9vw);
-  font-weight: bold;
-  margin-right: 40px;
-}
-@media (min-width: 1200px) {
-  #to-drop-down-button {
-    font-size: 2rem;
-  }
 }
 
 #admin-button {
@@ -12066,7 +11996,22 @@ button {
   font-size: 1.2rem;
   background-color: #357960;
   font-family: "Barlow";
+  font: "Barlow";
   border: none;
   color: white;
   width: 100%;
+}
+
+#census-status-year {
+  color: white;
+  text-align: center;
+  font: "Barlow";
+  font-family: "Barlow";
+  font-weight: 200;
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media (min-width: 1200px) {
+  #census-status-year {
+    font-size: 2rem;
+  }
 }/*# sourceMappingURL=admin-style.css.map */

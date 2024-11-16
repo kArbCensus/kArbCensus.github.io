@@ -1,11 +1,10 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-#banner-background
-{
+#banner-background {
     background-color: white;
 }
 
-#kalamazoo-arb-title{
+#kalamazoo-arb-title {
     color: black;
     font-family: "Barlow";
     font: "Barlow";
@@ -16,12 +15,20 @@
     @include font-size(2.5rem);
 }
 
+#to-drop-down-button {
+    width: 5%;
+    height: 100%;
+    background: none;
+    @include font-size(2rem);
+    font-weight: bold;
+    margin-right: 40px;
+}
+
 body {
     background-color: #357960;
 }
 
-#banner
-{
+#banner {
     position: absolute;
 }
 
@@ -39,11 +46,14 @@ body {
     @include font-size(1.5rem);
 }
 
-#symbol-credit
-{
+#symbol-credit {
     padding: 1%;
     margin: auto;
     color: white;
     font-family: "Barlow";
     font: "Barlow";
+}
+
+.bs-linebreak {
+    height: 75px;
 }

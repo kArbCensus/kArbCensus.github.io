@@ -1,69 +1,14 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#used-asset-link {
-    color: black;
-    font-family: "Barlow";
-}
-
-h2 {
-    color: White;
-    text-align: center;
-    font: "Barlow";
-    font-family: "Barlow";
-    font-weight: 400;
-    @include font-size(2.5rem);
-}
-
-h3 {
-    color: White;
-    text-align: center;
-    font: "Barlow";
-    font-family: "Barlow";
-    font-weight: 200;
-    @include font-size(2rem);
-}
-
 h4 {
     @include font-size(1.2rem);
     font-weight: 300;
-}
-
-input {
-    font: "Barlow";
-    font-family: "Barlow";
-    border-radius: 5px;
-    text-align: center;
-    width: 90%;
-    @include font-size(1.2rem);
-    border: 1px solid black;
-}
-
-button {
-    font-weight: 200;
-    font: "Barlow";
-    font-family: "Barlow";
-    border: none;
-    background-color: white;
-    width: 25%;
-}
-
-.bs-linebreak {
-    height: 75px;
 }
 
 .btn {
     white-space: normal;
     word-wrap: break-word;
     word-break: normal;
-}
-
-#to-drop-down-button {
-    width: 5%;
-    height: 100%;
-    background: none;
-    @include font-size(2rem);
-    font-weight: bold;
-    margin-right: 40px;
 }
 
 #admin-button {
@@ -81,7 +26,18 @@ button {
     @include font-size(1.2rem);
     background-color: #357960;
     font-family: 'Barlow';
+    font: 'Barlow';
     border: none;
     color: white;
     width: 100%;
+}
+
+#census-status-year
+{
+    color: white;
+    text-align: center;
+    font: "Barlow";
+    font-family: "Barlow";
+    font-weight: 200;
+    @include font-size(2rem);
 }

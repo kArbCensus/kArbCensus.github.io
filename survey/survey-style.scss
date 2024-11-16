@@ -1,11 +1,5 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#used-asset-link {
-    color: black;
-    font-family: "Barlow";
-    font: "Barlow";
-}
-
 h2 {
     color: White;
     text-align: center;
@@ -44,24 +38,10 @@ button {
     color: black;
 }
 
-.bs-linebreak {
-    height: 75px;
-}
-
 .btn {
     white-space: normal;
     word-wrap: break-word;
     word-break: normal;
-}
-
-
-#to-drop-down-button {
-    width: 5%;
-    height: 100%;
-    background: none;
-    @include font-size(2rem);
-    font-weight: bold;
-    margin-right: 40px;
 }
 
 #plot-select {

@@ -11985,6 +11985,20 @@ textarea.form-control-lg {
   }
 }
 
+#to-drop-down-button {
+  width: 5%;
+  height: 100%;
+  background: none;
+  font-size: calc(1.325rem + 0.9vw);
+  font-weight: bold;
+  margin-right: 40px;
+}
+@media (min-width: 1200px) {
+  #to-drop-down-button {
+    font-size: 2rem;
+  }
+}
+
 body {
   background-color: #357960;
 }
@@ -12018,4 +12032,8 @@ body {
   color: white;
   font-family: "Barlow";
   font: "Barlow";
+}
+
+.bs-linebreak {
+  height: 75px;
 }/*# sourceMappingURL=shared-styling.css.map */
