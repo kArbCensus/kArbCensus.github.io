@@ -11992,6 +11992,7 @@ textarea.form-control-lg {
   font-size: calc(1.325rem + 0.9vw);
   font-weight: bold;
   margin-right: 40px;
+  cursor: pointer;
 }
 @media (min-width: 1200px) {
   #to-drop-down-button {

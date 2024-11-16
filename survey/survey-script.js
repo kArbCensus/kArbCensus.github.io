@@ -163,6 +163,7 @@ function updateCurrentTree(placement) {
     const toUpdate = currentTrees[placement];
     const species = document.createElement("h4");
     species.appendChild(document.createTextNode("" + toUpdate.species));
+    species.id = "given-species";
     document.getElementById("give-species").appendChild(species);
     const year = document.getElementById("given-date");
     year.innerHTML = "" + currentTrees[placement].year;

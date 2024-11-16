@@ -10,9 +10,10 @@ input {
     border: 1px solid black;
 }
 
-#given-date
+#given-date, #given-species
 {
     @include font-size(1.2rem);
+    margin-top: 3.5%;
 }
 
 #select-plot-note {
@@ -33,6 +34,7 @@ input {
     position: relative;
     text-align: left;
     width: 100%;
+    cursor: pointer;
 }
 
 select {
