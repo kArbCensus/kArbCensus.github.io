@@ -67,24 +67,6 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon" data-bs-title="The identified type of tree."></i>
-                                </div>
-                                <div class="col-3 text-center">
-                                    <h4>
-                                        Species</h4>
-                                </div>
-                                <div class="col-4 text-center" id="give-species">
-                                    <h4>Some Tree Name</h4>
-                                </div>
-                                <div class="col-2"></div>
-                            </div>
-
-                            <br>
-
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
                                         data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
                                 </div>
@@ -99,6 +81,7 @@
                             </div>
 
                             <br>
+
 
                             <div class="row">
                                 <div class="col-2"></div>
@@ -123,20 +106,14 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
-                                        data-bs-title="Which of the roughly 4 states the tree falls into."></i>
+                                        id="tooltip-icon" data-bs-title="The identified type of tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
-                                        Status</h4>
+                                        Species</h4>
                                 </div>
-                                <div class="col-4 text-center">
-                                    <select id="given-status" aria-label="Choose status type">
-                                        <option>Alive</option>
-                                        <option>Sick</option>
-                                        <option>Dead</option>
-                                        <option>Fallen</option>
-                                    </select>
+                                <div class="col-4 text-center" id="give-species">
+                                    <h4>Some Tree Name</h4>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -148,7 +125,7 @@
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
-                                        data-bs-title="Which of the 3 size classes based on diameter the tree fits into."></i>
+                                        data-bs-title="Which of the 3 size classes the tree fits into based on its DBH."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
@@ -185,6 +162,29 @@
 
                             <br>
 
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-1 text-center">
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        id="tooltip-icon"
+                                        data-bs-title="Which of the roughly 4 states the tree falls into."></i>
+                                </div>
+                                <div class="col-3 text-center">
+                                    <h4>
+                                        Status</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <select id="given-status" aria-label="Choose status type">
+                                        <option>Alive</option>
+                                        <option>Sick</option>
+                                        <option>Dead</option>
+                                        <option>Fallen</option>
+                                    </select>
+                                </div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <br>
 
                             <div class="row">
                                 <div class="col-2"></div>
@@ -218,7 +218,7 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Other important notes to mention about the tree or the info entered above."
+                                        data-bs-title="Other important comments to mention about the tree or the info entered above."
                                         id="tooltip-icon"></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -313,8 +313,8 @@
                         <tr>
                             <th class="text-center" scope="col" style="width: 16%; min-width: 150px;">View & Update</th>
                             <th class="text-center" scope="col">Recent Tag #</th>
-                            <th class="text-center" scope="col">Size Class</th>
                             <th class="text-center" scope="col">Species</th>
+                            <th class="text-center" scope="col">Size Class</th>
                         </tr>
                     </thead>
                     <tbody id="table-body" class="text-center">

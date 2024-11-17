@@ -145,10 +145,11 @@ async function updateSurveyTable() {
         updater.appendChild(icon);
         let tag = document.createElement('td');
         tag.appendChild(document.createTextNode("" + tree.recentTag));
-        let size = document.createElement('td');
-        size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
+        let size = document.createElement('td');
+        size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
+
 
 
         // Seeing if a table option should be grayed out
@@ -159,8 +160,9 @@ async function updateSurveyTable() {
         // Adding each entry aspect
         newRow.appendChild(updater);
         newRow.appendChild(tag);
-        newRow.appendChild(size);
         newRow.appendChild(species);
+        newRow.appendChild(size);
+
 
         // Adding the constructed row to the table
         body.appendChild(newRow);
@@ -260,7 +262,7 @@ function confirmUpdate() {
 
         // Use a boolean to decide whether to PUT or POST
 
-        
+
         // TODO: Get put treeId instead of chosenPlot
         const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         //TODO: Sends tableItem to the API
