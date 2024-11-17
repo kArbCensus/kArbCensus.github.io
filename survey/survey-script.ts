@@ -418,7 +418,7 @@ enum state {
 enum size {
     Small,
     Medium,
-    Big,
+    Large,
 }
 
 enum match {
@@ -441,5 +441,5 @@ const statusName: Map<state, string> = new Map([
 const sizeClassName: Map<size, string> = new Map([
     [size.Small, "Small"],
     [size.Medium, "Medium"],
-    [size.Big, "Big"],
+    [size.Large, "Large"],
 ]);

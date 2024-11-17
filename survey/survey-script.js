@@ -304,7 +304,7 @@ var size;
 (function (size) {
     size[size["Small"] = 0] = "Small";
     size[size["Medium"] = 1] = "Medium";
-    size[size["Big"] = 2] = "Big";
+    size[size["Large"] = 2] = "Large";
 })(size || (size = {}));
 var match;
 (function (match) {
@@ -324,6 +324,6 @@ const statusName = new Map([
 const sizeClassName = new Map([
     [size.Small, "Small"],
     [size.Medium, "Medium"],
-    [size.Big, "Big"],
+    [size.Large, "Large"],
 ]);
 //# sourceMappingURL=survey-script.js.map
