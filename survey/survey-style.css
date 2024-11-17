@@ -11971,8 +11971,13 @@ input {
   border-radius: 5px;
   text-align: center;
   width: 90%;
-  font-size: 1.2rem;
+  font-size: calc(1.255rem + 0.06vw);
   border: 1px solid black;
+}
+@media (min-width: 1200px) {
+  input {
+    font-size: 1.3rem;
+  }
 }
 
 #given-date, #given-species {
