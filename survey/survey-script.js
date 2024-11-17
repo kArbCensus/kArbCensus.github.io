@@ -196,6 +196,7 @@ function confirmUpdate() {
     // Turns modal info into a tableItem by grabbing each element from the modal
     const selectPlot = document.getElementById("plot-select");
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
+    const treeId = selectedTableItem.treeId;
     const getSpecies = document.getElementById("give-species");
     let species = "";
     if (getSpecies.firstChild instanceof HTMLInputElement) {
@@ -216,18 +217,13 @@ function confirmUpdate() {
     }
     else {
         offModalWarning();
-        // Use a boolean to decide whether to PUT or POST
+        const treeForAPI = new tableItem(treeId, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+        // POST if a new tree, otherwise PUT
         if (isNewTree) {
-            // Posting
+            // TODO: POST request for new tree
         }
-        else {
-            // Putting
-        }
-        //TESTING FOR RN
-        // TODO: Get put treeId instead of chosenPlot
-        const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
-        //TODO: Sends tableItem to the API
-        currentTrees.push(treeToAPI);
+        else
+            putCensusEntry(treeForAPI);
     }
 }
 function putCensusEntry(item) {

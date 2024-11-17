@@ -2,7 +2,7 @@
 let currentTrees = new Array<tableItem>();
 
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear = -1 as number;
+const currentCensusYear: number = -1;
 
 // Boolean to determine POST vs PUT requests
 let isNewTree: boolean;
@@ -245,6 +245,8 @@ function confirmUpdate() {
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
+    const treeId = selectedTableItem.treeId;
+
     const getSpecies = document.getElementById("give-species");
     let species = "";
     if (getSpecies.firstChild instanceof HTMLInputElement) {
@@ -268,21 +270,13 @@ function confirmUpdate() {
     else {
         offModalWarning();
 
-        // Use a boolean to decide whether to PUT or POST
-        if(isNewTree)
-        {
-            // Posting
+        const treeForAPI = new tableItem(treeId, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+        // POST if a new tree, otherwise PUT
+        if (isNewTree) {
+            // TODO: POST request for new tree
         }
         else
-        {
-            // Putting
-        }
-
-        //TESTING FOR RN
-        // TODO: Get put treeId instead of chosenPlot
-        const treeToAPI = new tableItem(chosenPlot, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
-        //TODO: Sends tableItem to the API
-        currentTrees.push(treeToAPI); 
+            putCensusEntry(treeForAPI);
     }
 
 }
