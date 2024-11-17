@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 let currentTrees = new Array();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
 const currentCensusYear = -1;
-// Boolean for Post vs Put requests
-let toPost = true;
+// Boolean to determine POST vs PUT requests
+let isNewTree;
 function getApiUrlBase() {
     return __awaiter(this, void 0, void 0, function* () {
         const configRes = yield fetch("/api_config.json");
@@ -154,8 +154,8 @@ function createNewTree() {
     species.style.textAlign = "left";
     species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
-    // Adjusting to post to the API
-    toPost = true;
+    // Adjusting to POST to the API
+    isNewTree = true;
 }
 /**
  * Sets up the modal to change information about a pre-existing tree.
@@ -185,8 +185,8 @@ function updateCurrentTree(placement) {
     matchNum.value = "" + currentTrees[placement].matchNum;
     const comment = document.getElementById("given-comment");
     comment.value = "" + currentTrees[placement].comments;
-    // Adjusting to put to the API
-    toPost = false;
+    // Adjusting to PUT to the API
+    isNewTree = false;
 }
 /**
  * Adding the information from a filled out survey modal to our database
@@ -216,7 +216,7 @@ function confirmUpdate() {
     else {
         offModalWarning();
         // Use a boolean to decide whether to PUT or POST
-        if (toPost) {
+        if (isNewTree) {
             // Posting
         }
         else {

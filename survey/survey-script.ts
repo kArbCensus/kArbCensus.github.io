@@ -4,8 +4,8 @@ let currentTrees = new Array<tableItem>();
 //TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
 const currentCensusYear = -1 as number;
 
-// Boolean for Post vs Put requests
-let toPost = true as boolean;
+// Boolean to determine POST vs PUT requests
+let isNewTree: boolean;
 
 
 
@@ -187,8 +187,8 @@ function createNewTree() {
     species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
 
-    // Adjusting to post to the API
-    toPost = true as boolean;
+    // Adjusting to POST to the API
+    isNewTree = true;
 }
 
 
@@ -231,8 +231,8 @@ function updateCurrentTree(placement: number) {
     const comment = document.getElementById("given-comment") as HTMLInputElement;
     comment.value = "" + currentTrees[placement].comments;
 
-    // Adjusting to put to the API
-    toPost = false as boolean;
+    // Adjusting to PUT to the API
+    isNewTree = false;
 }
 
 /**
@@ -268,7 +268,7 @@ function confirmUpdate() {
         offModalWarning();
 
         // Use a boolean to decide whether to PUT or POST
-        if(toPost)
+        if(isNewTree)
         {
             // Posting
         }
