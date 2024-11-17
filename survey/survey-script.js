@@ -13,6 +13,8 @@ let currentTrees = new Array();
 const currentCensusYear = -1;
 // Boolean to determine POST vs PUT requests
 let isNewTree;
+// Table item that was selected to use for PUT request
+let selectedTableItem;
 function getApiUrlBase() {
     return __awaiter(this, void 0, void 0, function* () {
         const configRes = yield fetch("/api_config.json");
@@ -159,32 +161,31 @@ function createNewTree() {
 }
 /**
  * Sets up the modal to change information about a pre-existing tree.
- * @param placement the index of the selected tree in our array of trees for the plot.
+ * @param index the index of the selected tree in our array of trees for the plot.
  */
-function updateCurrentTree(placement) {
+function updateCurrentTree(index) {
     refreshPopUp();
-    // Transfer info from array into modal
-    const toUpdate = currentTrees[placement];
     // Set tableItem variable for confirm update to use
+    selectedTableItem = currentTrees[index];
     const species = document.createElement("h4");
-    species.appendChild(document.createTextNode("" + toUpdate.species));
+    species.appendChild(document.createTextNode("" + selectedTableItem.species));
     species.id = "given-species";
     document.getElementById("give-species").appendChild(species);
     const year = document.getElementById("given-date");
-    year.innerHTML = "" + currentTrees[placement].year;
+    year.innerHTML = "" + selectedTableItem.year;
     const tag = document.getElementById("given-tag");
-    tag.value = "" + currentTrees[placement].recentTag;
+    tag.value = "" + selectedTableItem.recentTag;
     const status = document.getElementById("given-status");
-    status.value = statusName.get(currentTrees[placement].status);
+    status.value = statusName.get(selectedTableItem.status);
     console.log(status.value);
     const sizeClass = document.getElementById("given-size-class");
-    sizeClass.value = sizeClassName.get(currentTrees[placement].sizeClass);
+    sizeClass.value = sizeClassName.get(selectedTableItem.sizeClass);
     const dbh = document.getElementById("given-dbh");
-    dbh.value = "" + currentTrees[placement].dbh;
+    dbh.value = "" + selectedTableItem.dbh;
     const matchNum = document.getElementById("given-match-num");
-    matchNum.value = "" + currentTrees[placement].matchNum;
+    matchNum.value = "" + selectedTableItem.matchNum;
     const comment = document.getElementById("given-comment");
-    comment.value = "" + currentTrees[placement].comments;
+    comment.value = "" + selectedTableItem.comments;
     // Adjusting to PUT to the API
     isNewTree = false;
 }
