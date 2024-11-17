@@ -317,7 +317,7 @@ function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
     (document.getElementById("given-date") as HTMLHeadingElement).innerText = "" + currentCensusYear;
     (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
-    (document.getElementById("given-status") as HTMLSelectElement).value = "Alive";
+    (document.getElementById("given-status") as HTMLSelectElement).value = "Live";
     (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
     (document.getElementById("given-dbh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
@@ -409,7 +409,7 @@ class tableItem {
 
 // Aspects of trees
 enum state {
-    Alive,
+    Live,
     Sick,
     Dead,
     Fallen
@@ -432,7 +432,7 @@ enum match {
 
 // Maps to access the aspects of each tree
 const statusName: Map<state, string> = new Map([
-    [state.Alive, "Alive"],
+    [state.Live, "Live"],
     [state.Sick, "Sick"],
     [state.Dead, "Dead"],
     [state.Fallen, "Fallen"],

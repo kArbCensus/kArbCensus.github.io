@@ -259,7 +259,7 @@ function refreshPopUp() {
     document.getElementById("give-species").innerHTML = "";
     document.getElementById("given-date").innerText = "" + currentCensusYear;
     document.getElementById("given-tag").value = "-1";
-    document.getElementById("given-status").value = "Alive";
+    document.getElementById("given-status").value = "Live";
     document.getElementById("given-size-class").value = "Small";
     document.getElementById("given-dbh").value = "0";
     document.getElementById("given-match-num").value = "1";
@@ -295,7 +295,7 @@ class tableItem {
 // Aspects of trees
 var state;
 (function (state) {
-    state[state["Alive"] = 0] = "Alive";
+    state[state["Live"] = 0] = "Live";
     state[state["Sick"] = 1] = "Sick";
     state[state["Dead"] = 2] = "Dead";
     state[state["Fallen"] = 3] = "Fallen";
@@ -316,7 +316,7 @@ var match;
 })(match || (match = {}));
 // Maps to access the aspects of each tree
 const statusName = new Map([
-    [state.Alive, "Alive"],
+    [state.Live, "Live"],
     [state.Sick, "Sick"],
     [state.Dead, "Dead"],
     [state.Fallen, "Fallen"],
