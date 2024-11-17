@@ -11970,7 +11970,7 @@ input {
   font: "Barlow";
   border-radius: 5px;
   text-align: center;
-  width: 90%;
+  width: 100%;
   font-size: calc(1.255rem + 0.06vw);
   border: 1px solid black;
 }
