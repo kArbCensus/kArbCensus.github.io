@@ -2,15 +2,54 @@
 const currentYear = new Date().getFullYear();
 
 
+async function getApiUrlBase2(): Promise<string> {
+    const configRes = await fetch("/api_config.json");
+    const { urlBase } = await configRes.json() as { urlBase: string };
+    return urlBase;
+}
+
+
+
+//////////// CONSTANTLY CALLED FUNCTIONS ////////////
+
+
+
 /**
  * Sets the text displaying whether or not a census is currently occurring.
  */
-function censusStatusYearSetup() {
+async function censusStatusYearSetup() {
+
     // Setting up the current displayed census year
     const censusYearStatus = document.getElementById("census-status-year")
 
-    //TODO: Make this take the running census
-    censusYearStatus.innerText = "Current Census: " + currentYear;
+    // Wait for auth token to be ready
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    const censusDateUrl = await getApiUrlBase2() + "census";
+
+    // Make API call with authentication token
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+    const apiRes = await fetch(censusDateUrl, {
+        headers,
+        method: "GET",
+    });
+
+    // Converting the gathered json into a casted obj
+    const apiObj = await apiRes.json() as CensusDateInfoPayload;
+
+    // Updating the indicator of the current census
+    if(apiObj.isActive)
+    {
+        censusYearStatus.innerText = "Current Census: " + apiObj.year;
+    }
+    else
+    {
+        censusYearStatus.innerText = "Current Census: No census is actively underway";
+    }
+    
 }
 
 
@@ -68,4 +107,17 @@ function endCensus() {
 
     // Refreshing for updated status text
     location.reload();
+}
+
+
+
+
+//////////// TYPES TO MAKE INFO FROM DB WORK ////////////
+
+
+
+interface CensusDateInfoPayload {
+    year: number;
+    startedBy: string;
+    isActive: boolean;
 }
