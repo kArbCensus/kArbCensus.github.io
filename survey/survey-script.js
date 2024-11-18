@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // All of the trees for a chosen plot
 let currentTrees = new Array();
-//TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear = -1;
+// The current census year
+let currentCensusYear;
 // Boolean to determine POST vs PUT requests
 let isNewTree;
 // Table item that was selected to use for PUT request
@@ -36,6 +36,37 @@ function setupModalButton() {
         updateButton.disabled = true;
         updateButton.onclick = () => { };
     }
+}
+/**
+ * Setups all of the info and restrictions surrounding whether or not a census
+ * is in progress.
+ */
+function setupCensusDate() {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Wait for auth token to be ready
+        yield globalThis.authTokenReady;
+        // Get the API endpoint
+        const censusDateUrl = (yield getApiUrlBase()) + "census";
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = yield fetch(censusDateUrl, {
+            headers,
+            method: "GET",
+        });
+        // Converting the gathered json into a casted obj
+        const apiObj = yield apiRes.json();
+        // Setting the current census to be what the API gave
+        if (apiObj.isActive) {
+            currentCensusYear = apiObj.year;
+        }
+        else {
+            currentCensusYear = -1;
+        }
+        // Adjusting update modal button accordingly
+        setupModalButton();
+    });
 }
 /**
  * Populates the drop down options with each of the plots in the arb

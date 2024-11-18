@@ -1,8 +1,8 @@
 // All of the trees for a chosen plot
 let currentTrees = new Array<tableItem>();
 
-//TODO: MAKE THIS AN API CALL TO GET THE REAL CURRENT YEAR!
-const currentCensusYear: number = -1;
+// The current census year
+let currentCensusYear: number;
 
 // Boolean to determine POST vs PUT requests
 let isNewTree: boolean;
@@ -36,6 +36,41 @@ function setupModalButton() {
         updateButton.disabled = true;
         updateButton.onclick = () => {/*Nothing*/ };
     }
+}
+
+/**
+ * Setups all of the info and restrictions surrounding whether or not a census
+ * is in progress. 
+ */
+async function setupCensusDate() {
+    // Wait for auth token to be ready
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    const censusDateUrl = await getApiUrlBase() + "census";
+
+    // Make API call with authentication token
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+    const apiRes = await fetch(censusDateUrl, {
+        headers,
+        method: "GET",
+    });
+
+    // Converting the gathered json into a casted obj
+    const apiObj = await apiRes.json() as CensusDateInfoPayload;
+
+    // Setting the current census to be what the API gave
+    if (apiObj.isActive) {
+        currentCensusYear = apiObj.year;
+    }
+    else {
+        currentCensusYear = -1;
+    }
+
+    // Adjusting update modal button accordingly
+    setupModalButton();
 }
 
 
@@ -383,6 +418,12 @@ function offModalWarning() {
 
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
+
+interface CensusDateInfoPayload {
+    year: number;
+    startedBy: string;
+    isActive: boolean;
+}
 
 interface PlotIdsPayload {
     plotIds: number[];
