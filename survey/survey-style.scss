@@ -5,12 +5,12 @@ input {
     font: "Barlow";
     border-radius: 5px;
     text-align: center;
-    width: 100%;
+    width: 90%;
     @include font-size(1.3rem);
     border: 1px solid black;
 }
 
-#given-date, #given-species
+#given-date, #given-species, #given-size-class
 {
     @include font-size(1.2rem);
     margin-top: 3.5%;

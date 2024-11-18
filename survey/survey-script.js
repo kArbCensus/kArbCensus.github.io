@@ -130,7 +130,7 @@ function updateSurveyTable() {
             let species = document.createElement('td');
             species.appendChild(document.createTextNode("" + tree.species));
             let size = document.createElement('td');
-            size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
+            size.appendChild(document.createTextNode(sizeClassToName.get(tree.sizeClass)));
             // Seeing if a table option should be grayed out
             if (tree.year == currentCensusYear) {
                 newRow.className = "table-active";
@@ -156,6 +156,18 @@ function createNewTree() {
     species.style.textAlign = "left";
     species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
+    // Adding in the ability to set which size class the tree falls into
+    const sizeClass = document.createElement("select");
+    const small = document.createElement("option");
+    small.appendChild(document.createTextNode("Small"));
+    sizeClass.appendChild(small);
+    const medium = document.createElement("option");
+    medium.appendChild(document.createTextNode("Medium"));
+    sizeClass.appendChild(medium);
+    const large = document.createElement("option");
+    large.appendChild(document.createTextNode("Large"));
+    sizeClass.appendChild(large);
+    document.getElementById("give-size-class").appendChild(sizeClass);
     // Adjusting to POST to the API
     isNewTree = true;
 }
@@ -178,8 +190,10 @@ function updateCurrentTree(index) {
     const status = document.getElementById("given-status");
     status.value = statusName.get(selectedTableItem.status);
     console.log(status.value);
-    const sizeClass = document.getElementById("given-size-class");
-    sizeClass.value = sizeClassName.get(selectedTableItem.sizeClass);
+    const sizeClass = document.createElement("h4");
+    sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
+    sizeClass.id = "given-size-class";
+    document.getElementById("give-size-class").appendChild(sizeClass);
     const dbh = document.getElementById("given-dbh");
     dbh.value = "" + selectedTableItem.dbh;
     const matchNum = document.getElementById("given-match-num");
@@ -198,7 +212,7 @@ function confirmUpdate() {
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
     const treeId = selectedTableItem.treeId;
     const getSpecies = document.getElementById("give-species");
-    let species = "";
+    let species;
     if (getSpecies.firstChild instanceof HTMLInputElement) {
         species = getSpecies.firstChild.value;
     }
@@ -207,7 +221,14 @@ function confirmUpdate() {
     }
     const recentTag = parseInt(document.getElementById("given-tag").value);
     const status = document.getElementById("given-status").selectedIndex;
-    const sizeClass = document.getElementById("given-size-class").selectedIndex;
+    const getSizeClass = document.getElementById("give-size-class");
+    let sizeClass;
+    if (getSizeClass.firstChild instanceof HTMLSelectElement) {
+        sizeClass = getSizeClass.firstChild.selectedIndex;
+    }
+    else if (getSizeClass.firstChild instanceof HTMLHeadingElement) {
+        sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
+    }
     const dbh = parseInt(document.getElementById("given-dbh").value);
     const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
     const comment = document.getElementById("given-comment").value;
@@ -260,7 +281,7 @@ function refreshPopUp() {
     document.getElementById("given-date").innerText = "" + currentCensusYear;
     document.getElementById("given-tag").value = "-1";
     document.getElementById("given-status").value = "Live";
-    document.getElementById("given-size-class").value = "Small";
+    document.getElementById("give-size-class").innerHTML = "";
     document.getElementById("given-dbh").value = "0";
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
@@ -321,9 +342,14 @@ const statusName = new Map([
     [state.Dead, "Dead"],
     [state.Fallen, "Fallen"],
 ]);
-const sizeClassName = new Map([
+const sizeClassToName = new Map([
     [size.Small, "Small"],
     [size.Medium, "Medium"],
     [size.Large, "Large"],
+]);
+const nameToSizeClass = new Map([
+    ["Small", size.Small],
+    ["Medium", size.Medium],
+    ["Large", size.Large],
 ]);
 //# sourceMappingURL=survey-script.js.map

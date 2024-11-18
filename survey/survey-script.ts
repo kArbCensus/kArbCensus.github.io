@@ -153,7 +153,7 @@ async function updateSurveyTable() {
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
         let size = document.createElement('td');
-        size.appendChild(document.createTextNode(sizeClassName.get(tree.sizeClass)));
+        size.appendChild(document.createTextNode(sizeClassToName.get(tree.sizeClass)));
 
 
 
@@ -189,6 +189,25 @@ function createNewTree() {
     species.ariaLabel = "Input species name";
     document.getElementById("give-species").appendChild(species);
 
+
+    // Adding in the ability to set which size class the tree falls into
+    const sizeClass = document.createElement("select");
+
+    const small = document.createElement("option");
+    small.appendChild(document.createTextNode("Small"))
+    sizeClass.appendChild(small);
+
+    const medium = document.createElement("option");
+    medium.appendChild(document.createTextNode("Medium"))
+    sizeClass.appendChild(medium);
+
+    const large = document.createElement("option");
+    large.appendChild(document.createTextNode("Large"))
+    sizeClass.appendChild(large);
+
+    document.getElementById("give-size-class").appendChild(sizeClass);
+
+
     // Adjusting to POST to the API
     isNewTree = true;
 }
@@ -220,8 +239,10 @@ function updateCurrentTree(index: number) {
     status.value = statusName.get(selectedTableItem.status);
     console.log(status.value);
 
-    const sizeClass = document.getElementById("given-size-class") as HTMLSelectElement;
-    sizeClass.value = sizeClassName.get(selectedTableItem.sizeClass);
+    const sizeClass = document.createElement("h4");
+    sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
+    sizeClass.id = "given-size-class";
+    document.getElementById("give-size-class").appendChild(sizeClass);
 
     const dbh = document.getElementById("given-dbh") as HTMLInputElement;
     dbh.value = "" + selectedTableItem.dbh;
@@ -248,7 +269,7 @@ function confirmUpdate() {
     const treeId = selectedTableItem.treeId;
 
     const getSpecies = document.getElementById("give-species");
-    let species = "";
+    let species: string;
     if (getSpecies.firstChild instanceof HTMLInputElement) {
         species = getSpecies.firstChild.value as string;
     }
@@ -258,7 +279,16 @@ function confirmUpdate() {
 
     const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
     const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
-    const sizeClass = (document.getElementById("given-size-class") as HTMLSelectElement).selectedIndex as size;
+
+    const getSizeClass = document.getElementById("give-size-class");
+    let sizeClass: size;
+    if (getSizeClass.firstChild instanceof HTMLSelectElement) {
+        sizeClass = getSizeClass.firstChild.selectedIndex as size;
+    }
+    else if (getSizeClass.firstChild instanceof HTMLHeadingElement) {
+        sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
+    }
+
     const dbh = parseInt((document.getElementById("given-dbh") as HTMLInputElement).value) as number;
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
@@ -277,6 +307,7 @@ function confirmUpdate() {
         }
         else
             putCensusEntry(treeForAPI);
+
     }
 
 }
@@ -318,7 +349,7 @@ function refreshPopUp() {
     (document.getElementById("given-date") as HTMLHeadingElement).innerText = "" + currentCensusYear;
     (document.getElementById("given-tag") as HTMLInputElement).value = "-1";
     (document.getElementById("given-status") as HTMLSelectElement).value = "Live";
-    (document.getElementById("given-size-class") as HTMLSelectElement).value = "Small";
+    document.getElementById("give-size-class").innerHTML = "";
     (document.getElementById("given-dbh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
@@ -438,8 +469,14 @@ const statusName: Map<state, string> = new Map([
     [state.Fallen, "Fallen"],
 ]);
 
-const sizeClassName: Map<size, string> = new Map([
+const sizeClassToName: Map<size, string> = new Map([
     [size.Small, "Small"],
     [size.Medium, "Medium"],
     [size.Large, "Large"],
+]);
+
+const nameToSizeClass: Map<string, size> = new Map([
+    ["Small", size.Small],
+    ["Medium", size.Medium],
+    ["Large", size.Large],
 ]);

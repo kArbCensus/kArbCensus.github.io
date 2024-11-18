@@ -11970,7 +11970,7 @@ input {
   font: "Barlow";
   border-radius: 5px;
   text-align: center;
-  width: 100%;
+  width: 90%;
   font-size: calc(1.255rem + 0.06vw);
   border: 1px solid black;
 }
@@ -11980,7 +11980,7 @@ input {
   }
 }
 
-#given-date, #given-species {
+#given-date, #given-species, #given-size-class {
   font-size: 1.2rem;
   margin-top: 3.5%;
 }
