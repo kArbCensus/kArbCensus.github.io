@@ -23,6 +23,7 @@ globalThis.promiseAdmin = new Promise((resolve) => {
   resolvePromiseAdmin = resolve;
 })
 
+// Define a promise that resolves when its able to give the base URL to any API interactions
 let resolveBaseApiUrl: (value:string) => void;
 globalThis.baseApiUrl = new Promise((resolve) =>{
   resolveBaseApiUrl = resolve;
