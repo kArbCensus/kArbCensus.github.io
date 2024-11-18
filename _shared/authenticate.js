@@ -19,6 +19,10 @@ let resolvePromiseAdmin;
 globalThis.promiseAdmin = new Promise((resolve) => {
     resolvePromiseAdmin = resolve;
 });
+let resolveBaseApiUrl;
+globalThis.baseApiUrl = new Promise((resolve) => {
+    resolveBaseApiUrl = resolve;
+});
 var client = null;
 var token = null;
 function authenticate() {
@@ -51,6 +55,10 @@ function checkAuth() {
                 resolveAuthTokenReady();
                 globalThis.isAdmin = isAdmin();
                 resolvePromiseAdmin();
+                // Setting up the url of the api to be accessible
+                const configRes = yield fetch("/api_config.json");
+                const { urlBase } = yield configRes.json();
+                resolveBaseApiUrl(urlBase);
                 // TODO: Remove debug logs in production
                 console.log("Access Token: ", token);
                 console.log(`Is admin? ${globalThis.isAdmin}`);

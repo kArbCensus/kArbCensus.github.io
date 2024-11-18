@@ -2,14 +2,6 @@
 const currentYear = new Date().getFullYear();
 
 
-async function getApiUrlBase2(): Promise<string> {
-    const configRes = await fetch("/api_config.json");
-    const { urlBase } = await configRes.json() as { urlBase: string };
-    return urlBase;
-}
-
-
-
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 
 
@@ -26,7 +18,9 @@ async function censusStatusYearSetup() {
     await globalThis.authTokenReady;
 
     // Get the API endpoint
-    const censusDateUrl = await getApiUrlBase2() + "census";
+    const censusDateUrl = await globalThis.baseApiUrl + "census";
+
+    console.log(censusDateUrl);
 
     // Make API call with authentication token
     const headers = {

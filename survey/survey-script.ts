@@ -11,14 +11,6 @@ let isNewTree: boolean;
 let selectedTableItem: tableItem;
 
 
-async function getApiUrlBase(): Promise<string> {
-    const configRes = await fetch("/api_config.json");
-    const { urlBase } = await configRes.json() as { urlBase: string };
-    return urlBase;
-}
-
-
-
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
 
@@ -47,7 +39,7 @@ async function setupCensusDate() {
     await globalThis.authTokenReady;
 
     // Get the API endpoint
-    const censusDateUrl = await getApiUrlBase() + "census";
+    const censusDateUrl = await globalThis.baseApiUrl + "census";
 
     // Make API call with authentication token
     const headers = {
@@ -82,7 +74,7 @@ async function createPlotOptions() {
     await globalThis.authTokenReady;
 
     // Get the API endpoint
-    const plotCountUrl = await getApiUrlBase() + "plot-ids";
+    const plotCountUrl = await globalThis.baseApiUrl + "plot-ids";
 
     // Make API call with authentication token
     const headers = {
@@ -135,7 +127,7 @@ async function updateSurveyTable() {
 
 
     // Get the API endpoint
-    let treesUrl = await getApiUrlBase() + "trees";
+    let treesUrl = await globalThis.baseApiUrl + "trees";
 
     // Add query options
     treesUrl += `?plot=${chosenPlot}&current_census=${currentCensusYear}`
@@ -361,7 +353,7 @@ async function putCensusEntry(item: tableItem) {
     }
 
     // Get the API endpoint
-    const treesUrl = await getApiUrlBase() + "trees";
+    const treesUrl = await globalThis.baseApiUrl + "trees";
 
     // Add authentication token to headers
     const headers = {

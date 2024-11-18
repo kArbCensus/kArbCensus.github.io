@@ -9,13 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // Getting the current date
 const currentYear = new Date().getFullYear();
-function getApiUrlBase2() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const configRes = yield fetch("/api_config.json");
-        const { urlBase } = yield configRes.json();
-        return urlBase;
-    });
-}
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 /**
  * Sets the text displaying whether or not a census is currently occurring.
@@ -27,7 +20,8 @@ function censusStatusYearSetup() {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
-        const censusDateUrl = (yield getApiUrlBase2()) + "census";
+        const censusDateUrl = (yield globalThis.baseApiUrl) + "census";
+        console.log(censusDateUrl);
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`

@@ -15,13 +15,6 @@ let currentCensusYear;
 let isNewTree;
 // Table item that was selected to use for PUT request
 let selectedTableItem;
-function getApiUrlBase() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const configRes = yield fetch("/api_config.json");
-        const { urlBase } = yield configRes.json();
-        return urlBase;
-    });
-}
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 /**
  * Adjusts the pop-up button based on whether or not there is an open census
@@ -46,7 +39,7 @@ function setupCensusDate() {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
-        const censusDateUrl = (yield getApiUrlBase()) + "census";
+        const censusDateUrl = (yield globalThis.baseApiUrl) + "census";
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`
@@ -76,7 +69,7 @@ function createPlotOptions() {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
-        const plotCountUrl = (yield getApiUrlBase()) + "plot-ids";
+        const plotCountUrl = (yield globalThis.baseApiUrl) + "plot-ids";
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`
@@ -118,7 +111,7 @@ function updateSurveyTable() {
         const select = document.getElementById("plot-select");
         const chosenPlot = parseInt(select.options[select.selectedIndex].value);
         // Get the API endpoint
-        let treesUrl = (yield getApiUrlBase()) + "trees";
+        let treesUrl = (yield globalThis.baseApiUrl) + "trees";
         // Add query options
         treesUrl += `?plot=${chosenPlot}&current_census=${currentCensusYear}`;
         // Add authentication token to headers
@@ -291,7 +284,7 @@ function putCensusEntry(item) {
             comments: item.comments,
         };
         // Get the API endpoint
-        const treesUrl = (yield getApiUrlBase()) + "trees";
+        const treesUrl = (yield globalThis.baseApiUrl) + "trees";
         // Add authentication token to headers
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`

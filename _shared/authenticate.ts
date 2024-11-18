@@ -7,6 +7,7 @@ declare global {
   var authTokenReady: Promise<void>;
   var promiseAdmin: Promise<void>;
   var isAdmin: boolean;
+  var baseApiUrl: Promise<string>;
 }
 globalThis.authToken = null;
 
@@ -20,6 +21,11 @@ globalThis.authTokenReady = new Promise((resolve) => {
 let resolvePromiseAdmin: () => void;
 globalThis.promiseAdmin = new Promise((resolve) => {
   resolvePromiseAdmin = resolve;
+})
+
+let resolveBaseApiUrl: (value:string) => void;
+globalThis.baseApiUrl = new Promise((resolve) =>{
+  resolveBaseApiUrl = resolve;
 })
 
 interface ArbJwtPayload extends JwtPayload {
@@ -64,6 +70,11 @@ async function checkAuth() {
       resolveAuthTokenReady();
       globalThis.isAdmin = isAdmin();
       resolvePromiseAdmin();
+
+      // Setting up the url of the api to be accessible
+      const configRes = await fetch("/api_config.json");
+      const { urlBase } = await configRes.json() as { urlBase: string };
+      resolveBaseApiUrl(urlBase);
       
 
       // TODO: Remove debug logs in production
