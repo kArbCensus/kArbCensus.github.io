@@ -101,7 +101,23 @@ async function createPlotOptions() {
 
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 
+function sortTrees() {
+    // Getting the users choice
+    const choice = (document.getElementById("filter-select") as HTMLSelectElement).selectedIndex;
 
+    // Recent tag is chosen
+    if (choice == 0) {
+        currentTrees.sort((a, b) => a.recentTag - b.recentTag);
+    }
+    // Species is chosen
+    else if (choice == 1) {
+        currentTrees.sort((a, b) => a.species.localeCompare(b.species));
+    }
+    // Size class is chosen
+    else {
+        currentTrees.sort((a, b) => a.sizeClass - b.sizeClass);
+    }
+}
 
 /**
  * Based on the currently selected plot chose, updates the potential
@@ -113,12 +129,14 @@ async function updateSurveyTable() {
 
     // Grabbing each of HTML elements to be made visible if applicable
     const addButton = document.getElementById("add-button");
-    const grayWarning = document.getElementById("gray-warning");
+    const filterButton = document.getElementById("filter-button")
     const surveyTable = document.getElementById("survey-table");
+    const grayWarning = document.getElementById("gray-warning");
     if (surveyTable.style.visibility == "hidden") {
         addButton.style.visibility = "visible";
-        grayWarning.style.visibility = "visible";
+        filterButton.style.visibility = "visible";
         surveyTable.style.visibility = "visible";
+        grayWarning.style.visibility = "visible";
     }
 
     // Getting our plot
@@ -146,7 +164,7 @@ async function updateSurveyTable() {
 
     // Update and sort current trees
     changeArrFromJson(apiObj);
-    currentTrees.sort((a, b) => a.recentTag - b.recentTag);
+    sortTrees();
 
 
     //Clear out the current items in the table

@@ -37,6 +37,29 @@ input {
     cursor: pointer;
 }
 
+#filter-tag
+{
+    color: White;
+    text-align: center;
+    font-family: "Barlow";
+    font: "Barlow";
+    font-weight: 400;
+    @include font-size(1.5rem);
+}
+
+#filter-select
+{
+    @include font-size(1rem);
+    font-family: "Barlow";
+    font: "Barlow";
+    border-radius: 15px;
+    border: none;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    cursor: pointer; 
+}
+
 select {
     border: 1px solid black;
     border-radius: 5px;
@@ -65,7 +88,7 @@ table {
     overflow-x: auto;
     white-space: nowrap;
     border-radius: 5px;
-    margin-top: 4%;
+    margin-top: 1%;
 }
 
 table tbody {

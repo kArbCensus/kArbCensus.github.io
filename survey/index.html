@@ -276,12 +276,11 @@
             <div class="col-auto">
                 <select name="plot" id="plot-select" class="form-select" aria-label="Choose a plot to look at"
                     onchange="updateSurveyTable()">
-                    <option value="ChosePlot">Chose a plot here</option>
+                    <option value="ChosePlot">Chose a Plot Here</option>
                 </select>
             </div>
             <div class="col"></div>
         </div>
-
 
         <!--Line Break-->
         <div class="row">
@@ -293,14 +292,34 @@
 
         <!--Add button-->
         <div class="row" id="add-button" style="visibility: hidden;">
-            <div class="col-3 "></div>
-            <div class="col-6 text-center">
+            <div class="col-2"></div>
+            <div class="col-8 text-center">
                 <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up"
                     onclick="createNewTree()" aria-label="Add a new tree for the census">
-                    Add new tree
+                    Add New Tree
                 </button>
             </div>
-            <div class="col-3"></div>
+            <div class="col-2"></div>
+        </div>
+
+        <br>
+        <br>
+
+        <!--Filter button-->
+        <div class="row align-items-center" style="visibility: hidden;" id="filter-button">
+            <div class="col"></div>
+            <div class="col-auto">
+                <h3 id="filter-tag">Filter By:</h3>
+            </div>
+            <div class="col-auto">
+                <select name="" id="filter-select" class="form-select" aria-label="Alter the order of the table"
+                    onchange="updateSurveyTable()">
+                    <option value="MostRecentTag">Most Recent Tag</option>
+                    <option value="Species">Species</option>
+                    <option value="SizeClass">Size Class</option>
+                </select>
+            </div>
+            <div class="col"></div>
         </div>
 
 
