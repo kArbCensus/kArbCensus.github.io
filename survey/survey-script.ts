@@ -51,7 +51,7 @@ async function setupCensusDate() {
     });
 
     // Converting the gathered json into a casted obj
-    const apiObj = await apiRes.json() as CensusDateInfoPayload;
+    const apiObj = await apiRes.json() as CensusStatus;
 
     // Setting the current census to be what the API gave
     if (apiObj.isActive) {
@@ -429,7 +429,7 @@ function offModalWarning() {
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 
-interface CensusDateInfoPayload {
+interface CensusStatus {
     year: number;
     startedBy: string;
     isActive: boolean;

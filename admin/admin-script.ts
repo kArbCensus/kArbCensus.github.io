@@ -20,8 +20,6 @@ async function censusStatusYearSetup() {
     // Get the API endpoint
     const censusDateUrl = await globalThis.baseApiUrl + "census";
 
-    console.log(censusDateUrl);
-
     // Make API call with authentication token
     const headers = {
         "Authorization": `Bearer ${globalThis.authToken}`
@@ -32,18 +30,16 @@ async function censusStatusYearSetup() {
     });
 
     // Converting the gathered json into a casted obj
-    const apiObj = await apiRes.json() as CensusDateInfoPayload;
+    const apiObj = await apiRes.json() as CensusStatus;
 
     // Updating the indicator of the current census
-    if(apiObj.isActive)
-    {
+    if (apiObj.isActive) {
         censusYearStatus.innerText = "Current Census: " + apiObj.year;
     }
-    else
-    {
+    else {
         censusYearStatus.innerText = "Current Census: No census is actively underway";
     }
-    
+
 }
 
 
@@ -73,34 +69,37 @@ function setNewPopUpText(turnOn: boolean, text: string) {
     popUp.appendChild(document.createTextNode(text));
 
     const update = document.getElementById("pop-up-update");
-    if (turnOn) {
-        update.onclick = function () { startCensus(); };
+    update.onclick = async function () { await updateCensusStatus(turnOn); };
     }
-    else {
-        update.onclick = function () { endCensus(); };
-    }
-}
-
 
 /**
- * Tells the API to start a new census.
+ * Way to update the database to say if a census should be occurring.
+ * @param startCensus Whether the function should start a new census or stop the current census.
  */
-function startCensus() {
-    //TODO: Implement an API call to start a census
+async function updateCensusStatus(startCensus:boolean) {
+
+    // Wait for auth token to be ready
+     await globalThis.authTokenReady;
+
+     // Get the API endpoint
+     const censusDateUrl = await globalThis.baseApiUrl + "census";
+ 
+     // Creating the body
+     const censusStatus: SetStatusParameters = {newStatus: startCensus};
+ 
+     // Make API call with authentication token
+     const headers = {
+         "Authorization": `Bearer ${globalThis.authToken}`
+     };
+     const apiRes = await fetch(censusDateUrl, {
+         headers,
+         method: "POST",
+         body:JSON.stringify(censusStatus),
+     });
+
 
     // Refreshing for updated status text
-    location.reload();
-}
-
-
-/**
- * Tells the API to end the current census.
- */
-function endCensus() {
-    //TODO: Implement an API call to end a census
-
-    // Refreshing for updated status text
-    location.reload();
+    censusStatusYearSetup();
 }
 
 
@@ -110,8 +109,12 @@ function endCensus() {
 
 
 
-interface CensusDateInfoPayload {
+interface CensusStatus {
     year: number;
-    startedBy: string;
+    startedBy: string | null;
     isActive: boolean;
+}
+
+interface SetStatusParameters {
+    newStatus: boolean;
 }

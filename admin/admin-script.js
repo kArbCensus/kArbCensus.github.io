@@ -21,7 +21,6 @@ function censusStatusYearSetup() {
         yield globalThis.authTokenReady;
         // Get the API endpoint
         const censusDateUrl = (yield globalThis.baseApiUrl) + "census";
-        console.log(censusDateUrl);
         // Make API call with authentication token
         const headers = {
             "Authorization": `Bearer ${globalThis.authToken}`
@@ -62,27 +61,33 @@ function setNewPopUpText(turnOn, text) {
     popUp.innerHTML = "";
     popUp.appendChild(document.createTextNode(text));
     const update = document.getElementById("pop-up-update");
-    if (turnOn) {
-        update.onclick = function () { startCensus(); };
-    }
-    else {
-        update.onclick = function () { endCensus(); };
-    }
+    update.onclick = function () {
+        return __awaiter(this, void 0, void 0, function* () { yield updateCensusStatus(turnOn); });
+    };
 }
 /**
- * Tells the API to start a new census.
+ * Way to update the database to say if a census should be occurring.
+ * @param startCensus Whether the function should start a new census or stop the current census.
  */
-function startCensus() {
-    //TODO: Implement an API call to start a census
-    // Refreshing for updated status text
-    location.reload();
-}
-/**
- * Tells the API to end the current census.
- */
-function endCensus() {
-    //TODO: Implement an API call to end a census
-    // Refreshing for updated status text
-    location.reload();
+function updateCensusStatus(startCensus) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Wait for auth token to be ready
+        yield globalThis.authTokenReady;
+        // Get the API endpoint
+        const censusDateUrl = (yield globalThis.baseApiUrl) + "census";
+        // Creating the body
+        const censusStatus = { newStatus: startCensus };
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = yield fetch(censusDateUrl, {
+            headers,
+            method: "POST",
+            body: JSON.stringify(censusStatus),
+        });
+        // Refreshing for updated status text
+        censusStatusYearSetup();
+    });
 }
 //# sourceMappingURL=admin-script.js.map
