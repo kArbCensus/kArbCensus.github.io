@@ -2,9 +2,6 @@
 $(function () {
     $('#banner-insert').load('../_shared/in-page/banner.html');
 })
-$(function () {
-    $('#symbol-insert').load('../_shared/in-page/symbol-credit.html');
-})
 
 
 /**
