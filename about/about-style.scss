@@ -1,32 +1,58 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#photo{
+#photo {
     border: .5rem solid white;
     border-radius: 10px;
     height: auto;
     margin-top: 3%;
-    
+    padding: auto;
 }
 
 /* Adjust max width for larger screens */
 @media (min-width: 750px) {
     #photo {
-        max-width: 50%; /* Medium screens */
+        max-width: 50%;
+        /* Medium screens */
         max-height: 80%;
     }
 }
 
 @media (min-width: 1000px) {
     #photo {
-        max-width: 50%; /* Medium screens */
+        max-width: 50%;
+        /* Medium screens */
         max-height: 60%;
+
     }
 }
 
-
 @media (min-width: 1500px) {
     #photo {
-        max-width: 20%; /* Large screens */
+        max-width: 20%;
+        /* Large screens */
         max-height: 80%;
     }
+}
+
+h3 {
+    font-family: "Barlow";
+    font: "Barlow";
+    font-weight: bold;
+    margin: auto;
+    @include font-size(1.5rem);
+}
+
+p{
+    font-family: "Barlow";
+    font: "Barlow";
+    margin: auto;
+    @include font-size(1rem);
+}
+
+#name-link{
+    font-family: "Barlow";
+    font: "Barlow";
+    margin: auto;
+    @include font-size(1rem);
+    color: black;
 }
