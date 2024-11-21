@@ -14,6 +14,7 @@
         crossorigin="anonymous"></script>
 
     <!--Adding style to our page-->
+    <link rel="stylesheet" type="text/css" href="about-style.css">
     <link rel="stylesheet" type="text/css" href="../_shared/in-page/shared-styling.css">
     <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/7af180cc8b.js" crossorigin="anonymous"></script>
@@ -25,28 +26,34 @@
     <script src="../_shared/in-page/in-page-script.js" type="text/javascript"></script>
 
     <!--TODO: Have Juniper let AUTH0 add this site to the listed callback urls-->
-    <!--Authentication-->
+    <!--Authentication
     <script src="/_shared/jwt-decode.js"></script>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
     <script src="/_shared/auth0-functions.js" type="text/javascript" defer></script>
     <script src="/_shared/authenticate.js" type="module" defer></script>
-    
+-->
+
 </head>
 
-<body onload="addAdmin();">
+<body onload="">
     <div class="container-fluid flex-column min-vh-100">
 
         <!--Top of page banner-->
         <div id="banner-insert"></div>
+
+        <!--Image of us-->
+        <div class="row">
+
+            <div class="col text-center w-100">
+                <img src="poster.jpg" id="photo" class="img-fluid img-rounded" alt="Responsive image">
+            </div>
+
+        </div>
+
     </div>
 
-    <footer class="mt-auto" aria-label="Page symbol credit" id="symbol-credit">
-        Tree by redemption_art from <a href="https://thenounproject.com/icon/tree-7359759/" target="_blank"
-            title="Tree Icons" id="used-asset-link" style="color: white;" aria-label="Further info on the tree symbol">Noun
-            Project</a> (CC BY 3.0)
-    </footer>
-
+    
 </body>
 
 </html>

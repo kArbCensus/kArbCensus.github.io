@@ -1,0 +1,32 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+#photo{
+    border: .5rem solid white;
+    border-radius: 10px;
+    height: auto;
+    margin-top: 3%;
+    
+}
+
+/* Adjust max width for larger screens */
+@media (min-width: 750px) {
+    #photo {
+        max-width: 50%; /* Medium screens */
+        max-height: 80%;
+    }
+}
+
+@media (min-width: 1000px) {
+    #photo {
+        max-width: 50%; /* Medium screens */
+        max-height: 60%;
+    }
+}
+
+
+@media (min-width: 1500px) {
+    #photo {
+        max-width: 20%; /* Large screens */
+        max-height: 80%;
+    }
+}
