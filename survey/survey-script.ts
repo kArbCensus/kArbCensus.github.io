@@ -282,7 +282,6 @@ function updateCurrentTree(index: number) {
 
     const status = document.getElementById("given-status") as HTMLSelectElement;
     status.value = statusName.get(selectedTableItem.status);
-    console.log(status.value);
 
     const sizeClass = document.createElement("h4");
     sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
@@ -305,13 +304,11 @@ function updateCurrentTree(index: number) {
 /**
  * Adding the information from a filled out survey modal to our database
  */
-function confirmUpdate() {
+async function confirmUpdate() {
 
     // Turns modal info into a tableItem by grabbing each element from the modal
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
-
-    const treeId = selectedTableItem.treeId;
 
     const getSpecies = document.getElementById("give-species");
     let species: string;
@@ -345,18 +342,50 @@ function confirmUpdate() {
     else {
         offModalWarning();
 
-        const treeForAPI = new tableItem(treeId, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+        const treeForAPI = new tableItem(-1, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         // POST if a new tree, otherwise PUT
         if (isNewTree) {
-            // TODO: POST request for new tree
+            await postNewTree(treeForAPI, chosenPlot);
         }
-        else
-            putCensusEntry(treeForAPI);
+        else {
+            treeForAPI.treeId = selectedTableItem.treeId;
+            await putCensusEntry(treeForAPI);
+        }
 
+        // Refresh survey table after update
+        updateSurveyTable();
     }
-
 }
 
+async function postNewTree(item: tableItem, plotId: number) {
+    // Convert table item to payload
+    const payload: TreePostPayload = {
+        species: item.species,
+        sizeClass: sizeClassToName.get(item.sizeClass),
+        plotId: plotId,
+        year: item.year,
+        recentTag: item.recentTag,
+        dbh: item.dbh,
+        status: statusName.get(item.status),
+        matchNum: item.matchNum,
+        comments: item.comments,
+    };
+
+    // Get the API endpoint
+    const treesUrl = await globalThis.baseApiUrl + "trees";
+
+    // Add authentication token to headers
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+
+    // Make an API request to add/update the census entry
+    await fetch(treesUrl, {
+        headers,
+        method: "POST",
+        body: JSON.stringify(payload)
+    });
+}
 
 async function putCensusEntry(item: tableItem) {
     // Convert table item to payload
@@ -365,7 +394,7 @@ async function putCensusEntry(item: tableItem) {
         treeId: item.treeId,
         recentTag: item.recentTag,
         dbh: item.dbh,
-        status: statusName[item.status],
+        status: statusName.get(item.status),
         matchNum: item.matchNum,
         comments: item.comments,
     }
@@ -410,7 +439,7 @@ function changeArrFromJson(censusEntries: EntryResponsePayload[]) {
         entry.year,
         entry.recentTag,
         state[entry.status as keyof typeof state], // Convert status to state type
-        size[entry.sizeClass as keyof typeof size], // Convert sizeClass to size type
+        nameToSizeClass.get(entry.sizeClass), // Convert sizeClass to size type
         entry.dbh,
         entry.matchNum as match,
         entry.comments
@@ -454,6 +483,18 @@ interface EntryResponsePayload {
 interface EntryPutPayload {
     year: number;
     treeId: number;
+    recentTag: number;
+    dbh: number;
+    status: string;
+    matchNum: number;
+    comments: string;
+}
+
+interface TreePostPayload {
+    species: string;
+    sizeClass: string;
+    plotId: number;
+    year: number;
     recentTag: number;
     dbh: number;
     status: string;

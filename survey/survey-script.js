@@ -231,7 +231,6 @@ function updateCurrentTree(index) {
     tag.value = "" + selectedTableItem.recentTag;
     const status = document.getElementById("given-status");
     status.value = statusName.get(selectedTableItem.status);
-    console.log(status.value);
     const sizeClass = document.createElement("h4");
     sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
     sizeClass.id = "given-size-class";
@@ -249,45 +248,78 @@ function updateCurrentTree(index) {
  * Adding the information from a filled out survey modal to our database
  */
 function confirmUpdate() {
-    // Turns modal info into a tableItem by grabbing each element from the modal
-    const selectPlot = document.getElementById("plot-select");
-    const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
-    const treeId = selectedTableItem.treeId;
-    const getSpecies = document.getElementById("give-species");
-    let species;
-    if (getSpecies.firstChild instanceof HTMLInputElement) {
-        species = getSpecies.firstChild.value;
-    }
-    else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
-        species = getSpecies.firstChild.innerText;
-    }
-    const recentTag = parseInt(document.getElementById("given-tag").value);
-    const status = document.getElementById("given-status").selectedIndex;
-    const getSizeClass = document.getElementById("give-size-class");
-    let sizeClass;
-    if (getSizeClass.firstChild instanceof HTMLSelectElement) {
-        sizeClass = getSizeClass.firstChild.selectedIndex;
-    }
-    else if (getSizeClass.firstChild instanceof HTMLHeadingElement) {
-        sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
-    }
-    const dbh = parseInt(document.getElementById("given-dbh").value);
-    const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
-    const comment = document.getElementById("given-comment").value;
-    // Ensuring no unfilled form is sent to the database
-    if (dbh <= 0 || species == "") {
-        onModalWarning();
-    }
-    else {
-        offModalWarning();
-        const treeForAPI = new tableItem(treeId, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
-        // POST if a new tree, otherwise PUT
-        if (isNewTree) {
-            // TODO: POST request for new tree
+    return __awaiter(this, void 0, void 0, function* () {
+        // Turns modal info into a tableItem by grabbing each element from the modal
+        const selectPlot = document.getElementById("plot-select");
+        const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
+        const getSpecies = document.getElementById("give-species");
+        let species;
+        if (getSpecies.firstChild instanceof HTMLInputElement) {
+            species = getSpecies.firstChild.value;
         }
-        else
-            putCensusEntry(treeForAPI);
-    }
+        else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
+            species = getSpecies.firstChild.innerText;
+        }
+        const recentTag = parseInt(document.getElementById("given-tag").value);
+        const status = document.getElementById("given-status").selectedIndex;
+        const getSizeClass = document.getElementById("give-size-class");
+        let sizeClass;
+        if (getSizeClass.firstChild instanceof HTMLSelectElement) {
+            sizeClass = getSizeClass.firstChild.selectedIndex;
+        }
+        else if (getSizeClass.firstChild instanceof HTMLHeadingElement) {
+            sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
+        }
+        const dbh = parseInt(document.getElementById("given-dbh").value);
+        const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
+        const comment = document.getElementById("given-comment").value;
+        // Ensuring no unfilled form is sent to the database
+        if (dbh <= 0 || species == "") {
+            onModalWarning();
+        }
+        else {
+            offModalWarning();
+            const treeForAPI = new tableItem(-1, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+            // POST if a new tree, otherwise PUT
+            if (isNewTree) {
+                yield postNewTree(treeForAPI, chosenPlot);
+            }
+            else {
+                treeForAPI.treeId = selectedTableItem.treeId;
+                yield putCensusEntry(treeForAPI);
+            }
+            // Refresh survey table after update
+            updateSurveyTable();
+        }
+    });
+}
+function postNewTree(item, plotId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Convert table item to payload
+        const payload = {
+            species: item.species,
+            sizeClass: sizeClassToName.get(item.sizeClass),
+            plotId: plotId,
+            year: item.year,
+            recentTag: item.recentTag,
+            dbh: item.dbh,
+            status: statusName.get(item.status),
+            matchNum: item.matchNum,
+            comments: item.comments,
+        };
+        // Get the API endpoint
+        const treesUrl = (yield globalThis.baseApiUrl) + "trees";
+        // Add authentication token to headers
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        // Make an API request to add/update the census entry
+        yield fetch(treesUrl, {
+            headers,
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+    });
 }
 function putCensusEntry(item) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -297,7 +329,7 @@ function putCensusEntry(item) {
             treeId: item.treeId,
             recentTag: item.recentTag,
             dbh: item.dbh,
-            status: statusName[item.status],
+            status: statusName.get(item.status),
             matchNum: item.matchNum,
             comments: item.comments,
         };
@@ -331,7 +363,7 @@ function refreshPopUp() {
 // Setting the current array to contain the values from a json file
 function changeArrFromJson(censusEntries) {
     currentTrees = censusEntries.map((entry) => (new tableItem(entry.treeId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
-    size[entry.sizeClass], // Convert sizeClass to size type
+    nameToSizeClass.get(entry.sizeClass), // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
 }
 // Easy toggles for the warning notices
