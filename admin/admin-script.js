@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // Getting the current date
 const currentYear = new Date().getFullYear();
+// The current census collected from the API
+let apiObj;
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 /**
  * Sets the text displaying whether or not a census is currently occurring.
@@ -30,7 +32,7 @@ function censusStatusYearSetup() {
             method: "GET",
         });
         // Converting the gathered json into a casted obj
-        const apiObj = yield apiRes.json();
+        apiObj = (yield apiRes.json());
         // Updating the indicator of the current census
         if (apiObj.isActive) {
             censusYearStatus.innerText = "Current Census: " + apiObj.year;
@@ -57,9 +59,24 @@ function confirmEndCurrentCensus() {
  * match the user's chosen option.
  */
 function setNewPopUpText(turnOn, text) {
+    // Setting the text
     const popUp = document.getElementById("pop-up-text");
     popUp.innerHTML = "";
     popUp.appendChild(document.createTextNode(text));
+    // Setting the button functionality
+    const updateButton = document.getElementById("pop-up-update");
+    if ((apiObj === undefined) || (turnOn && apiObj.isActive) || (!turnOn && !apiObj.isActive)) {
+        updateButton.style.backgroundColor = "grey";
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Action already occurring"));
+        updateButton.disabled = true;
+    }
+    else {
+        updateButton.style.backgroundColor = "#357960";
+        updateButton.innerHTML = "";
+        updateButton.appendChild(document.createTextNode("Confirm"));
+        updateButton.disabled = false;
+    }
     const update = document.getElementById("pop-up-update");
     update.onclick = function () {
         return __awaiter(this, void 0, void 0, function* () { yield updateCensusStatus(turnOn); });
