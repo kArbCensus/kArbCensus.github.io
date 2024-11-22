@@ -340,7 +340,7 @@ function confirmUpdate() {
         else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
             treeSpecies = getSpecies.firstChild.innerText;
         }
-        const recentTag = parseInt(document.getElementById("given-tag").value);
+        const recentTag = parseFloat(document.getElementById("given-tag").value);
         const status = document.getElementById("given-status").selectedIndex;
         const getSizeClass = document.getElementById("give-size-class");
         let sizeClass;
@@ -350,7 +350,7 @@ function confirmUpdate() {
         else if (getSizeClass.firstChild instanceof HTMLHeadingElement) {
             sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
         }
-        const dbh = parseInt(document.getElementById("given-dbh").value);
+        const dbh = parseFloat(document.getElementById("given-dbh").value);
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
         // Ensuring no clearly inaccurate data is sent to the database

@@ -222,8 +222,7 @@ async function updateSurveyTable() {
 
 
 // TODO: have this be an API call to get all the registered API names
-function populateSpecies(dropDown: HTMLSelectElement)
-{
+function populateSpecies(dropDown: HTMLSelectElement) {
     // TEMPORARILY hard coding in each tree
     const americanElm = document.createElement("option");
     americanElm.value = "American Elm";
@@ -420,7 +419,7 @@ async function confirmUpdate() {
         treeSpecies = getSpecies.firstChild.innerText as string;
     }
 
-    const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
+    const recentTag = parseFloat((document.getElementById("given-tag") as HTMLInputElement).value);
     const status = (document.getElementById("given-status") as HTMLSelectElement).selectedIndex as state;
 
     const getSizeClass = document.getElementById("give-size-class");
@@ -432,7 +431,7 @@ async function confirmUpdate() {
         sizeClass = nameToSizeClass.get(getSizeClass.firstChild.innerText);
     }
 
-    const dbh = parseInt((document.getElementById("given-dbh") as HTMLInputElement).value) as number;
+    const dbh = parseFloat((document.getElementById("given-dbh") as HTMLInputElement).value) as number;
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
