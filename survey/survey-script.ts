@@ -221,6 +221,107 @@ async function updateSurveyTable() {
 }
 
 
+// TODO: have this be an API call to get all the registered API names
+function populateSpecies(dropDown: HTMLSelectElement)
+{
+    // TEMPORARILY hard coding in each tree
+    const americanElm = document.createElement("option");
+    americanElm.value = "American Elm";
+    americanElm.appendChild(document.createTextNode("American Elm"));
+    dropDown.appendChild(americanElm);
+
+    const beech = document.createElement("option");
+    beech.value = "Beech";
+    beech.appendChild(document.createTextNode("Beech"));
+    dropDown.appendChild(beech);
+
+    const bitternutHickory = document.createElement("option");
+    bitternutHickory.value = "Bitternut Hickory";
+    bitternutHickory.appendChild(document.createTextNode("Bitternut Hickory"));
+    dropDown.appendChild(bitternutHickory);
+
+    const blackCherry = document.createElement("option");
+    blackCherry.value = "Black Cherry";
+    blackCherry.appendChild(document.createTextNode("Black Cherry"));
+    dropDown.appendChild(blackCherry);
+
+    const blackLocust = document.createElement("option");
+    blackLocust.value = "Black Locust";
+    blackLocust.appendChild(document.createTextNode("Black Locust"));
+    dropDown.appendChild(blackLocust);
+
+    const blackOak = document.createElement("option");
+    blackOak.value = "Black Oak";
+    blackOak.appendChild(document.createTextNode("Black Oak"));
+    dropDown.appendChild(blackOak);
+
+    const dogwood = document.createElement("option");
+    dogwood.value = "Dogwood";
+    dogwood.appendChild(document.createTextNode("Dogwood"));
+    dropDown.appendChild(dogwood);
+
+    const hickory = document.createElement("option");
+    hickory.value = "Hickory";
+    hickory.appendChild(document.createTextNode("Hickory"));
+    dropDown.appendChild(hickory);
+
+    const maple = document.createElement("option");
+    maple.value = "Maple";
+    maple.appendChild(document.createTextNode("Maple"));
+    dropDown.appendChild(maple);
+
+    const oak = document.createElement("option");
+    oak.value = "Oak";
+    oak.appendChild(document.createTextNode("Oak"));
+    dropDown.appendChild(oak);
+
+    const redMaple = document.createElement("option");
+    redMaple.value = "Red Maple";
+    redMaple.appendChild(document.createTextNode("Red Maple"));
+    dropDown.appendChild(redMaple);
+
+    const redOak = document.createElement("option");
+    redOak.value = "Red Oak";
+    redOak.appendChild(document.createTextNode("Red Oak"));
+    dropDown.appendChild(redOak);
+
+    const redPine = document.createElement("option");
+    redPine.value = "Red Pine";
+    redPine.appendChild(document.createTextNode("Red Pine"));
+    dropDown.appendChild(redPine);
+
+    const sassafras = document.createElement("option");
+    sassafras.value = "Sassafras";
+    sassafras.appendChild(document.createTextNode("Sassafras"));
+    dropDown.appendChild(sassafras);
+
+    const shagbarkHickory = document.createElement("option");
+    shagbarkHickory.value = "Shagbark Hickory";
+    shagbarkHickory.appendChild(document.createTextNode("Shagbark Hickory"));
+    dropDown.appendChild(shagbarkHickory);
+
+    const sugarMaple = document.createElement("option");
+    sugarMaple.value = "Sugar Maple";
+    sugarMaple.appendChild(document.createTextNode("Sugar Maple"));
+    dropDown.appendChild(sugarMaple);
+
+    const unknown = document.createElement("option");
+    unknown.value = "Unknown";
+    unknown.appendChild(document.createTextNode("Unknown"));
+    dropDown.appendChild(unknown);
+
+    const whiteOak = document.createElement("option");
+    whiteOak.value = "White Oak";
+    whiteOak.appendChild(document.createTextNode("White Oak"));
+    dropDown.appendChild(whiteOak);
+
+    const whitePine = document.createElement("option");
+    whitePine.value = "White Pine";
+    whitePine.appendChild(document.createTextNode("White Pine"));
+    dropDown.appendChild(whitePine);
+}
+
+
 /**
  * Sets up the modal for entering in info about a new tree.
  */
@@ -229,9 +330,9 @@ function createNewTree() {
     refreshPopUp();
 
     // Adding in the ability to set a species name
-    const species = document.createElement("input");
-    species.style.textAlign = "left";
-    species.ariaLabel = "Input species name";
+    const species = document.createElement("select");
+    species.ariaLabel = "Choose species name";
+    populateSpecies(species);
     document.getElementById("give-species").appendChild(species);
 
 
@@ -311,12 +412,12 @@ async function confirmUpdate() {
     const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
 
     const getSpecies = document.getElementById("give-species");
-    let species: string;
-    if (getSpecies.firstChild instanceof HTMLInputElement) {
-        species = getSpecies.firstChild.value as string;
+    let treeSpecies: string;
+    if (getSpecies.firstChild instanceof HTMLSelectElement) {
+        treeSpecies = getSpecies.firstChild.options[getSpecies.firstChild.selectedIndex].value;
     }
     else if (getSpecies.firstChild instanceof HTMLHeadingElement) {
-        species = getSpecies.firstChild.innerText as string;
+        treeSpecies = getSpecies.firstChild.innerText as string;
     }
 
     const recentTag = parseInt((document.getElementById("given-tag") as HTMLInputElement).value);
@@ -336,13 +437,13 @@ async function confirmUpdate() {
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
     // Ensuring no clearly inaccurate data is sent to the database
-    if (dbh <= 0 || dbh >= 999 || species == "") {
+    if (dbh <= 0 || dbh >= 999) {
         onModalWarning();
     }
     else {
         offModalWarning();
 
-        const treeForAPI = new tableItem(-1, species, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+        const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
         // POST if a new tree, otherwise PUT
         if (isNewTree) {
             await postNewTree(treeForAPI, chosenPlot);
