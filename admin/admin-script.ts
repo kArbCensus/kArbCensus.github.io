@@ -4,9 +4,16 @@ const currentYear = new Date().getFullYear();
 // The current census collected from the API
 let apiObj: CensusStatus;
 
-
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 
+
+async function checkAdmin()
+{
+    await globalThis.promiseAdmin;
+    if (!isAdmin) {
+        window.location.href = "/";
+    }
+}
 
 
 /**
