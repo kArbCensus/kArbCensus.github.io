@@ -436,7 +436,7 @@ async function confirmUpdate() {
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
     // Ensuring no clearly inaccurate data is sent to the database
-    if (dbh <= 0 || dbh >= 999) {
+    if (dbh <= 0 || dbh >= 999 || recentTag < -1) {
         onModalWarning();
     }
     else {

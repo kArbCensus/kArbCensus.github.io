@@ -354,7 +354,7 @@ function confirmUpdate() {
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
         // Ensuring no clearly inaccurate data is sent to the database
-        if (dbh <= 0 || dbh >= 999) {
+        if (dbh <= 0 || dbh >= 999 || recentTag < -1) {
             onModalWarning();
         }
         else {
