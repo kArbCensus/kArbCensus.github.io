@@ -58,7 +58,7 @@ function checkAuth() {
                 resolvePromiseAdmin();
                 // Setting up the url of the api to be accessible
                 const configRes = yield fetch("/api_config.json");
-                const { urlBase } = yield configRes.json();
+                const { urlBase } = (yield configRes.json());
                 resolveBaseApiUrl(urlBase);
                 // TODO: Remove debug logs in production
                 console.log("Access Token: ", token);
@@ -110,4 +110,26 @@ function isAdmin() {
     return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
 authenticate();
+// Define namespace for functions that other scripts can use
+var Auth;
+(function (Auth) {
+    var resolveReady;
+    Auth.ready = new Promise((resolve) => {
+        resolveReady = resolve;
+    });
+    function logout() {
+        client.logout({
+            clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
+            logoutParams: {
+                returnTo: window.location.origin,
+            },
+        });
+    }
+    Auth.logout = logout;
+    function changePassword() {
+    }
+    Auth.changePassword = changePassword;
+    resolveReady();
+})(Auth || (Auth = {}));
+globalThis.Auth = Auth;
 //# sourceMappingURL=authenticate.js.map

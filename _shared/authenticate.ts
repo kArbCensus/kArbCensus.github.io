@@ -8,7 +8,14 @@ declare global {
   var promiseAdmin: Promise<void>;
   var isAdmin: boolean;
   var baseApiUrl: Promise<string>;
+
+  namespace Auth {
+    function logout(): void;
+    function changePassword(): void;
+    var ready: Promise<void>;
+  }
 }
+
 globalThis.authToken = null;
 
 // Define promise that resolves once token is set
@@ -21,13 +28,13 @@ globalThis.authTokenReady = new Promise((resolve) => {
 let resolvePromiseAdmin: () => void;
 globalThis.promiseAdmin = new Promise((resolve) => {
   resolvePromiseAdmin = resolve;
-})
+});
 
 // Define a promise that resolves when its able to give the base URL to any API interactions
-let resolveBaseApiUrl: (value:string) => void;
-globalThis.baseApiUrl = new Promise((resolve) =>{
+let resolveBaseApiUrl: (value: string) => void;
+globalThis.baseApiUrl = new Promise((resolve) => {
   resolveBaseApiUrl = resolve;
-})
+});
 
 interface ArbJwtPayload extends JwtPayload {
   "https://kArbCensus.github.io/roles": Array<string>;
@@ -74,9 +81,8 @@ async function checkAuth() {
 
       // Setting up the url of the api to be accessible
       const configRes = await fetch("/api_config.json");
-      const { urlBase } = await configRes.json() as { urlBase: string };
+      const { urlBase } = (await configRes.json()) as { urlBase: string };
       resolveBaseApiUrl(urlBase);
-      
 
       // TODO: Remove debug logs in production
       console.log("Access Token: ", token);
@@ -131,3 +137,29 @@ function isAdmin(): boolean {
 }
 
 authenticate();
+
+// Define namespace for functions that other scripts can use
+namespace Auth {
+  var resolveReady: () => void;
+  export var ready: Promise<void> = new Promise((resolve) => {
+    resolveReady = resolve;
+  });
+
+  export function logout() {
+    client.logout({
+      clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
+      logoutParams: {
+        returnTo:
+          window.location.origin,
+      },
+    });
+  }
+
+  export function changePassword() {
+    
+  }
+
+  resolveReady();
+}
+
+globalThis.Auth = Auth;
