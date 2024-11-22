@@ -1,1 +1,40 @@
-# kArbCensus
+# The Kalamazoo Arboretum Census App
+
+This repository was created as part of a final project for COMP 484/490: Computing for the Environment and Social Justice. to assist in surveying the Lillian Anderson Arboretum. Our app serves to act as not only a way to survey the arboretum but also a way to interact with the current census (or most recent if one is not active) as a whole. 
+
+
+## Understanding this repository
+
+First, to understand this repository, you must recognize what it contains. All of the code here is strictly related to the front end of the Kalamazoo Arboretum Census App. To preserve security, all other code (such as the API) will remain private for the foreseeable future.
+
+Second, we have tried to keep our files tidy within this repository. Each page has its own folder where it holds all of the files exclusive to it alone. All shared files, such as scripts around authentication, or the HTML for our banner, are located within the _shared folder. As for miscellaneous files, they have been left within the root of the directory for a variety of reasons, whether that being that they have no best spot or that they are left at the root by convention.
+
+Lastly, we have tried to leave a lot of comments throughout our files to make comprehending our code easier. Hopefully, we were able to write our code intuitively, but we would still highly advise reading through the provided comments when applicable. These comments are the best form of documentation we can provide and considering the fact our team had only a few weeks to focus on this project, they might be the key for you to bring clarity to our madness.
+
+
+## Tech stack within this repository
+
+The technologies we used in this repository are as follows
+* Typescript - Our main programming language to add functionality to the app
+* Javascript - Used primarily when issues arose with TS
+* HTML - The standard markup language for all of the internet
+* SCSS - How we mainly styled each page in conjunction with Bootstrap 
+* CSS - Appears via a little inline styling along with being what SCSS transpiles into
+* Bootstrap - The framework that helped scale our app across different screen sizes
+* JQuery - Used to efficiently share HTML across multiple pages 
+* Auth0 - How we do authentication
+
+Further technologies can be noted as used to create this app beyond what is found in this repository, namely the use of Supabase with a Postgres database for our back-end. That said, for the sake of this repository, being familiar in just the technology stated above will be sufficient for comprehension.  
+
+
+## Further contribution
+
+Beyond the work done by our team that was done while we were all taking COMP 484/490, very few contributions are planned or are likely to occur by us for the foreseeable future. That said, feel free to expand on this project. Furthermore, if you are working with Dr. Girdler or as part of COMP 484/490 to improve this app, we will be more than willing to answer any questions you might have as well as provide assistance when reasonable.
+
+
+## Questions or concerns
+
+If you have any further thoughts or inquiries surrounding this repository or the app as a whole, feel free to reach out to any of the following:
+* Teddy Jacobson at Teddy.Jacobson23@kzoo.edu
+* Judah Karesh at Judah.Karesh21@kzoo.edu
+* Juniper Pasternak at Juniper.Pasternak23@kzoo.edu
