@@ -335,8 +335,8 @@ async function confirmUpdate() {
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
-    // Ensuring no unfilled form is sent to the database
-    if (dbh <= 0 || species == "") {
+    // Ensuring no clearly inaccurate data is sent to the database
+    if (dbh <= 0 || dbh >= 999 || species == "") {
         onModalWarning();
     }
     else {
