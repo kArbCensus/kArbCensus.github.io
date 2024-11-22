@@ -69,7 +69,7 @@
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
-                                        data-bs-title="The last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
+                                        data-bs-title="This is the last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
@@ -89,7 +89,7 @@
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
-                                        data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify to trees with no tag."></i>
+                                        data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify trees with no tag."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
@@ -126,14 +126,14 @@
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
-                                        data-bs-title="The sub-circle of the given plot (based on it's first recorded DBH) that the tree was originally found in."></i>
+                                        data-bs-title="The sub-circle of the given plot (based on its first recorded DBH) that the tree was originally found in."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
                                         Size Class</h4>
                                 </div>
                                 <div class="col-4 text-center" id="give-size-class">
-                                    <select id="given-size-class" aria-label="Choose how the tree size class">
+                                    <select id="given-size-class" aria-label="Choose the tree size class">
                                         <option>Small</option>
                                         <option>Medium</option>
                                         <option>Large</option>
@@ -168,7 +168,7 @@
                                 <div class="col-1">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
                                         id="tooltip-icon"
-                                        data-bs-title="Which of the roughly 4 states the tree falls into."></i>
+                                        data-bs-title="This is which of the 4 states of living the tree roughly falls into."></i>
                                 </div>
                                 <div class="col-3 text-center">
                                     <h4>
@@ -191,8 +191,8 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" id="tooltip-icon"
-                                        data-bs-placement="top" data-bs-title="1: Confident this is the same tree as last census,
-                                        2: Probably the same tree as last census,
+                                        data-bs-placement="top" data-bs-title="1: Confident this is the same tree from the last census,
+                                        2: Probably the same tree as the last census,
                                         3: Likely a new tree,
                                         4: Definitely an old tree but it can't be matched OR the tag is not registered for the previous census,
                                         5: A Lost tree."></i>
@@ -219,7 +219,7 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 ">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Other important comments to mention about the tree or the info entered above."
+                                        data-bs-title="Other important comments about the tree or the info entered above."
                                         id="tooltip-icon"></i>
                                 </div>
                                 <div class="col-3 text-center">
@@ -242,7 +242,8 @@
                         <h3 id="submission-notice" style="visibility: hidden;">Please fill out all vital attributes
                             correctly before submission!</h3>
                         <button type="button" class="btn" id="pop-up-update"
-                            aria-label="Submit update for provided tree" onclick="confirmUpdate(); closeModal()">Confirm
+                            aria-label="Submit update for the provided tree"
+                            onclick="confirmUpdate(); closeModal()">Confirm
                             Update</button>
 
                     </div>
@@ -268,7 +269,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-                <h2 id="select-plot-note">Select a plot:</h2>
+                <h2 id="select-plot-note">Select a Plot:</h2>
             </div>
             <div class="col"></div>
         </div>
@@ -277,7 +278,7 @@
             <div class="col-auto">
                 <select name="plot" id="plot-select" class="form-select" aria-label="Choose a plot to look at"
                     onchange="updateSurveyTable()">
-                    <option value="ChosePlot">Chose a Plot Here</option>
+                    <option value="ChosePlot">Choose a Survey Plot</option>
                 </select>
             </div>
             <div class="col"></div>
@@ -313,9 +314,9 @@
                 <h3 id="filter-tag">Filter By:</h3>
             </div>
             <div class="col-auto">
-                <select name="" id="filter-select" class="form-select" aria-label="Alter the order of the table"
+                <select name="" id="filter-select" class="form-select" aria-label="Alter the order of the survey table"
                     onchange="updateSurveyTable()">
-                    <option value="MostRecentTag">Most Recent Tag</option>
+                    <option value="MostRecentTag">Recent Tag #</option>
                     <option value="Species">Species</option>
                     <option value="SizeClass">Size Class</option>
                 </select>

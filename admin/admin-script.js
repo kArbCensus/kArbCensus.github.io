@@ -60,7 +60,7 @@ function confirmCreateNewCensus() {
  * Ensures that the user wants to end a census via model.
  */
 function confirmEndCurrentCensus() {
-    setNewPopUpText(false, "Are you sure you want to end the current census.");
+    setNewPopUpText(false, "Are you sure you want to end the current census?");
 }
 /**
  * Utility function to adjust the text and functionality of a model to
