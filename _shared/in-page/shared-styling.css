@@ -12018,8 +12018,7 @@ body {
   color: black;
   text-decoration: none;
   text-wrap: nowrap;
-  overflow: visible;
-  text-align: right;
+  white-space: nowrap;
   margin-right: 2%;
   font-size: calc(1.275rem + 0.3vw);
 }
