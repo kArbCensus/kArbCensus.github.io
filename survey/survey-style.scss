@@ -10,10 +10,10 @@ input {
     border: 1px solid black;
 }
 
-#given-date, #given-species, #given-size-class
+#given-date, #given-species, #given-size-class, #modal-text
 {
     @include font-size(1.2rem);
-    margin-top: 3.5%;
+    margin-top: 7%;
 }
 
 #select-plot-note {
@@ -147,14 +147,9 @@ td {
     @include font-size(.9rem);
 }
 
-#tooltip-icon {
-    margin-top: 50%;
-}
-
 .modal {
     font-family: 'Barlow';
     font-weight: bold;
-
 }
 
 .modal-body {
@@ -168,10 +163,7 @@ td {
     font: 'Barlow';
 }
 
-h4 {
-    margin-top: 4%;
-    @include font-size(1.2rem);
-}
+
 
 .text-overflow-center {
     margin-left: -100%;

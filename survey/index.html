@@ -64,15 +64,14 @@
 
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row align-items-center">
+                            <div class="row align-items-center" style="margin-top: 4%;">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
                                         data-bs-title="This is the last time this tree has been updated across the censuses. Note that this will be automatically changed if you update a tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Updated</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -88,11 +87,10 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
                                         data-bs-title="The most recent tag number assigned to this tree. Use -1 to identify trees with no tag."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Tag</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -107,14 +105,14 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon" data-bs-title="The identified type of tree."></i>
+                                        data-bs-title="The identified type of tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Species</h4>
                                 </div>
                                 <div class="col-4 text-center" id="give-species">
-                                    <h4>Some Tree Name</h4>
+                                    <h4 id="given-species">Some Tree Name</h4>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -125,11 +123,10 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
                                         data-bs-title="The sub-circle of the given plot (based on its first recorded DBH) that the tree was originally found in."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Size Class</h4>
                                 </div>
                                 <div class="col-4 text-center" id="give-size-class">
@@ -148,11 +145,10 @@
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
                                         data-bs-title="The diameter in centimeters from breast height."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         DBH</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -167,11 +163,10 @@
                                 <div class="col-2"></div>
                                 <div class="col-1">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        id="tooltip-icon"
                                         data-bs-title="This is which of the 4 states of living the tree roughly falls into."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Status</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -190,15 +185,15 @@
                             <div class="row align-items-center">
                                 <div class="col-2"></div>
                                 <div class="col-1 text-center">
-                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" id="tooltip-icon"
-                                        data-bs-placement="top" data-bs-title="1: Confident this is the same tree from the last census,
+                                    <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="1: Confident this is the same tree from the last census,
                                         2: Probably the same tree as the last census,
                                         3: Likely a new tree,
                                         4: Definitely an old tree but it can't be matched OR the tag is not registered for the previous census,
                                         5: A Lost tree."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4>
+                                    <h4 id="modal-text">
                                         Match #</h4>
                                 </div>
                                 <div class="col-4 text-center">
@@ -215,19 +210,17 @@
 
                             <br>
 
-                            <div class="row align-items-center">
+                            <div class="row align-items-center" style="margin-bottom: 4%;">
                                 <div class="col-2"></div>
                                 <div class="col-1 ">
                                     <i class="fas fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Other important comments about the tree or the info entered above."
-                                        id="tooltip-icon"></i>
+                                        data-bs-title="Other important comments about the tree or the info entered above."></i>
                                 </div>
                                 <div class="col-3 text-center">
-                                    <h4 style="margin-bottom: 4%;">
-                                        Notes</h4>
+                                    <h4 id="modal-text">Notes</h4>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <input style="text-align: left; margin-bottom: 4%;" id="given-comment"
+                                    <input style="text-align: left;" id="given-comment"
                                         aria-label="Enter any extra comments">
                                 </div>
                                 <div class="col-2"></div>
@@ -311,7 +304,7 @@
         <div class="row align-items-center" style="visibility: hidden;" id="filter-button">
             <div class="col"></div>
             <div class="col-auto">
-                <h3 id="filter-tag">Filter By:</h3>
+                <h3 id="filter-tag" style="margin-top: 6%;">Filter By:</h3>
             </div>
             <div class="col-auto">
                 <select name="" id="filter-select" class="form-select" aria-label="Alter the order of the survey table"

@@ -11980,9 +11980,9 @@ input {
   }
 }
 
-#given-date, #given-species, #given-size-class {
+#given-date, #given-species, #given-size-class, #modal-text {
   font-size: 1.2rem;
-  margin-top: 3.5%;
+  margin-top: 7%;
 }
 
 #select-plot-note {
@@ -12134,10 +12134,6 @@ td {
   font-size: 0.9rem;
 }
 
-#tooltip-icon {
-  margin-top: 50%;
-}
-
 .modal {
   font-family: "Barlow";
   font-weight: bold;
@@ -12152,11 +12148,6 @@ td {
   font-size: 1.2rem;
   font-family: "Barlow";
   font: "Barlow";
-}
-
-h4, .h4 {
-  margin-top: 4%;
-  font-size: 1.2rem;
 }
 
 .text-overflow-center {
