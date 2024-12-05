@@ -329,6 +329,8 @@ function updateCurrentTree(index) {
  */
 function confirmUpdate() {
     return __awaiter(this, void 0, void 0, function* () {
+        // Resetting for the new submission
+        offModalWarning();
         // Turns modal info into a tableItem by grabbing each element from the modal
         const selectPlot = document.getElementById("plot-select");
         const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
@@ -354,8 +356,11 @@ function confirmUpdate() {
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
         // Ensuring no clearly inaccurate data is sent to the database
-        if (dbh <= 0 || dbh >= 999 || recentTag < -1) {
-            onModalWarning();
+        if (recentTag < -1) {
+            onModalWarning(document.getElementById("tag-row"));
+        }
+        else if (dbh <= 0 || dbh >= 999) {
+            onModalWarning(document.getElementById("dbh-row"));
         }
         else {
             offModalWarning();
@@ -447,10 +452,13 @@ function changeArrFromJson(censusEntries) {
     entry.dbh, entry.matchNum, entry.comments)));
 }
 // Easy toggles for the warning notices
-function onModalWarning() {
+function onModalWarning(row) {
+    row.style.backgroundColor = "#e34d42";
     document.getElementById("submission-notice").style.visibility = "visible";
 }
 function offModalWarning() {
+    document.getElementById("tag-row").style.backgroundColor = "transparent";
+    document.getElementById("dbh-row").style.backgroundColor = "transparent";
     document.getElementById("submission-notice").style.visibility = "hidden";
 }
 // Outline for the items themselves

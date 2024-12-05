@@ -405,6 +405,8 @@ function updateCurrentTree(index: number) {
  * Adding the information from a filled out survey modal to our database
  */
 async function confirmUpdate() {
+    // Resetting for the new submission
+    offModalWarning();
 
     // Turns modal info into a tableItem by grabbing each element from the modal
     const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
@@ -436,8 +438,11 @@ async function confirmUpdate() {
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
     // Ensuring no clearly inaccurate data is sent to the database
-    if (dbh <= 0 || dbh >= 999 || recentTag < -1) {
-        onModalWarning();
+    if (recentTag < -1) {
+        onModalWarning(document.getElementById("tag-row"));
+    }
+    else if (dbh <= 0 || dbh >= 999) {
+        onModalWarning(document.getElementById("dbh-row"));
     }
     else {
         offModalWarning();
@@ -547,10 +552,13 @@ function changeArrFromJson(censusEntries: EntryResponsePayload[]) {
 }
 
 // Easy toggles for the warning notices
-function onModalWarning() {
+function onModalWarning(row: HTMLElement) {
+    row.style.backgroundColor = "#e34d42";
     document.getElementById("submission-notice").style.visibility = "visible";
 }
 function offModalWarning() {
+    document.getElementById("tag-row").style.backgroundColor = "transparent";
+    document.getElementById("dbh-row").style.backgroundColor = "transparent";
     document.getElementById("submission-notice").style.visibility = "hidden";
 }
 
