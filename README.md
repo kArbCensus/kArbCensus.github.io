@@ -2,6 +2,7 @@
 
 This repository was created as part of a final project for COMP 484/490: Computing for the Environment and Social Justice to assist in surveying the Lillian Anderson Arboretum. Our app serves as not only a way to conduct censuses of the arboretum but also as a way to interact with a current census (or the most recent one if no census is active) as a whole. 
 
+Our [website](https://kArbCensus.github.io) is available, although currently only to authorized surveyors and admins.
 
 ## Understanding this repository
 
