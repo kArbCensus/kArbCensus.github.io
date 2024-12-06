@@ -12015,7 +12015,7 @@ p {
   font-size: 1rem;
 }
 
-#name-link {
+.name-link {
   font-family: "Barlow";
   font: "Barlow";
   margin: auto;

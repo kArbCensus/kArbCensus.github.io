@@ -12008,7 +12008,7 @@ body {
   position: absolute;
 }
 
-#banner-drop-option {
+.banner-drop-option {
   font: "Barlow";
   font-family: "Barlow";
   width: 5%;
@@ -12023,7 +12023,7 @@ body {
   font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
-  #banner-drop-option {
+  .banner-drop-option {
     font-size: 1.5rem;
   }
 }

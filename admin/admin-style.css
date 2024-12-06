@@ -11970,7 +11970,10 @@ h4, .h4 {
   font-weight: 300;
 }
 
-#admin-button {
+/*Don't question this. 
+I just needed this class to override a bunch of others
+and apparently that means going 4 levels deep.*/
+.admin-button.admin-button.admin-button.admin-button {
   font-size: calc(1.325rem + 0.9vw);
   padding: 3%;
   border: hidden;
@@ -11981,7 +11984,7 @@ h4, .h4 {
   font-family: "Barlow";
 }
 @media (min-width: 1200px) {
-  #admin-button {
+  .admin-button.admin-button.admin-button.admin-button {
     font-size: 2rem;
   }
 }

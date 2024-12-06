@@ -11980,7 +11980,7 @@ input {
   }
 }
 
-#given-date, #given-species, #given-size-class, #modal-text {
+#given-date, #given-species, #given-size-class, .modal-text {
   font-size: 1.2rem;
   margin-top: 7%;
 }

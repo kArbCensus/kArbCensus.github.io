@@ -26,7 +26,7 @@ async function addAdmin() {
         adminOption.className = "col-auto bg-light";
         const adminLink = document.createElement("a");
         adminLink.href = "../admin/";
-        adminLink.id = "banner-drop-option";
+        adminLink.className = "banner-drop-option";
         adminLink.ariaLabel = "Access the admin page";
         adminLink.appendChild(document.createTextNode("Admin"));
 

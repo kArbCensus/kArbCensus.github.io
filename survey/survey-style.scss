@@ -10,7 +10,7 @@ input {
     border: 1px solid black;
 }
 
-#given-date, #given-species, #given-size-class, #modal-text
+#given-date, #given-species, #given-size-class, .modal-text
 {
     @include font-size(1.2rem);
     margin-top: 7%;
