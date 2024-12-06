@@ -13,10 +13,10 @@ function logout() {
         Auth.logout();
     });
 }
-function changePassword() {
+function resetPassword() {
     return __awaiter(this, void 0, void 0, function* () {
         yield Auth.ready;
-        Auth.changePassword();
+        Auth.resetPassword();
     });
 }
 //# sourceMappingURL=banner-auth.js.map

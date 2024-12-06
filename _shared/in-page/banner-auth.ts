@@ -3,7 +3,7 @@ async function logout() {
   Auth.logout();
 }
 
-async function changePassword() {
+async function resetPassword() {
   await Auth.ready;
-  Auth.changePassword();
+  Auth.resetPassword();
 }

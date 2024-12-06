@@ -11,10 +11,12 @@ declare global {
 
   namespace Auth {
     function logout(): void;
-    function changePassword(): void;
+    function resetPassword(): void;
     var ready: Promise<void>;
   }
 }
+
+// TODO: Move the global data into Auth namespace and remove then redundant promises
 
 globalThis.authToken = null;
 
@@ -138,7 +140,7 @@ function isAdmin(): boolean {
 
 authenticate();
 
-// Define namespace for functions that other scripts can use
+// Define namespace for functions and variables that other scripts can use
 namespace Auth {
   var resolveReady: () => void;
   export var ready: Promise<void> = new Promise((resolve) => {
@@ -149,14 +151,41 @@ namespace Auth {
     client.logout({
       clientId: "2kldI7VhApWNbFemvlgfavjne4alLCZz",
       logoutParams: {
-        returnTo:
-          window.location.origin,
+        returnTo: window.location.origin,
       },
     });
   }
 
-  export function changePassword() {
-    
+  export async function resetPassword() {
+    const user = await client.getUser();
+
+    const res: Response = await fetch("/auth_config.json");
+    var clientConfig = (await res.json()) as Auth0ClientOptions;
+
+    const body = {
+      client_id: clientConfig.clientId,
+      email: user.email,
+      connection: "Username-Password-Authentication",
+    };
+
+    const headers = { "content-type": "application/json" };
+
+    const endpoint =
+      "https://" + clientConfig.domain + "/dbconnections/change_password";
+
+    try {
+      await fetch(endpoint, {
+        headers,
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      alert("Error while resetting password!")
+      throw new Error(`Failed to reset password: ${(error as Error).message}`);
+    }
+
+    // TODO: Make this a nicer popup
+    alert("We've just sent you an email to reset your password.");
   }
 
   resolveReady();

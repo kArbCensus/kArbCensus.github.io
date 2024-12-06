@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import "./auth0-functions.js";
+// TODO: Move the global data into Auth namespace and remove then redundant promises
 globalThis.authToken = null;
 // Define promise that resolves once token is set
 let resolveAuthTokenReady;
@@ -110,7 +111,7 @@ function isAdmin() {
     return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
 authenticate();
-// Define namespace for functions that other scripts can use
+// Define namespace for functions and variables that other scripts can use
 var Auth;
 (function (Auth) {
     var resolveReady;
@@ -126,9 +127,34 @@ var Auth;
         });
     }
     Auth.logout = logout;
-    function changePassword() {
+    function resetPassword() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield client.getUser();
+            const res = yield fetch("/auth_config.json");
+            var clientConfig = (yield res.json());
+            const body = {
+                client_id: clientConfig.clientId,
+                email: user.email,
+                connection: "Username-Password-Authentication",
+            };
+            const headers = { "content-type": "application/json" };
+            const endpoint = "https://" + clientConfig.domain + "/dbconnections/change_password";
+            try {
+                yield fetch(endpoint, {
+                    headers,
+                    method: "POST",
+                    body: JSON.stringify(body),
+                });
+            }
+            catch (error) {
+                alert("Error while resetting password!");
+                throw new Error(`Failed to reset password: ${error.message}`);
+            }
+            // TODO: Make this a nicer popup
+            alert("We've just sent you an email to reset your password.");
+        });
     }
-    Auth.changePassword = changePassword;
+    Auth.resetPassword = resetPassword;
     resolveReady();
 })(Auth || (Auth = {}));
 globalThis.Auth = Auth;
