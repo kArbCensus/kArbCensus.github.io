@@ -3,6 +3,19 @@
 h4 {
     @include font-size(1.2rem);
     font-weight: 300;
+    font-family: 'Barlow';
+    font: 'Barlow';
+}
+
+.admin-option-divider {
+    @include font-size(2.25rem);
+    color: white;
+    font-family: 'Barlow';
+    font: 'Barlow';
+    text-align: center;
+    font-weight: bold;
+    margin-top: 7%;
+    margin-bottom: 4%;
 }
 
 /*Don't question this. 
@@ -17,6 +30,8 @@ and apparently that means going 4 levels deep.*/
     color: black;
     border-radius: 30px;
     font-family: 'Barlow';
+    font: 'Barlow';
+    margin-bottom: 5%;
 }
 
 #pop-up-update {
@@ -35,5 +50,6 @@ and apparently that means going 4 levels deep.*/
     font: "Barlow";
     font-family: "Barlow";
     font-weight: 200;
-    @include font-size(2rem);
+    @include font-size(1.75rem);
+    margin-bottom: 5%;
 }

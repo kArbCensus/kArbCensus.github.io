@@ -11968,6 +11968,24 @@ textarea.form-control-lg {
 h4, .h4 {
   font-size: 1.2rem;
   font-weight: 300;
+  font-family: "Barlow";
+  font: "Barlow";
+}
+
+.admin-option-divider {
+  font-size: calc(1.35rem + 1.2vw);
+  color: white;
+  font-family: "Barlow";
+  font: "Barlow";
+  text-align: center;
+  font-weight: bold;
+  margin-top: 7%;
+  margin-bottom: 4%;
+}
+@media (min-width: 1200px) {
+  .admin-option-divider {
+    font-size: 2.25rem;
+  }
 }
 
 /*Don't question this. 
@@ -11982,6 +12000,8 @@ and apparently that means going 4 levels deep.*/
   color: black;
   border-radius: 30px;
   font-family: "Barlow";
+  font: "Barlow";
+  margin-bottom: 5%;
 }
 @media (min-width: 1200px) {
   .admin-button.admin-button.admin-button.admin-button {
@@ -12005,10 +12025,11 @@ and apparently that means going 4 levels deep.*/
   font: "Barlow";
   font-family: "Barlow";
   font-weight: 200;
-  font-size: calc(1.325rem + 0.9vw);
+  font-size: calc(1.3rem + 0.6vw);
+  margin-bottom: 5%;
 }
 @media (min-width: 1200px) {
   #census-status-year {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 }/*# sourceMappingURL=admin-style.css.map */
