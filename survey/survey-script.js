@@ -355,14 +355,8 @@ function confirmUpdate() {
         const dbh = parseFloat(document.getElementById("given-dbh").value);
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
-        // Ensuring no clearly inaccurate data is sent to the database
-        if (recentTag < -1) {
-            onModalWarning(document.getElementById("tag-row"));
-        }
-        else if (dbh <= 0 || dbh >= 999) {
-            onModalWarning(document.getElementById("dbh-row"));
-        }
-        else {
+        // Ensuring no clearly inaccurate data isn't sent to the database
+        if (configModalWarning(recentTag, dbh)) {
             offModalWarning();
             const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
             // POST if a new tree, otherwise PUT
@@ -451,11 +445,30 @@ function changeArrFromJson(censusEntries) {
     nameToSizeClass.get(entry.sizeClass), // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
 }
-// Easy toggles for the warning notices
-function onModalWarning(row) {
-    row.style.backgroundColor = "#e34d42";
-    document.getElementById("submission-notice").style.visibility = "visible";
+/**
+ * Checks if any warning needs to be displayed for the modal based on the user's input.
+ * @param tag The most recent tag for a provided tree
+ * @param dbh The DBH for a provided tree
+ * @returns Whether their is any issues in the possible submission parameters for the modal
+ */
+function configModalWarning(tag, dbh) {
+    let isFine = true;
+    if (tag < -1) {
+        document.getElementById("tag-row").style.backgroundColor = "#e34d42";
+        isFine = false;
+    }
+    if (dbh <= 0 || dbh >= 999) {
+        document.getElementById("dbh-row").style.backgroundColor = "#e34d42";
+        isFine = false;
+    }
+    if (!isFine) {
+        document.getElementById("submission-notice").style.visibility = "visible";
+    }
+    return isFine;
 }
+/**
+ * Disables all warnings within the modal around the users provided information.
+ */
 function offModalWarning() {
     document.getElementById("tag-row").style.backgroundColor = "transparent";
     document.getElementById("dbh-row").style.backgroundColor = "transparent";

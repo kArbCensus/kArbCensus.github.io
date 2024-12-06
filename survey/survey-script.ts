@@ -437,14 +437,8 @@ async function confirmUpdate() {
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
-    // Ensuring no clearly inaccurate data is sent to the database
-    if (recentTag < -1) {
-        onModalWarning(document.getElementById("tag-row"));
-    }
-    else if (dbh <= 0 || dbh >= 999) {
-        onModalWarning(document.getElementById("dbh-row"));
-    }
-    else {
+    // Ensuring no clearly inaccurate data isn't sent to the database
+    if (configModalWarning(recentTag, dbh)) {
         offModalWarning();
 
         const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
@@ -551,11 +545,36 @@ function changeArrFromJson(censusEntries: EntryResponsePayload[]) {
     )));
 }
 
-// Easy toggles for the warning notices
-function onModalWarning(row: HTMLElement) {
-    row.style.backgroundColor = "#e34d42";
-    document.getElementById("submission-notice").style.visibility = "visible";
+
+/**
+ * Checks if any warning needs to be displayed for the modal based on the user's input.
+ * @param tag The most recent tag for a provided tree
+ * @param dbh The DBH for a provided tree
+ * @returns Whether their is any issues in the possible submission parameters for the modal
+ */
+function configModalWarning(tag: number, dbh: number): boolean {
+    let isFine: boolean = true;
+
+    if (tag < -1) {
+        document.getElementById("tag-row").style.backgroundColor = "#e34d42";
+        isFine = false;
+    }
+
+    if (dbh <= 0 || dbh >= 999) {
+        document.getElementById("dbh-row").style.backgroundColor = "#e34d42";
+        isFine = false;
+    }
+
+    if (!isFine) {
+        document.getElementById("submission-notice").style.visibility = "visible";
+    }
+
+    return isFine;
 }
+
+/**
+ * Disables all warnings within the modal around the users provided information.
+ */
 function offModalWarning() {
     document.getElementById("tag-row").style.backgroundColor = "transparent";
     document.getElementById("dbh-row").style.backgroundColor = "transparent";
