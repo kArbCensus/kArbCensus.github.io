@@ -68,11 +68,11 @@ function confirmEndCurrentCensus() {
  */
 function setNewPopUpText(turnOn, text) {
     // Setting the text
-    const popUp = document.getElementById("pop-up-text");
+    const popUp = document.getElementById("census-control-pop-up-text");
     popUp.innerHTML = "";
     popUp.appendChild(document.createTextNode(text));
     // Setting the button functionality
-    const updateButton = document.getElementById("pop-up-update");
+    const updateButton = document.getElementById("census-control-pop-up-update");
     if ((apiObj === undefined) || (turnOn && apiObj.isActive) || (!turnOn && !apiObj.isActive)) {
         updateButton.style.backgroundColor = "grey";
         updateButton.innerHTML = "";
@@ -85,7 +85,7 @@ function setNewPopUpText(turnOn, text) {
         updateButton.appendChild(document.createTextNode("Confirm"));
         updateButton.disabled = false;
     }
-    const update = document.getElementById("pop-up-update");
+    const update = document.getElementById("census-control-pop-up-update");
     update.onclick = function () {
         return __awaiter(this, void 0, void 0, function* () { yield updateCensusStatus(turnOn); });
     };

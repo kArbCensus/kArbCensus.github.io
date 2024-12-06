@@ -24,6 +24,7 @@
     <script src="admin-script.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="admin-jquery-script.js" type="text/javascript"></script>
     <script src="../_shared/in-page/in-page-script.js" type="text/javascript"></script>
 
     <!--Authentication-->
@@ -51,37 +52,121 @@
             </div>
         </div>
 
-
-
-        <!--Pop up confirmation-->
-        <div class="modal fade" id="pop-up" data-bs-backdrop="static" tabindex="-1"
+        <!--Account creation confirmation-->
+        <div class="modal fade" id="account-pop-up" data-bs-backdrop="static" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">CONFIRMATION</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                    <!--Top of modal-->
+                    <div class="pop-up-top"></div>
 
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    <h4 id="pop-up-text">Text goes here</h4>
+                                    <h4 id="account-pop-up-text">Text goes here</h4>
                                 </div>
                             </div>
-                            <br>
+
+                            <!--Modal warning-->
+                            <div class="pop-up-warning"></div>
+
+                        </div>
+                    </div>
+
+                    <!--Confirm modal-->
+                    <div class="pop-up-confirm"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Plot creation confirmation-->
+        <div class="modal fade" id="plot-pop-up" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!--Top of modal-->
+                    <div class="pop-up-top"></div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    <h4>Once done, this action cannot be reverted!</h4>
+                                    <h4 id="plot-pop-up-text">Text goes here</h4>
                                 </div>
                             </div>
+
+                            <!--Modal warning-->
+                            <div class="pop-up-warning"></div>
+
+                        </div>
+                    </div>
+
+                    <!--Confirm modal-->
+                    <div class="pop-up-confirm"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Plot creation confirmation-->
+        <div class="modal fade" id="tree-pop-up" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!--Top of modal-->
+                    <div class="pop-up-top"></div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <h4 id="tree-pop-up-text">Text goes here</h4>
+                                </div>
+                            </div>
+
+                            <!--Modal warning-->
+                            <div class="pop-up-warning"></div>
+
+                        </div>
+                    </div>
+
+                    <!--Confirm modal-->
+                    <div class="pop-up-confirm"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Census control confirmation-->
+        <div class="modal fade" id="census-control-pop-up" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!--Top of modal-->
+                    <div class="pop-up-top"></div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <h4 id="census-control-pop-up-text">Text goes here</h4>
+                                </div>
+                            </div>
+
+                            <!--Modal warning-->
+                            <div class="pop-up-warning"></div>
+
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn" id="pop-up-update" data-bs-dismiss="modal"
+                        <button type="button" class="btn" id="census-control-pop-up-update" data-bs-dismiss="modal"
                             aria-label="Close">Confirm</button>
                     </div>
 
@@ -96,31 +181,37 @@
             <div class="col-6">
                 <div class="panel panel-default">
                     <div class="panel-body">
+
                         <h3 class="admin-option-divider">Database access</h3>
                         <a class="admin-button btn d-inline-flex justify-content-center" href="https://www.stub.com/"
                             aria-label="Download data from the database as a CSV"> Download database content as
                             a CSV</a>
+
                         <h3 class="admin-option-divider">Creation tools</h3>
-                        <a class="admin-button btn d-inline-flex justify-content-center" href="https://www.stub.com/"
-                            aria-label="Create a new account">Create new student
+                        <a class="admin-button btn d-inline-flex justify-content-center" data-bs-toggle="modal"
+                            data-bs-target="#account-pop-up" aria-label="Create a new account">Create new student
                             account</a>
-                        <a class="admin-button btn d-inline-flex justify-content-center" href="https://www.stub.com/"
-                            aria-label="Create a new plot">Insert new
-                            potential plot</a>
-                        <a class="admin-button btn d-inline-flex justify-content-center" href="https://www.stub.com/"
-                            aria-label="Create a new tree">Provide
+                        <a class="admin-button btn d-inline-flex justify-content-center" data-bs-toggle="modal"
+                            data-bs-target="#plot-pop-up" aria-label="Create a new plot">Insert new
+                            plot</a>
+                        <a class="admin-button btn d-inline-flex justify-content-center" data-bs-toggle="modal"
+                            data-bs-target="#tree-pop-up" aria-label="Create a new tree">Provide
                             new tree species</a>
+
                         <h3 class="admin-option-divider">Census control</h3>
                         <h3 id="census-status-year">Current census:</h3>
                         <a class="admin-button btn d-inline-flex justify-content-center" data-bs-toggle="modal"
-                            data-bs-target="#pop-up" aria-label="Start census" onclick="confirmCreateNewCensus()"> Start
+                            data-bs-target="#census-control-pop-up" aria-label="Start census"
+                            onclick="confirmCreateNewCensus()"> Start
                             a new
                             census
                         </a>
                         <a class="admin-button btn d-inline-flex justify-content-center" data-bs-toggle="modal"
-                            data-bs-target="#pop-up" aria-label="End census" onclick="confirmEndCurrentCensus()">
+                            data-bs-target="#census-control-pop-up" aria-label="End census"
+                            onclick="confirmEndCurrentCensus()">
                             End the current census
                         </a>
+
                     </div>
                 </div>
             </div>

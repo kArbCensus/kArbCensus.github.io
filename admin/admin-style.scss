@@ -34,7 +34,8 @@ and apparently that means going 4 levels deep.*/
     margin-bottom: 5%;
 }
 
-#pop-up-update {
+#census-control-pop-up-update,
+.pop-up-update.pop-up-update.pop-up-update.pop-up-update {
     @include font-size(1.2rem);
     background-color: #357960;
     font-family: 'Barlow';
