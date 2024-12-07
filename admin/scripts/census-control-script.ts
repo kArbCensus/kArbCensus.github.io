@@ -7,15 +7,6 @@ let apiObj: CensusStatus;
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 
 
-async function checkAdmin()
-{
-    await globalThis.promiseAdmin;
-    if (!isAdmin) {
-        window.location.href = "/";
-    }
-}
-
-
 /**
  * Sets the text displaying whether or not a census is currently occurring.
  */

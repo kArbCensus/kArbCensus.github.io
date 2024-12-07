@@ -12,14 +12,6 @@ const currentYear = new Date().getFullYear();
 // The current census collected from the API
 let apiObj;
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
-function checkAdmin() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield globalThis.promiseAdmin;
-        if (!isAdmin) {
-            window.location.href = "/";
-        }
-    });
-}
 /**
  * Sets the text displaying whether or not a census is currently occurring.
  */
@@ -115,4 +107,4 @@ function updateCensusStatus(startCensus) {
         censusStatusYearSetup();
     });
 }
-//# sourceMappingURL=admin-script.js.map
+//# sourceMappingURL=census-control-script.js.map
