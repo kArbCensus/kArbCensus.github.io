@@ -1,33 +1,75 @@
 //////////// CONSTANTLY CALLED FUNCTIONS ////////////
 
-//TODO: Implement this function
-function createNewAccount() {
-    console.log("Stub");
+/**
+ * Creates a new account and sends it to Auth0 to be implemented.
+ */
+async function createNewAccount() {
+
+    // Getting the entered fields
+    let newEmail = (document.getElementById("new-email") as HTMLInputElement).value as string;
+    let newPas = (document.getElementById("new-pas") as HTMLInputElement).value as string;
+
+    //TODO: Should there be a check here if the password is already in use?
+
+    //TODO: Post request to give Auth0 a new account
+
+    // User feedback via a reload
+    location.reload();
+
 }
 
-//TODO: Implement this function
-function createNewPlot() {
-    console.log("Stub");
+
+/**
+ * Grabs a new entered plot number and sends it to the data base.
+ */
+async function createNewPlot() {
+
+    // Getting the entered plot number
+    let newPlot = parseFloat((document.getElementById("new-plot") as HTMLInputElement).value);
+
+    // Ensuring the same plot doesn't already exist
+    if (configPlotWarning(newPlot)) {
+        // TODO: Post request to the DB with the new plot number
+
+        // User feedback via a reload
+        location.reload();
+    }
+
 }
 
-//TODO: Implement this function
+/**
+ * Grabs a new inserted tree species and sends it to the data base.
+ */
 function createNewTreeSpecies() {
-    console.log("Stub");
+
+    // Getting the new tree species
+    let newTree = (document.getElementById("new-tree") as HTMLInputElement).value as string;
+
+
+    // Ensuring the same plot doesn't already exist
+    if (configTreeWarning(newTree)) {
+        // TODO: Post request to the DB with the new tree species
+
+        // User feedback via a reload
+        location.reload();
+    }
+
 }
+
+
 
 //TODO: Config to check/set warning for new plot
-function configPlotWarning(plot: number): boolean {
+async function configPlotWarning(plot: number): Promise<boolean> {
     return true;
 }
 
 //TODO: Config to check/set warning for new species
-function configTreeWarning(species: string): boolean {
+async function configTreeWarning(species: string): Promise<boolean> {
     return true;
 }
 
 //TODO: event listener to turn off all modal warnings if a modal is hidden
 
-// Should probably make it so that all modals have the same footer spacing warning or not
 
 // Refresh page on submission?
 // Since the survey shows your added tree, it has fine user feedback.
