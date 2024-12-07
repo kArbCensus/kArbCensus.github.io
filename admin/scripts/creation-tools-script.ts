@@ -89,7 +89,7 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 
 
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = true;
+    let binSearchPassed = await genericBinarySearch(plotIds, plot);
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("plot-warning");
@@ -117,7 +117,7 @@ async function configTreeWarning(species: string): Promise<boolean> {
     const allSpecies: string[] = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
 
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = true;
+    let binSearchPassed = await genericBinarySearch(allSpecies, species);
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("tree-warning");
@@ -131,7 +131,17 @@ async function configTreeWarning(species: string): Promise<boolean> {
 
 }
 
-//TODO: create a generic binary search function because JS is cringe
+/**
+ * A generic binary search for quick searches of select items within the
+ * arrays provided by the API.
+ * @param array The array to conduct the binary search on
+ * @param lookFor The item we are searching for within the array
+ * @returns Whether or not the item could be found
+ */
+async function genericBinarySearch<T extends any>(array: T[], lookFor: T): Promise<boolean> {
+    // stub (on god this looks like a comp 210 assignment right here lol)
+    return true;
+}
 
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 

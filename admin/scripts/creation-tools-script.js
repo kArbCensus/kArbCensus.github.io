@@ -78,7 +78,7 @@ function configPlotWarning(plot) {
         const apiObj = yield apiRes.json();
         const plotIds = apiObj.plotIds;
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = true;
+        let binSearchPassed = yield genericBinarySearch(plotIds, plot);
         // Setting a warning if applicable
         const warning = document.getElementById("plot-warning");
         if (!binSearchPassed) {
@@ -101,7 +101,7 @@ function configTreeWarning(species) {
         // TEMP hard coded trees for testing
         const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = true;
+        let binSearchPassed = yield genericBinarySearch(allSpecies, species);
         // Setting a warning if applicable
         const warning = document.getElementById("tree-warning");
         if (!binSearchPassed) {
@@ -113,7 +113,19 @@ function configTreeWarning(species) {
         return binSearchPassed;
     });
 }
-//TODO: create a generic binary search function because JS is cringe
+/**
+ * A generic binary search for quick searches of select items within the
+ * arrays provided by the API.
+ * @param array The array to conduct the binary search on
+ * @param lookFor The item we are searching for within the array
+ * @returns Whether or not the item could be found
+ */
+function genericBinarySearch(array, lookFor) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // stub (on god this looks like a comp 210 assignment right here lol)
+        return true;
+    });
+}
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 //# sourceMappingURL=creation-tools-script.js.map
