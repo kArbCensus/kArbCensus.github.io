@@ -31,8 +31,11 @@ async function createNewPlot() {
     if (configPlotWarning(newPlot)) {
         // TODO: Post request to the DB with the new plot number
 
+        // Testing
+        console.log(newPlot);
+
         // User feedback via a reload
-        location.reload();
+        //location.reload();
     }
 
 }
@@ -50,23 +53,69 @@ function createNewTreeSpecies() {
     if (configTreeWarning(newTree)) {
         // TODO: Post request to the DB with the new tree species
 
+        // Testing
+        console.log(newTree);
+
         // User feedback via a reload
-        location.reload();
+        //location.reload();
     }
 
 }
 
 
-
 //TODO: Config to check/set warning for new plot
 async function configPlotWarning(plot: number): Promise<boolean> {
-    return true;
+
+    // Wait for auth token to be ready
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    const plotCountUrl = await globalThis.baseApiUrl + "plot-ids";
+
+    // Make API call with authentication token
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+    const apiRes = await fetch(plotCountUrl, {
+        headers,
+        method: "GET",
+    });
+    const apiObj = await apiRes.json() as PlotIdsPayload;
+    const plotIds: number[] = apiObj.plotIds;
+
+    // Checking if the user entered number is within the existing plots
+    let binSearchPassed = false;
+
+    // Setting a warning if applicable
+    if (!binSearchPassed) {
+        document.getElementById("plot-warning").style.visibility = "visible";
+    }
+
+    return binSearchPassed;
 }
+
 
 //TODO: Config to check/set warning for new species
 async function configTreeWarning(species: string): Promise<boolean> {
-    return true;
+
+    //TODO: Make this an API call where you get each of the trees species
+
+    // TEMP hard coded trees for testing
+    const allSpecies: string[] = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+
+    // Checking if the user entered number is within the existing plots
+    let binSearchPassed = false;
+
+    // Setting a warning if applicable
+    if (!binSearchPassed) {
+        document.getElementById("tree-warning").style.visibility = "visible";
+    }
+
+    return binSearchPassed;
+
 }
+
+
 
 //TODO: event listener to turn off all modal warnings if a modal is hidden
 

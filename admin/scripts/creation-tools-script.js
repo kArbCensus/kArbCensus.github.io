@@ -32,8 +32,10 @@ function createNewPlot() {
         // Ensuring the same plot doesn't already exist
         if (configPlotWarning(newPlot)) {
             // TODO: Post request to the DB with the new plot number
+            // Testing
+            console.log(newPlot);
             // User feedback via a reload
-            location.reload();
+            //location.reload();
         }
     });
 }
@@ -46,20 +48,51 @@ function createNewTreeSpecies() {
     // Ensuring the same plot doesn't already exist
     if (configTreeWarning(newTree)) {
         // TODO: Post request to the DB with the new tree species
+        // Testing
+        console.log(newTree);
         // User feedback via a reload
-        location.reload();
+        //location.reload();
     }
 }
 //TODO: Config to check/set warning for new plot
 function configPlotWarning(plot) {
     return __awaiter(this, void 0, void 0, function* () {
-        return true;
+        // Wait for auth token to be ready
+        yield globalThis.authTokenReady;
+        // Get the API endpoint
+        const plotCountUrl = (yield globalThis.baseApiUrl) + "plot-ids";
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = yield fetch(plotCountUrl, {
+            headers,
+            method: "GET",
+        });
+        const apiObj = yield apiRes.json();
+        const plotIds = apiObj.plotIds;
+        // Checking if the user entered number is within the existing plots
+        let binSearchPassed = false;
+        // Setting a warning if applicable
+        if (!binSearchPassed) {
+            document.getElementById("plot-warning").style.visibility = "visible";
+        }
+        return binSearchPassed;
     });
 }
 //TODO: Config to check/set warning for new species
 function configTreeWarning(species) {
     return __awaiter(this, void 0, void 0, function* () {
-        return true;
+        //TODO: Make this an API call where you get each of the trees species
+        // TEMP hard coded trees for testing
+        const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+        // Checking if the user entered number is within the existing plots
+        let binSearchPassed = false;
+        // Setting a warning if applicable
+        if (!binSearchPassed) {
+            document.getElementById("tree-warning").style.visibility = "visible";
+        }
+        return binSearchPassed;
     });
 }
 //TODO: event listener to turn off all modal warnings if a modal is hidden
