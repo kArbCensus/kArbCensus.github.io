@@ -54,3 +54,13 @@ and apparently that means going 4 levels deep.*/
     @include font-size(1.75rem);
     margin-bottom: 5%;
 }
+
+input {
+    font-family: "Barlow";
+    font: "Barlow";
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    @include font-size(1.3rem);
+    border: 1px solid black;
+}

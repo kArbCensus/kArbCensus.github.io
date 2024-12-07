@@ -16,8 +16,16 @@ function createNewTreeSpecies() {
 }
 
 //TODO: Config to check/set warning for new plot
+function configPlotWarning(plot: number) : boolean
+{
+    return true;
+}
 
 //TODO: Config to check/set warning for new species
+function configTreeWarning(species: string) : boolean
+{
+    return true;
+}
 
 //TODO: event listener to turn off all modal warnings if a modal is hidden
 

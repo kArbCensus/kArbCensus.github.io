@@ -12033,4 +12033,19 @@ and apparently that means going 4 levels deep.*/
   #census-status-year {
     font-size: 1.75rem;
   }
+}
+
+input {
+  font-family: "Barlow";
+  font: "Barlow";
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+  font-size: calc(1.255rem + 0.06vw);
+  border: 1px solid black;
+}
+@media (min-width: 1200px) {
+  input {
+    font-size: 1.3rem;
+  }
 }/*# sourceMappingURL=admin-style.css.map */
