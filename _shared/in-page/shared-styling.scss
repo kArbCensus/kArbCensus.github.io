@@ -58,7 +58,6 @@ body {
     word-break: normal;
 }
 
-#submission-notice,
 .submission-notice {
     text-align: center;
     color: #e34d42;
@@ -67,4 +66,5 @@ body {
     font-family: "Barlow";
     font: "Barlow";
     font-weight: bold;
+    visibility: hidden;
 }
