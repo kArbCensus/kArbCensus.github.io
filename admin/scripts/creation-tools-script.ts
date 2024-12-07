@@ -83,12 +83,17 @@ async function configPlotWarning(plot: number): Promise<boolean> {
     const apiObj = await apiRes.json() as PlotIdsPayload;
     const plotIds: number[] = apiObj.plotIds;
 
+    
     // Checking if the user entered number is within the existing plots
     let binSearchPassed = false;
 
     // Setting a warning if applicable
+    const warning: HTMLElement = document.getElementById("plot-warning");
     if (!binSearchPassed) {
-        document.getElementById("plot-warning").style.visibility = "visible";
+        warning.style.visibility = "visible";
+    }
+    else{
+        warning.style.visibility = "hidden";
     }
 
     return binSearchPassed;
@@ -107,10 +112,13 @@ async function configTreeWarning(species: string): Promise<boolean> {
     let binSearchPassed = false;
 
     // Setting a warning if applicable
+    const warning: HTMLElement = document.getElementById("tree-warning");
     if (!binSearchPassed) {
-        document.getElementById("tree-warning").style.visibility = "visible";
+        warning.style.visibility = "visible";
     }
-
+    else{
+        warning.style.visibility = "hidden";
+    }
     return binSearchPassed;
 
 }

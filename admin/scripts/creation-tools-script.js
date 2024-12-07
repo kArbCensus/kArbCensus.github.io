@@ -74,8 +74,12 @@ function configPlotWarning(plot) {
         // Checking if the user entered number is within the existing plots
         let binSearchPassed = false;
         // Setting a warning if applicable
+        const warning = document.getElementById("plot-warning");
         if (!binSearchPassed) {
-            document.getElementById("plot-warning").style.visibility = "visible";
+            warning.style.visibility = "visible";
+        }
+        else {
+            warning.style.visibility = "hidden";
         }
         return binSearchPassed;
     });
@@ -89,8 +93,12 @@ function configTreeWarning(species) {
         // Checking if the user entered number is within the existing plots
         let binSearchPassed = false;
         // Setting a warning if applicable
+        const warning = document.getElementById("tree-warning");
         if (!binSearchPassed) {
-            document.getElementById("tree-warning").style.visibility = "visible";
+            warning.style.visibility = "visible";
+        }
+        else {
+            warning.style.visibility = "hidden";
         }
         return binSearchPassed;
     });
