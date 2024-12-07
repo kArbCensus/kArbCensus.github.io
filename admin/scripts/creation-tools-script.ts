@@ -14,7 +14,7 @@ async function createNewAccount() {
     //TODO: Post request to give Auth0 a new account
 
     // User feedback via a reload
-    location.reload();
+    //location.reload();
 
 }
 
@@ -28,7 +28,7 @@ async function createNewPlot() {
     let newPlot = parseFloat((document.getElementById("new-plot") as HTMLInputElement).value);
 
     // Ensuring the same plot doesn't already exist
-    if (configPlotWarning(newPlot)) {
+    if (await configPlotWarning(newPlot)) {
         // TODO: Post request to the DB with the new plot number
 
         // Testing
@@ -43,14 +43,14 @@ async function createNewPlot() {
 /**
  * Grabs a new inserted tree species and sends it to the data base.
  */
-function createNewTreeSpecies() {
+async function createNewTreeSpecies() {
 
     // Getting the new tree species
     let newTree = (document.getElementById("new-tree") as HTMLInputElement).value as string;
 
 
     // Ensuring the same plot doesn't already exist
-    if (configTreeWarning(newTree)) {
+    if (await configTreeWarning(newTree)) {
         // TODO: Post request to the DB with the new tree species
 
         // Testing
@@ -83,9 +83,9 @@ async function configPlotWarning(plot: number): Promise<boolean> {
     const apiObj = await apiRes.json() as PlotIdsPayload;
     const plotIds: number[] = apiObj.plotIds;
 
-    
+
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = false;
+    let binSearchPassed = true;
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("plot-warning");
@@ -109,7 +109,7 @@ async function configTreeWarning(species: string): Promise<boolean> {
     const allSpecies: string[] = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
 
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = false;
+    let binSearchPassed = true;
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("tree-warning");
@@ -123,13 +123,7 @@ async function configTreeWarning(species: string): Promise<boolean> {
 
 }
 
+//TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 
-
-//TODO: event listener to turn off all modal warnings if a modal is hidden
-
-
-// Refresh page on submission?
-// Since the survey shows your added tree, it has fine user feedback.
-// But here I feel a page refresh would assure me I did something
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////

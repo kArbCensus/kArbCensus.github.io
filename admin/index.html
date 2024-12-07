@@ -116,7 +116,7 @@
                         <h3 class="submission-notice" id="account-warning">Failed to create account for provided email
                         </h3>
                         <button type="button" class="pop-up-update btn" aria-label="Submit the new account"
-                            onclick="createNewAccount(); closeModal('account-warning')">Confirm</button>
+                            onclick="confirmModal(createNewAccount, 'account-warning', 'account-pop-up')">Confirm</button>
                     </div>
 
                 </div>
@@ -159,7 +159,7 @@
                         <h3 class="submission-notice" id="plot-warning">Invalid plot number: entered plot already exists
                         </h3>
                         <button type="button" class="pop-up-update btn" aria-label="Submit the new plot number"
-                            onclick="createNewPlot(); closeModal('plot-warning')">Confirm</button>
+                            onclick="confirmModal(createNewPlot, 'plot-warning', 'plot-pop-up')">Confirm</button>
                     </div>
 
                 </div>
@@ -202,7 +202,7 @@
                         <h3 class="submission-notice" id="tree-warning">Invalid species: given tree is already an option
                         </h3>
                         <button type="button" class="pop-up-update btn" aria-label="Submit the new tree species"
-                            onclick="createNewTreeSpecies(); closeModal('tree-warning')">Confirm</button>
+                            onclick="confirmModal(createNewTreeSpecies, 'tree-warning', 'tree-pop-up')">Confirm</button>
                     </div>
 
                 </div>

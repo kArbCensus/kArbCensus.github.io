@@ -10,8 +10,14 @@ $(function () {
 /**
  * Gives the user feedback when doing an admin feature by closing the modal
 */
-function closeModal(modalID) {
-    if (document.getElementById(modalID).style.visibility == "hidden") {
-        bootstrap.Modal.getOrCreateInstance(document.getElementById("pop-up")).hide();
+async function confirmModal(functionToAttempt, modalWarningID, modalID) {
+    
+    await functionToAttempt();
+
+    console.log(document.getElementById("" + modalWarningID).style.visibility);
+
+    if (document.getElementById("" + modalWarningID).style.visibility == "hidden") {
+        bootstrap.Modal.getOrCreateInstance(document.getElementById("" + modalID)).hide();
     }
+    
 }

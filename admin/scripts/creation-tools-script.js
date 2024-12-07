@@ -19,7 +19,7 @@ function createNewAccount() {
         //TODO: Should there be a check here if the password is already in use?
         //TODO: Post request to give Auth0 a new account
         // User feedback via a reload
-        location.reload();
+        //location.reload();
     });
 }
 /**
@@ -30,7 +30,7 @@ function createNewPlot() {
         // Getting the entered plot number
         let newPlot = parseFloat(document.getElementById("new-plot").value);
         // Ensuring the same plot doesn't already exist
-        if (configPlotWarning(newPlot)) {
+        if (yield configPlotWarning(newPlot)) {
             // TODO: Post request to the DB with the new plot number
             // Testing
             console.log(newPlot);
@@ -43,16 +43,18 @@ function createNewPlot() {
  * Grabs a new inserted tree species and sends it to the data base.
  */
 function createNewTreeSpecies() {
-    // Getting the new tree species
-    let newTree = document.getElementById("new-tree").value;
-    // Ensuring the same plot doesn't already exist
-    if (configTreeWarning(newTree)) {
-        // TODO: Post request to the DB with the new tree species
-        // Testing
-        console.log(newTree);
-        // User feedback via a reload
-        //location.reload();
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        // Getting the new tree species
+        let newTree = document.getElementById("new-tree").value;
+        // Ensuring the same plot doesn't already exist
+        if (yield configTreeWarning(newTree)) {
+            // TODO: Post request to the DB with the new tree species
+            // Testing
+            console.log(newTree);
+            // User feedback via a reload
+            //location.reload();
+        }
+    });
 }
 //TODO: Config to check/set warning for new plot
 function configPlotWarning(plot) {
@@ -72,7 +74,7 @@ function configPlotWarning(plot) {
         const apiObj = yield apiRes.json();
         const plotIds = apiObj.plotIds;
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = false;
+        let binSearchPassed = true;
         // Setting a warning if applicable
         const warning = document.getElementById("plot-warning");
         if (!binSearchPassed) {
@@ -91,7 +93,7 @@ function configTreeWarning(species) {
         // TEMP hard coded trees for testing
         const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = false;
+        let binSearchPassed = true;
         // Setting a warning if applicable
         const warning = document.getElementById("tree-warning");
         if (!binSearchPassed) {
@@ -103,9 +105,6 @@ function configTreeWarning(species) {
         return binSearchPassed;
     });
 }
-//TODO: event listener to turn off all modal warnings if a modal is hidden
-// Refresh page on submission?
-// Since the survey shows your added tree, it has fine user feedback.
-// But here I feel a page refresh would assure me I did something
+//TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 //# sourceMappingURL=creation-tools-script.js.map
