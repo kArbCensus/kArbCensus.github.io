@@ -127,5 +127,6 @@ function genericBinarySearch(array, lookFor) {
     });
 }
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
+// (If this isn't done, you can just spam the enter button to have this happen a ton of times cause async)
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 //# sourceMappingURL=creation-tools-script.js.map
