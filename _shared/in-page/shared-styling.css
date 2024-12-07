@@ -12036,4 +12036,15 @@ body {
   white-space: normal;
   word-wrap: break-word;
   word-break: normal;
+}
+
+#submission-notice,
+.submission-notice {
+  text-align: center;
+  color: #e34d42;
+  font-size: 1rem;
+  margin: auto;
+  font-family: "Barlow";
+  font: "Barlow";
+  font-weight: bold;
 }/*# sourceMappingURL=shared-styling.css.map */

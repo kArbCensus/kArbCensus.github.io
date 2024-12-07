@@ -176,13 +176,3 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-#submission-notice {
-    text-align: center;
-    color: #e34d42;
-    @include font-size(1rem);
-    margin: auto;
-    font-family: "Barlow";
-    font: "Barlow";
-    font-weight: bold;
-}

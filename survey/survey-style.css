@@ -12160,14 +12160,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-#submission-notice {
-  text-align: center;
-  color: #e34d42;
-  font-size: 1rem;
-  margin: auto;
-  font-family: "Barlow";
-  font: "Barlow";
-  font-weight: bold;
 }/*# sourceMappingURL=survey-style.css.map */
