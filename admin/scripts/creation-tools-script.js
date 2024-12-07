@@ -56,7 +56,11 @@ function createNewTreeSpecies() {
         }
     });
 }
-//TODO: Config to check/set warning for new plot
+/**
+ * Checks if a plot number an admin wants to enter is valid and gives them a warning if not.
+ * @param plot The plot id the user is trying to enter into the database
+ * @returns Gives whether or not users plot number is already in use
+ */
 function configPlotWarning(plot) {
     return __awaiter(this, void 0, void 0, function* () {
         // Wait for auth token to be ready
@@ -86,7 +90,11 @@ function configPlotWarning(plot) {
         return binSearchPassed;
     });
 }
-//TODO: Config to check/set warning for new species
+/**
+ * Checks if a tree species the user wants to enter is valid and gives them a warning if not.
+ * @param species The tree name the user is trying to enter into the database
+ * @returns Gives whether or not users species name is already in use
+ */
 function configTreeWarning(species) {
     return __awaiter(this, void 0, void 0, function* () {
         //TODO: Make this an API call where you get each of the trees species
@@ -105,6 +113,7 @@ function configTreeWarning(species) {
         return binSearchPassed;
     });
 }
+//TODO: create a generic binary search function because JS is cringe
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 //# sourceMappingURL=creation-tools-script.js.map

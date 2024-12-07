@@ -63,7 +63,11 @@ async function createNewTreeSpecies() {
 }
 
 
-//TODO: Config to check/set warning for new plot
+/**
+ * Checks if a plot number an admin wants to enter is valid and gives them a warning if not.
+ * @param plot The plot id the user is trying to enter into the database
+ * @returns Gives whether or not users plot number is already in use
+ */
 async function configPlotWarning(plot: number): Promise<boolean> {
 
     // Wait for auth token to be ready
@@ -92,7 +96,7 @@ async function configPlotWarning(plot: number): Promise<boolean> {
     if (!binSearchPassed) {
         warning.style.visibility = "visible";
     }
-    else{
+    else {
         warning.style.visibility = "hidden";
     }
 
@@ -100,7 +104,11 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 }
 
 
-//TODO: Config to check/set warning for new species
+/**
+ * Checks if a tree species the user wants to enter is valid and gives them a warning if not.
+ * @param species The tree name the user is trying to enter into the database
+ * @returns Gives whether or not users species name is already in use
+ */
 async function configTreeWarning(species: string): Promise<boolean> {
 
     //TODO: Make this an API call where you get each of the trees species
@@ -116,12 +124,14 @@ async function configTreeWarning(species: string): Promise<boolean> {
     if (!binSearchPassed) {
         warning.style.visibility = "visible";
     }
-    else{
+    else {
         warning.style.visibility = "hidden";
     }
     return binSearchPassed;
 
 }
+
+//TODO: create a generic binary search function because JS is cringe
 
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 
