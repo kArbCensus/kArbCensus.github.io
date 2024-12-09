@@ -14,6 +14,7 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
     
     let modal = document.getElementById(modalID);
     
+    document.body.style.cursor = "wait";
     modal.inert = true;
 
     await functionToAttempt();
@@ -23,6 +24,8 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
         bootstrap.Modal.getOrCreateInstance(document.getElementById("" + modalID)).hide();
     }
 
+    document.body.style.cursor = "pointer";
     modal.inert = false;
+    
     
 }
