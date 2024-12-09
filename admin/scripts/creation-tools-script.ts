@@ -70,6 +70,12 @@ async function createNewTreeSpecies() {
  */
 async function configPlotWarning(plot: number): Promise<boolean> {
 
+    // Ensuring a number was entered
+    if (Number.isNaN(plot)) {
+        document.getElementById("plot-warning").style.visibility = "visible";
+        return false;
+    }
+
     // Wait for auth token to be ready
     await globalThis.authTokenReady;
 

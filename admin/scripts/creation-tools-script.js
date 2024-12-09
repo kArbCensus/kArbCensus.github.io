@@ -63,6 +63,11 @@ function createNewTreeSpecies() {
  */
 function configPlotWarning(plot) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Ensuring a number was entered
+        if (Number.isNaN(plot)) {
+            document.getElementById("plot-warning").style.visibility = "visible";
+            return false;
+        }
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
         // Get the API endpoint
