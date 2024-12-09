@@ -12,12 +12,17 @@ $(function () {
 */
 async function confirmModal(functionToAttempt, modalWarningID, modalID) {
     
+    let modal = document.getElementById(modalID);
+    
+    modal.inert = true;
+
     await functionToAttempt();
 
-    console.log(document.getElementById("" + modalWarningID).style.visibility);
-
-    if (document.getElementById("" + modalWarningID).style.visibility == "hidden") {
+    // Hiding the modal if applicable
+    if (document.getElementById(modalWarningID).style.visibility == "hidden") {
         bootstrap.Modal.getOrCreateInstance(document.getElementById("" + modalID)).hide();
     }
+
+    modal.inert = false;
     
 }
