@@ -66,7 +66,7 @@ async function createNewTreeSpecies() {
 /**
  * Checks if a plot number an admin wants to enter is valid and gives them a warning if not.
  * @param plot The plot id the user is trying to enter into the database
- * @returns Gives whether or not users plot number is already in use
+ * @returns Gives whether or not users its ok to use the specified plot number 
  */
 async function configPlotWarning(plot: number): Promise<boolean> {
 
@@ -89,59 +89,91 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 
 
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = await genericBinarySearch(plotIds, plot);
+    let binSearchFound = await genericBinarySearch(plotIds, plot, 0, plotIds.length - 1);
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("plot-warning");
-    if (!binSearchPassed) {
+    if (binSearchFound) {
         warning.style.visibility = "visible";
+        return false;
     }
     else {
         warning.style.visibility = "hidden";
+        return true;
     }
-
-    return binSearchPassed;
 }
 
 
 /**
  * Checks if a tree species the user wants to enter is valid and gives them a warning if not.
  * @param species The tree name the user is trying to enter into the database
- * @returns Gives whether or not users species name is already in use
+ * @returns Gives whether or not users its ok to use the specified tree species
  */
 async function configTreeWarning(species: string): Promise<boolean> {
 
+    // Removing capitalization and whitespace as a factor
+    species = species.toLowerCase().trim();
+
     //TODO: Make this an API call where you get each of the trees species
+    // Make the API call convert trees to all upper case or all lower case
 
     // TEMP hard coded trees for testing
-    const allSpecies: string[] = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+    const allSpecies: string[] = ["american elm", "beech", "bitternut hickory", "black cherry", "black locust", "black oak", "dogwood", "hickory", "maple", "oak", "red maple", "red oak", "red pine", "sassafras", "shagbark hickory", "sugar maple", "unknown", "white oak", "white pine"];
 
     // Checking if the user entered number is within the existing plots
-    let binSearchPassed = await genericBinarySearch(allSpecies, species);
+    let binSearchFound = await genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
 
     // Setting a warning if applicable
     const warning: HTMLElement = document.getElementById("tree-warning");
-    if (!binSearchPassed) {
+    if (binSearchFound) {
         warning.style.visibility = "visible";
+        return false;
     }
     else {
         warning.style.visibility = "hidden";
+        return true;
     }
-    return binSearchPassed;
+
 
 }
 
 /**
- * A generic binary search for quick searches of select items within the
- * arrays provided by the API.
+ * A recursive generic binary search for quick searches of select items within
+ * the array's provided by the API.
  * @param array The array to conduct the binary search on
  * @param lookFor The item we are searching for within the array
+ * @param start Which index of the array to start looking at
+ * @param end Which index of the array to end looking at
  * @returns Whether or not the item could be found
  */
-async function genericBinarySearch<T extends any>(array: T[], lookFor: T): Promise<boolean> {
-    // stub (on god this looks like a comp 210 assignment right here lol)
-    return true;
+async function genericBinarySearch<T extends any>(array: T[], lookFor: T, start: number, end: number): Promise<boolean> {
+
+    // Base case for it the binary search failed
+    if (start > end) {
+        return false;
+    }
+
+    // The search continues
+    else {
+
+        let middle = Math.round((start + end) / 2);
+
+        // Seeing if the item has been found
+        if (lookFor == array[middle]) {
+            return true;
+        }
+
+        // Narrowing down the search by half
+        else if (lookFor < array[middle]) {
+            return await genericBinarySearch(array, lookFor, start, middle - 1)
+        }
+        else {
+            return await genericBinarySearch(array, lookFor, middle + 1, end)
+        }
+
+    }
 }
+
 
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
 // (If this isn't done, you can just spam the enter button to have this happen a ton of times cause async)

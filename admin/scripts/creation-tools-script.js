@@ -59,7 +59,7 @@ function createNewTreeSpecies() {
 /**
  * Checks if a plot number an admin wants to enter is valid and gives them a warning if not.
  * @param plot The plot id the user is trying to enter into the database
- * @returns Gives whether or not users plot number is already in use
+ * @returns Gives whether or not users its ok to use the specified plot number
  */
 function configPlotWarning(plot) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -78,52 +78,76 @@ function configPlotWarning(plot) {
         const apiObj = yield apiRes.json();
         const plotIds = apiObj.plotIds;
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = yield genericBinarySearch(plotIds, plot);
+        let binSearchFound = yield genericBinarySearch(plotIds, plot, 0, plotIds.length - 1);
         // Setting a warning if applicable
         const warning = document.getElementById("plot-warning");
-        if (!binSearchPassed) {
+        if (binSearchFound) {
             warning.style.visibility = "visible";
+            return false;
         }
         else {
             warning.style.visibility = "hidden";
+            return true;
         }
-        return binSearchPassed;
     });
 }
 /**
  * Checks if a tree species the user wants to enter is valid and gives them a warning if not.
  * @param species The tree name the user is trying to enter into the database
- * @returns Gives whether or not users species name is already in use
+ * @returns Gives whether or not users its ok to use the specified tree species
  */
 function configTreeWarning(species) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Removing capitalization and whitespace as a factor
+        species = species.toLowerCase().trim();
         //TODO: Make this an API call where you get each of the trees species
+        // Make the API call convert trees to all upper case or all lower case
         // TEMP hard coded trees for testing
-        const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+        const allSpecies = ["american elm", "beech", "bitternut hickory", "black cherry", "black locust", "black oak", "dogwood", "hickory", "maple", "oak", "red maple", "red oak", "red pine", "sassafras", "shagbark hickory", "sugar maple", "unknown", "white oak", "white pine"];
         // Checking if the user entered number is within the existing plots
-        let binSearchPassed = yield genericBinarySearch(allSpecies, species);
+        let binSearchFound = yield genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
         // Setting a warning if applicable
         const warning = document.getElementById("tree-warning");
-        if (!binSearchPassed) {
+        if (binSearchFound) {
             warning.style.visibility = "visible";
+            return false;
         }
         else {
             warning.style.visibility = "hidden";
+            return true;
         }
-        return binSearchPassed;
     });
 }
 /**
- * A generic binary search for quick searches of select items within the
- * arrays provided by the API.
+ * A recursive generic binary search for quick searches of select items within
+ * the array's provided by the API.
  * @param array The array to conduct the binary search on
  * @param lookFor The item we are searching for within the array
+ * @param start Which index of the array to start looking at
+ * @param end Which index of the array to end looking at
  * @returns Whether or not the item could be found
  */
-function genericBinarySearch(array, lookFor) {
+function genericBinarySearch(array, lookFor, start, end) {
     return __awaiter(this, void 0, void 0, function* () {
-        // stub (on god this looks like a comp 210 assignment right here lol)
-        return true;
+        // Base case for it the binary search failed
+        if (start > end) {
+            return false;
+        }
+        // The search continues
+        else {
+            let middle = Math.round((start + end) / 2);
+            // Seeing if the item has been found
+            if (lookFor == array[middle]) {
+                return true;
+            }
+            // Narrowing down the search by half
+            else if (lookFor < array[middle]) {
+                return yield genericBinarySearch(array, lookFor, start, middle - 1);
+            }
+            else {
+                return yield genericBinarySearch(array, lookFor, middle + 1, end);
+            }
+        }
     });
 }
 //TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
