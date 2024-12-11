@@ -124,24 +124,32 @@ function sortTrees() {
  * options within the survey table.
  */
 async function updateSurveyTable() {
+    
     // Wait for auth token to be ready
     await globalThis.authTokenReady;
+
+    // Getting our plot
+    const select = document.getElementById("plot-select") as HTMLSelectElement;
+    const chosenPlot = parseInt(select.options[select.selectedIndex].value);
 
     // Grabbing each of HTML elements to be made visible if applicable
     const addButton = document.getElementById("add-button");
     const filterButton = document.getElementById("filter-button")
     const surveyTable = document.getElementById("survey-table");
     const grayWarning = document.getElementById("gray-warning");
-    if (surveyTable.style.visibility == "hidden") {
+    if (chosenPlot != -1) {
         addButton.style.visibility = "visible";
         filterButton.style.visibility = "visible";
         surveyTable.style.visibility = "visible";
         grayWarning.style.visibility = "visible";
     }
-
-    // Getting our plot
-    const select = document.getElementById("plot-select") as HTMLSelectElement;
-    const chosenPlot = parseInt(select.options[select.selectedIndex].value);
+    else
+    {
+        addButton.style.visibility = "hidden";
+        filterButton.style.visibility = "hidden";
+        surveyTable.style.visibility = "hidden";
+        grayWarning.style.visibility = "hidden";
+    }
 
 
     // Get the API endpoint

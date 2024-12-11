@@ -114,20 +114,26 @@ function updateSurveyTable() {
     return __awaiter(this, void 0, void 0, function* () {
         // Wait for auth token to be ready
         yield globalThis.authTokenReady;
+        // Getting our plot
+        const select = document.getElementById("plot-select");
+        const chosenPlot = parseInt(select.options[select.selectedIndex].value);
         // Grabbing each of HTML elements to be made visible if applicable
         const addButton = document.getElementById("add-button");
         const filterButton = document.getElementById("filter-button");
         const surveyTable = document.getElementById("survey-table");
         const grayWarning = document.getElementById("gray-warning");
-        if (surveyTable.style.visibility == "hidden") {
+        if (chosenPlot != -1) {
             addButton.style.visibility = "visible";
             filterButton.style.visibility = "visible";
             surveyTable.style.visibility = "visible";
             grayWarning.style.visibility = "visible";
         }
-        // Getting our plot
-        const select = document.getElementById("plot-select");
-        const chosenPlot = parseInt(select.options[select.selectedIndex].value);
+        else {
+            addButton.style.visibility = "hidden";
+            filterButton.style.visibility = "hidden";
+            surveyTable.style.visibility = "hidden";
+            grayWarning.style.visibility = "hidden";
+        }
         // Get the API endpoint
         let treesUrl = (yield globalThis.baseApiUrl) + "trees";
         // Add query options
