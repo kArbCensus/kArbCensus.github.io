@@ -12049,7 +12049,7 @@ body {
   visibility: hidden;
 }
 
-.modal:not(.show) .btn-close {
+.modal:not(.show) {
   visibility: hidden;
   pointer-events: none;
 }/*# sourceMappingURL=shared-styling.css.map */
