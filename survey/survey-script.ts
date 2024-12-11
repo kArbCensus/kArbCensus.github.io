@@ -14,7 +14,6 @@ let selectedTableItem: tableItem;
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
 
-
 /**
  * Adjusts the pop-up button based on whether or not there is an open census
  */
@@ -124,7 +123,7 @@ function sortTrees() {
  * options within the survey table.
  */
 async function updateSurveyTable() {
-    
+
     // Wait for auth token to be ready
     await globalThis.authTokenReady;
 
@@ -133,22 +132,14 @@ async function updateSurveyTable() {
     const chosenPlot = parseInt(select.options[select.selectedIndex].value);
 
     // Grabbing each of HTML elements to be made visible if applicable
-    const addButton = document.getElementById("add-button");
-    const filterButton = document.getElementById("filter-button")
-    const surveyTable = document.getElementById("survey-table");
-    const grayWarning = document.getElementById("gray-warning");
+    const selectShow = document.getElementById("select-show");
     if (chosenPlot != -1) {
-        addButton.style.visibility = "visible";
-        filterButton.style.visibility = "visible";
-        surveyTable.style.visibility = "visible";
-        grayWarning.style.visibility = "visible";
+        selectShow.style.visibility = "visible";
+        selectShow.inert = false;
     }
-    else
-    {
-        addButton.style.visibility = "hidden";
-        filterButton.style.visibility = "hidden";
-        surveyTable.style.visibility = "hidden";
-        grayWarning.style.visibility = "hidden";
+    else {
+        selectShow.style.visibility = "hidden";
+        selectShow.inert = true;
     }
 
 

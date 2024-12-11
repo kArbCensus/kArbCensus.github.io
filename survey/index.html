@@ -285,74 +285,80 @@
         <br>
 
 
-        <!--Add button-->
-        <div class="row" id="add-button" style="visibility: hidden;">
-            <div class="col-2"></div>
-            <div class="col-8 text-center">
-                <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up"
-                    onclick="createNewTree()" aria-label="Add a new tree for the census">
-                    Add New Tree
-                </button>
+        <!--Appears when a plot is selected-->
+        <div id="select-show" style="visibility: hidden;" inert="true">
+
+            <!--Add button-->
+            <div class="row" id="add-button">
+                <div class="col-2"></div>
+                <div class="col-8 text-center">
+                    <button id="add-new-tree-button" data-bs-toggle="modal" data-bs-target="#pop-up"
+                        onclick="createNewTree()" aria-label="Add a new tree for the census">
+                        Add New Tree
+                    </button>
+                </div>
+                <div class="col-2"></div>
             </div>
-            <div class="col-2"></div>
+
+            <br>
+            <br>
+
+            <!--Filter button-->
+            <div class="row align-items-center" id="filter-button">
+                <div class="col"></div>
+                <div class="col-auto">
+                    <h3 id="filter-tag" style="margin-top: 6%;">Filter By:</h3>
+                </div>
+                <div class="col-auto">
+                    <select name="" id="filter-select" class="form-select"
+                        aria-label="Alter the order of the survey table" onchange="updateSurveyTable()">
+                        <option value="MostRecentTag">Recent Tag #</option>
+                        <option value="Species">Species</option>
+                        <option value="SizeClass">Size Class</option>
+                    </select>
+                </div>
+                <div class="col"></div>
+            </div>
+
+
+            <!--The interactive table-->
+            <div class="row" id="survey-table">
+
+                <div class="col-">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" scope="col" style="width: 16%; min-width: 150px;">View & Update
+                                </th>
+                                <th class="text-center" scope="col">Recent Tag #</th>
+                                <th class="text-center" scope="col">Species</th>
+                                <th class="text-center" scope="col">Size Class</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="text-center">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <br>
+            <br>
+
+
+            <!--Notice on what a gray column means-->
+            <div class="row" id="gray-warning">
+                <div class="col-2 "></div>
+                <div class="col-8 text-center">
+                    <h5 id="gray-note">Note: a gray background for a tree entry means it's already been updated for the
+                        current census</h5>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <br>
+
+
         </div>
-
-        <br>
-        <br>
-
-        <!--Filter button-->
-        <div class="row align-items-center" style="visibility: hidden;" id="filter-button">
-            <div class="col"></div>
-            <div class="col-auto">
-                <h3 id="filter-tag" style="margin-top: 6%;">Filter By:</h3>
-            </div>
-            <div class="col-auto">
-                <select name="" id="filter-select" class="form-select" aria-label="Alter the order of the survey table"
-                    onchange="updateSurveyTable()">
-                    <option value="MostRecentTag">Recent Tag #</option>
-                    <option value="Species">Species</option>
-                    <option value="SizeClass">Size Class</option>
-                </select>
-            </div>
-            <div class="col"></div>
-        </div>
-
-
-        <!--The interactive table-->
-        <div class="row" id="survey-table" style="visibility: hidden;">
-
-            <div class="col-">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="text-center" scope="col" style="width: 16%; min-width: 150px;">View & Update</th>
-                            <th class="text-center" scope="col">Recent Tag #</th>
-                            <th class="text-center" scope="col">Species</th>
-                            <th class="text-center" scope="col">Size Class</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body" class="text-center">
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-        <br>
-        <br>
-
-
-        <!--Notice on what a gray column means-->
-        <div class="row" id="gray-warning" style="visibility: hidden;">
-            <div class="col-2 "></div>
-            <div class="col-8 text-center">
-                <h5 id="gray-note">Note: a gray background for a tree entry means it's already been updated for the
-                    current census</h5>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <br>
-
 
         <!--Line Break-->
         <div class="row">
