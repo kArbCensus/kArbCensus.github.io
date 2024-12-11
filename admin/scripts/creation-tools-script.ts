@@ -13,9 +13,6 @@ async function createNewAccount() {
 
     //TODO: Post request to give Auth0 a new account
 
-    // User feedback via a reload
-    //location.reload();
-
 }
 
 
@@ -34,8 +31,6 @@ async function createNewPlot() {
         // Testing
         console.log(newPlot);
 
-        // User feedback via a reload
-        //location.reload();
     }
 
 }
@@ -56,8 +51,6 @@ async function createNewTreeSpecies() {
         // Testing
         console.log(newTree);
 
-        // User feedback via a reload
-        //location.reload();
     }
 
 }

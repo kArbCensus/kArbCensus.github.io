@@ -11,9 +11,9 @@ $(function () {
  * Gives the user feedback when doing an admin feature by closing the modal
 */
 async function confirmModal(functionToAttempt, modalWarningID, modalID) {
-    
+
     let modal = document.getElementById(modalID);
-    
+
     document.body.style.cursor = "wait";
     modal.inert = true;
 
@@ -26,6 +26,9 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
 
     document.body.style.cursor = "pointer";
     modal.inert = false;
-    
-    
+
+    // User feedback via a reload
+    //location.reload();
+
+
 }

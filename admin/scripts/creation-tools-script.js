@@ -18,8 +18,6 @@ function createNewAccount() {
         let newPas = document.getElementById("new-pas").value;
         //TODO: Should there be a check here if the password is already in use?
         //TODO: Post request to give Auth0 a new account
-        // User feedback via a reload
-        //location.reload();
     });
 }
 /**
@@ -34,8 +32,6 @@ function createNewPlot() {
             // TODO: Post request to the DB with the new plot number
             // Testing
             console.log(newPlot);
-            // User feedback via a reload
-            //location.reload();
         }
     });
 }
@@ -51,8 +47,6 @@ function createNewTreeSpecies() {
             // TODO: Post request to the DB with the new tree species
             // Testing
             console.log(newTree);
-            // User feedback via a reload
-            //location.reload();
         }
     });
 }
