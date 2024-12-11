@@ -8,8 +8,11 @@ $(function () {
 
 
 /**
- * Gives the user feedback when doing an admin feature by closing the modal
-*/
+ * Gives the user feedback when submitting a modal by doing the modal's functionality then closing it.
+ * @param {function} functionToAttempt Executing the modal's submission function
+ * @param {string} modalWarningID The ID of the warning sign that the submission failed
+ * @param {string} modalID The ID of the modal itself
+ */
 async function confirmModal(functionToAttempt, modalWarningID, modalID) {
 
     let modal = document.getElementById(modalID);
@@ -21,14 +24,18 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
 
     // Hiding the modal if applicable
     if (document.getElementById(modalWarningID).style.visibility == "hidden") {
-        bootstrap.Modal.getOrCreateInstance(document.getElementById("" + modalID)).hide();
+        bootstrap.Modal.getOrCreateInstance(document.getElementById(modalID)).hide();
     }
 
     document.body.style.cursor = "pointer";
     modal.inert = false;
 
-    // User feedback via a reload
-    //location.reload();
-
-
 }
+
+/*
+Todos:
+Make this ^ method in shared 
+Make all of the visibile shifts on a selecting a plot in a div to simplify
+Make a refresh
+Make modal confirm popup for admin only
+*/
