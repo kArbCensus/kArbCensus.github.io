@@ -11978,7 +11978,6 @@ textarea.form-control-lg {
   margin-top: 1%;
   margin-left: 2%;
   font-size: calc(1.375rem + 1.5vw);
-  white-space: nowrap;
 }
 @media (min-width: 1200px) {
   #kalamazoo-arb-title {
