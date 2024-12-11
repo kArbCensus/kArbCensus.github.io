@@ -12047,4 +12047,9 @@ body {
   font: "Barlow";
   font-weight: bold;
   visibility: hidden;
+}
+
+.modal:not(.show) .btn-close {
+  visibility: hidden;
+  pointer-events: none;
 }/*# sourceMappingURL=shared-styling.css.map */

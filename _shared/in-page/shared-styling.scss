@@ -68,3 +68,9 @@ body {
     font-weight: bold;
     visibility: hidden;
 }
+
+// Needed cause Bootstrap v5 is cringe and cause aria issues without this
+.modal:not(.show) .btn-close {
+    visibility: hidden;
+    pointer-events: none;
+  }
