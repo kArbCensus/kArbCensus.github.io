@@ -22,7 +22,7 @@ let selectedTableItem;
 function setupModalButton() {
     // Giving the user the option to update if appropriate
     const updateButton = document.getElementById("pop-up-update");
-    if (currentCensusYear != -1) {
+    if (currentCensusYear == -1) {
         updateButton.style.backgroundColor = "grey";
         updateButton.innerHTML = "";
         updateButton.appendChild(document.createTextNode("Census Not Open"));
@@ -357,15 +357,15 @@ function confirmUpdate() {
         // Ensuring no clearly inaccurate data isn't sent to the database
         if (configModalWarning(recentTag, dbh)) {
             offModalWarning();
-            // const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
-            // // POST if a new tree, otherwise PUT
-            // if (isNewTree) {
-            //     await postNewTree(treeForAPI, chosenPlot);
-            // }
-            // else {
-            //     treeForAPI.treeId = selectedTableItem.treeId;
-            //     await putCensusEntry(treeForAPI);
-            // }
+            const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+            // POST if a new tree, otherwise PUT
+            if (isNewTree) {
+                yield postNewTree(treeForAPI, chosenPlot);
+            }
+            else {
+                treeForAPI.treeId = selectedTableItem.treeId;
+                yield putCensusEntry(treeForAPI);
+            }
             // Refresh survey table after update
             updateSurveyTable();
         }
