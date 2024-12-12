@@ -12069,4 +12069,9 @@ body {
   #feedback-confirm h3, #feedback-confirm .h3 {
     font-size: 1.3rem;
   }
+}
+
+.has-scrollbar {
+  padding-right: 0% !important;
+  overflow-y: scroll !important;
 }/*# sourceMappingURL=shared-styling.css.map */

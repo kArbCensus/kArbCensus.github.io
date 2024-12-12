@@ -8,6 +8,16 @@ $(function () {
 
 
 /**
+ * Assigning a modal scrollbar style fix if device has a invasive scroll bar on a webpage.
+ */
+function applyScrollbarStyleFix() {
+    if (window.innerWidth > document.documentElement.clientWidth) {
+        console.log("TEST!");
+        document.body.className = "has-scrollbar";
+    }
+}
+
+/**
  * Adding in the admin option to the survey banner based on the users role.
  */
 async function addAdmin() {
@@ -70,7 +80,7 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
         // Give the user confirmation that their submission worked
         // Grabbing where content will go
         const template = document.getElementById("feedback-template");
-        const placeHolder =document.getElementById("feedback-placeholder");
+        const placeHolder = document.getElementById("feedback-placeholder");
 
         // Set up for a new user feedback pop up
         placeHolder.innerHTML = "";
