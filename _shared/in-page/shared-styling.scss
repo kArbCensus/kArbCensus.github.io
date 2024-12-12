@@ -94,3 +94,7 @@ body {
     overflow-y: scroll !important;
 
 }
+
+.no-scrollbar {
+    overflow-y: auto;
+}

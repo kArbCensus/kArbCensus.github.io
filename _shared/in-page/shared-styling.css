@@ -12074,4 +12074,8 @@ body {
 .has-scrollbar {
   padding-right: 0% !important;
   overflow-y: scroll !important;
+}
+
+.no-scrollbar {
+  overflow-y: auto;
 }/*# sourceMappingURL=shared-styling.css.map */

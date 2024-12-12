@@ -11,10 +11,16 @@ $(function () {
  * Assigning a modal scrollbar style fix if device has a invasive scroll bar on a webpage.
  */
 function applyScrollbarStyleFix() {
+
+    document.body.style.overflow="scroll";
+
     if (window.innerWidth > document.documentElement.clientWidth) {
-        console.log("TEST!");
+        document.body.style.overflow="auto";
         document.body.className = "has-scrollbar";
     }
+
+    document.body.style.overflow="auto";
+   
 }
 
 /**
