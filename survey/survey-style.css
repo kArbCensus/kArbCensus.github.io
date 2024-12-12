@@ -12007,7 +12007,7 @@ input {
   border: none;
   position: relative;
   text-align: left;
-  width: 100%;
+  width: 25%;
   cursor: pointer;
 }
 @media (min-width: 1200px) {
@@ -12109,7 +12109,7 @@ td {
   min-width: 130px;
   background-color: white;
   color: black;
-  width: 25%;
+  width: 20%;
 }
 @media (min-width: 1200px) {
   #add-new-tree-button {
