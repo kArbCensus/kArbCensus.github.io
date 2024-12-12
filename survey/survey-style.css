@@ -12007,8 +12007,8 @@ input {
   border: none;
   position: relative;
   text-align: left;
-  width: 60%;
   cursor: pointer;
+  width: auto;
 }
 @media (min-width: 1200px) {
   #plot-select {
