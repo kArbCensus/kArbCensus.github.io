@@ -12052,4 +12052,21 @@ body {
 .modal:not(.show) {
   visibility: hidden;
   pointer-events: none;
+}
+
+#feedback-confirm {
+  position: fixed;
+  bottom: 5%;
+  width: 100%;
+}
+#feedback-confirm h3, #feedback-confirm .h3 {
+  font-size: calc(1.255rem + 0.06vw);
+  font-family: "Barlow";
+  font: "Barlow";
+  color: black;
+}
+@media (min-width: 1200px) {
+  #feedback-confirm h3, #feedback-confirm .h3 {
+    font-size: 1.3rem;
+  }
 }/*# sourceMappingURL=shared-styling.css.map */

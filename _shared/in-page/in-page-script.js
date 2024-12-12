@@ -2,6 +2,9 @@
 $(function () {
     $('#banner-insert').load('../_shared/in-page/banner.html');
 })
+$(function () {
+    $('#provide-modal-feedback').load('../_shared/in-page/modal-feedback.html');
+})
 
 
 /**
@@ -54,19 +57,31 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
     modal.inert = true;
     let initialPointer = document.body.style.cursor;
     document.body.style.cursor = "wait";
-    
+
 
     await functionToAttempt();
 
-    // Hiding the modal if applicable
+    // What to do if no problems existed in executing the modals submission
     if (document.getElementById(modalWarningID).style.visibility == "hidden") {
+
+        // Close the modal
         bootstrap.Modal.getOrCreateInstance(document.getElementById(modalID)).hide();
+
+        // Give the user confirmation that their submission worked
+        // Grabbing where content will go
+        const template = document.getElementById("feedback-template");
+        const placeHolder =document.getElementById("feedback-placeholder");
+
+        // Set up for a new user feedback pop up
+        placeHolder.innerHTML = "";
+        const content = template.content.cloneNode(true);
+
+        // Applying the new alert that the modal worked
+        placeHolder.appendChild(content);
     }
 
     // Resuming user interaction
     document.body.style.cursor = initialPointer;
     modal.inert = false;
-
-    console.log("PROOF");
 
 }

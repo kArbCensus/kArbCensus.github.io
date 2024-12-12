@@ -74,3 +74,16 @@ body {
     visibility: hidden;
     pointer-events: none;
 }
+
+#feedback-confirm {
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+
+    h3 {
+        @include font-size(1.3rem);
+        font-family: "Barlow";
+        font: "Barlow";
+        color: black;
+    }
+}
