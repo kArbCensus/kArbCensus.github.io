@@ -108,6 +108,8 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 
     // Ensuring a number was entered
     if (Number.isNaN(plot)) {
+        warning.innerHTML = "";
+        warning.appendChild(document.createTextNode("Invalid plot number: entered plot has no value"));
         warning.style.visibility = "visible";
         return false;
     }
@@ -135,6 +137,8 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 
     // Setting a warning if applicable
     if (binSearchFound) {
+        warning.innerHTML = "";
+        warning.appendChild(document.createTextNode("Invalid plot number: entered plot already exists"));
         warning.style.visibility = "visible";
         return false;
     }
@@ -157,6 +161,8 @@ async function configTreeWarning(species: string): Promise<boolean> {
 
     // Ensuring something was entered
     if (species === "") {
+        warning.innerHTML = "";
+        warning.appendChild(document.createTextNode("Invalid species: provided tree name has no value"));
         warning.style.visibility = "visible";
         return false;
     }
@@ -172,6 +178,8 @@ async function configTreeWarning(species: string): Promise<boolean> {
 
     // Setting a warning if applicable
     if (binSearchFound) {
+        warning.innerHTML = "";
+        warning.appendChild(document.createTextNode("Invalid species: given tree is already an option"));
         warning.style.visibility = "visible";
         return false;
     }

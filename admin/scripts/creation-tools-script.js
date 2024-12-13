@@ -92,6 +92,8 @@ function configPlotWarning(plot) {
         const warning = document.getElementById("plot-warning");
         // Ensuring a number was entered
         if (Number.isNaN(plot)) {
+            warning.innerHTML = "";
+            warning.appendChild(document.createTextNode("Invalid plot number: entered plot has no value"));
             warning.style.visibility = "visible";
             return false;
         }
@@ -113,6 +115,8 @@ function configPlotWarning(plot) {
         let binSearchFound = yield genericBinarySearch(plotIds, plot, 0, plotIds.length - 1);
         // Setting a warning if applicable
         if (binSearchFound) {
+            warning.innerHTML = "";
+            warning.appendChild(document.createTextNode("Invalid plot number: entered plot already exists"));
             warning.style.visibility = "visible";
             return false;
         }
@@ -133,6 +137,8 @@ function configTreeWarning(species) {
         const warning = document.getElementById("tree-warning");
         // Ensuring something was entered
         if (species === "") {
+            warning.innerHTML = "";
+            warning.appendChild(document.createTextNode("Invalid species: provided tree name has no value"));
             warning.style.visibility = "visible";
             return false;
         }
@@ -144,6 +150,8 @@ function configTreeWarning(species) {
         let binSearchFound = yield genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
         // Setting a warning if applicable
         if (binSearchFound) {
+            warning.innerHTML = "";
+            warning.appendChild(document.createTextNode("Invalid species: given tree is already an option"));
             warning.style.visibility = "visible";
             return false;
         }
