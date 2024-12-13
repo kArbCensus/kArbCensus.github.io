@@ -6,12 +6,20 @@
 async function createNewAccount() {
 
     // Getting the entered fields
-    let newEmail = (document.getElementById("new-email") as HTMLInputElement).value as string;
-    let newPas = (document.getElementById("new-pas") as HTMLInputElement).value as string;
+    let newEmail = ((document.getElementById("new-email") as HTMLInputElement).value as string);
+    let newPas = ((document.getElementById("new-pas") as HTMLInputElement).value as string);
 
-    //TODO: Should there be a check here if the password is already in use?
+    // Removing whitespace as a factor
+    newEmail = newEmail.trim().toLowerCase();
+    newPas = newPas.trim();
 
-    //TODO: Post request to give Auth0 a new account
+    // Ensuring the email and password are correct
+    if (await configAccountWarning(newEmail, newPas)) {
+        //TODO: Post request to give Auth0 a new account
+
+        // Testing
+        console.log(newEmail + " and " + newPas);
+    }
 
 }
 
@@ -43,6 +51,9 @@ async function createNewTreeSpecies() {
     // Getting the new tree species
     let newTree = (document.getElementById("new-tree") as HTMLInputElement).value as string;
 
+    // Removing capitalization and whitespace as a factor
+    newTree = newTree.toLowerCase().trim();
+
 
     // Ensuring the same plot doesn't already exist
     if (await configTreeWarning(newTree)) {
@@ -57,9 +68,36 @@ async function createNewTreeSpecies() {
 
 
 /**
- * Checks if a plot number an admin wants to enter is valid and gives them a warning if not.
+ * Checks if the provided account credentials are valid giving a warning if not.
+ * @param email The potential email for a new user
+ * @param password The potential password for a new user
+ * @returns Gives whether or not its ok to use the specified account credentials
+ */
+async function configAccountWarning(email: string, password: string) {
+
+    // Ensuring both an email and password were provided
+    const warning = document.getElementById("account-warning");
+    if (email === "" || password === "") {
+        warning.style.visibility = "visible";
+        return false;
+    }
+    else {
+        warning.style.visibility = "hidden";
+        return true;
+    }
+
+    //TODO: Should this check for existing accounts and do a search?
+
+
+
+}
+
+
+
+/**
+ * Checks if a plot number is valid and gives a warning if not.
  * @param plot The plot id the user is trying to enter into the database
- * @returns Gives whether or not users its ok to use the specified plot number 
+ * @returns Gives whether or not if its ok to use the specified plot number 
  */
 async function configPlotWarning(plot: number): Promise<boolean> {
 
@@ -106,12 +144,15 @@ async function configPlotWarning(plot: number): Promise<boolean> {
 /**
  * Checks if a tree species the user wants to enter is valid and gives them a warning if not.
  * @param species The tree name the user is trying to enter into the database
- * @returns Gives whether or not users its ok to use the specified tree species
+ * @returns Gives whether or not its ok to use the specified tree species
  */
 async function configTreeWarning(species: string): Promise<boolean> {
 
-    // Removing capitalization and whitespace as a factor
-    species = species.toLowerCase().trim();
+    // Ensuring something was entered
+    if (species === "") {
+        document.getElementById("tree-warning").style.visibility = "visible";
+        return false;
+    }
 
     //TODO: Make this an API call where you get each of the trees species
     // Make the API call convert trees to all upper case or all lower case
