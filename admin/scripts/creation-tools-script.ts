@@ -75,8 +75,10 @@ async function createNewTreeSpecies() {
  */
 async function configAccountWarning(email: string, password: string) {
 
+    // Getting this modals warning label
+    const warning: HTMLElement = document.getElementById("account-warning");
+
     // Ensuring both an email and password were provided
-    const warning = document.getElementById("account-warning");
     if (email === "" || password === "") {
         warning.style.visibility = "visible";
         return false;
@@ -101,9 +103,12 @@ async function configAccountWarning(email: string, password: string) {
  */
 async function configPlotWarning(plot: number): Promise<boolean> {
 
+    // Getting this modals warning label
+    const warning: HTMLElement = document.getElementById("plot-warning");
+
     // Ensuring a number was entered
     if (Number.isNaN(plot)) {
-        document.getElementById("plot-warning").style.visibility = "visible";
+        warning.style.visibility = "visible";
         return false;
     }
 
@@ -129,7 +134,6 @@ async function configPlotWarning(plot: number): Promise<boolean> {
     let binSearchFound = await genericBinarySearch(plotIds, plot, 0, plotIds.length - 1);
 
     // Setting a warning if applicable
-    const warning: HTMLElement = document.getElementById("plot-warning");
     if (binSearchFound) {
         warning.style.visibility = "visible";
         return false;
@@ -148,9 +152,12 @@ async function configPlotWarning(plot: number): Promise<boolean> {
  */
 async function configTreeWarning(species: string): Promise<boolean> {
 
+    // Getting this modals warning label
+    const warning: HTMLElement = document.getElementById("tree-warning");
+
     // Ensuring something was entered
     if (species === "") {
-        document.getElementById("tree-warning").style.visibility = "visible";
+        warning.style.visibility = "visible";
         return false;
     }
 
@@ -164,7 +171,6 @@ async function configTreeWarning(species: string): Promise<boolean> {
     let binSearchFound = await genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
 
     // Setting a warning if applicable
-    const warning: HTMLElement = document.getElementById("tree-warning");
     if (binSearchFound) {
         warning.style.visibility = "visible";
         return false;

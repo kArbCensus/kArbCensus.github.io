@@ -67,8 +67,9 @@ function createNewTreeSpecies() {
  */
 function configAccountWarning(email, password) {
     return __awaiter(this, void 0, void 0, function* () {
-        // Ensuring both an email and password were provided
+        // Getting this modals warning label
         const warning = document.getElementById("account-warning");
+        // Ensuring both an email and password were provided
         if (email === "" || password === "") {
             warning.style.visibility = "visible";
             return false;
@@ -87,9 +88,11 @@ function configAccountWarning(email, password) {
  */
 function configPlotWarning(plot) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Getting this modals warning label
+        const warning = document.getElementById("plot-warning");
         // Ensuring a number was entered
         if (Number.isNaN(plot)) {
-            document.getElementById("plot-warning").style.visibility = "visible";
+            warning.style.visibility = "visible";
             return false;
         }
         // Wait for auth token to be ready
@@ -109,7 +112,6 @@ function configPlotWarning(plot) {
         // Checking if the user entered number is within the existing plots
         let binSearchFound = yield genericBinarySearch(plotIds, plot, 0, plotIds.length - 1);
         // Setting a warning if applicable
-        const warning = document.getElementById("plot-warning");
         if (binSearchFound) {
             warning.style.visibility = "visible";
             return false;
@@ -127,9 +129,11 @@ function configPlotWarning(plot) {
  */
 function configTreeWarning(species) {
     return __awaiter(this, void 0, void 0, function* () {
+        // Getting this modals warning label
+        const warning = document.getElementById("tree-warning");
         // Ensuring something was entered
         if (species === "") {
-            document.getElementById("tree-warning").style.visibility = "visible";
+            warning.style.visibility = "visible";
             return false;
         }
         //TODO: Make this an API call where you get each of the trees species
@@ -139,7 +143,6 @@ function configTreeWarning(species) {
         // Checking if the user entered number is within the existing plots
         let binSearchFound = yield genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
         // Setting a warning if applicable
-        const warning = document.getElementById("tree-warning");
         if (binSearchFound) {
             warning.style.visibility = "visible";
             return false;

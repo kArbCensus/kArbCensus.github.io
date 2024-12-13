@@ -65,6 +65,7 @@ function confirmEndCurrentCensus() {
  * match the user's chosen option.
  */
 function setNewPopUpText(turnOn: boolean, text: string) {
+
     // Setting the text
     const popUp = document.getElementById("census-control-pop-up-text");
     popUp.innerHTML = "";
