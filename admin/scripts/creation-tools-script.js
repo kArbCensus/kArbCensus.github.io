@@ -21,9 +21,24 @@ function createNewAccount() {
         newPas = newPas.trim();
         // Ensuring the email and password are correct
         if (yield configAccountWarning(newEmail, newPas)) {
-            //TODO: Post request to give Auth0 a new account
-            // Testing
-            console.log(newEmail + " and " + newPas);
+            // Construct request body
+            const payload = {
+                email: newEmail,
+                password: newPas,
+            };
+            // Get the API endpoint
+            const addAccUrl = (yield globalThis.baseApiUrl) + "add-account";
+            // Add content type and authorization token to headers
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${globalThis.authToken}`,
+            };
+            // Make an API request to create new account
+            yield fetch(addAccUrl, {
+                headers,
+                method: "POST",
+                body: JSON.stringify(payload)
+            });
         }
     });
 }
@@ -193,7 +208,4 @@ function genericBinarySearch(array, lookFor, start, end) {
         }
     });
 }
-//TODO: create an event listener that makes update buttons work when pulled up and disabled when clicked
-// (If this isn't done, you can just spam the enter button to have this happen a ton of times cause async)
-//////////// TYPES TO MAKE INFO FROM DB WORK ////////////
 //# sourceMappingURL=creation-tools-script.js.map

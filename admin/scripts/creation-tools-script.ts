@@ -15,12 +15,28 @@ async function createNewAccount() {
 
     // Ensuring the email and password are correct
     if (await configAccountWarning(newEmail, newPas)) {
-        //TODO: Post request to give Auth0 a new account
+        // Construct request body
+        const payload: NewUserInfo = {
+            email: newEmail,
+            password: newPas,
+        }
 
-        // Testing
-        console.log(newEmail + " and " + newPas);
+        // Get the API endpoint
+        const addAccUrl = await globalThis.baseApiUrl + "add-account";
+
+        // Add content type and authorization token to headers
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${globalThis.authToken}`,
+        }
+
+        // Make an API request to create new account
+        await fetch(addAccUrl, {
+            headers,
+            method: "POST",
+            body: JSON.stringify(payload)
+        })
     }
-
 }
 
 
@@ -233,3 +249,8 @@ async function genericBinarySearch<T extends any>(array: T[], lookFor: T, start:
 // (If this isn't done, you can just spam the enter button to have this happen a ton of times cause async)
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
+
+interface NewUserInfo {
+    email: string;
+    password: string;
+}
