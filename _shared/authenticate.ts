@@ -22,19 +22,19 @@ globalThis.authToken = null;
 
 // Define promise that resolves once token is set
 let resolveAuthTokenReady: () => void;
-globalThis.authTokenReady = new Promise((resolve) => {
+globalThis.authTokenReady = new Promise<void>((resolve) => {
   resolveAuthTokenReady = resolve;
 });
 
 // Define a promise once the role based on if the user is an admin
 let resolvePromiseAdmin: () => void;
-globalThis.promiseAdmin = new Promise((resolve) => {
+globalThis.promiseAdmin = new Promise<void>((resolve) => {
   resolvePromiseAdmin = resolve;
 });
 
 // Define a promise that resolves when its able to give the base URL to any API interactions
 let resolveBaseApiUrl: (value: string) => void;
-globalThis.baseApiUrl = new Promise((resolve) => {
+globalThis.baseApiUrl = new Promise<string>((resolve) => {
   resolveBaseApiUrl = resolve;
 });
 
