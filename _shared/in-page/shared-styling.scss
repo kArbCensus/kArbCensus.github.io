@@ -88,6 +88,20 @@ body {
     }
 }
 
+#password-change-confirm
+{
+    position: fixed;
+    top: 5%;
+    width: 100%;
+
+    #template-pass-text {
+        @include font-size(1.3rem);
+        font-family: "Barlow";
+        font: "Barlow";
+        color: black;
+    }
+}
+
 
 .has-scrollbar {
     padding-right: 0% !important;

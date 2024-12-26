@@ -88,7 +88,7 @@ async function confirmModal(functionToAttempt, modalWarningID, modalID) {
         const template = document.getElementById("feedback-template");
         const placeHolder = document.getElementById("feedback-placeholder");
 
-        // Set up for a new user feedback pop up
+        // Set up for a new user feedback popup
         placeHolder.innerHTML = "";
         const content = template.content.cloneNode(true);
 

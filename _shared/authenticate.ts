@@ -180,15 +180,44 @@ namespace Auth {
         body: JSON.stringify(body),
       });
     } catch (error) {
-      alert("Error while resetting password!")
+      await resetPasswordPopupDisplay(false);
       throw new Error(`Failed to reset password: ${(error as Error).message}`);
     }
 
-    // TODO: Make this a nicer popup
-    alert("We've just sent you an email to reset your password.");
+    await resetPasswordPopupDisplay(true);
   }
 
   resolveReady();
+}
+
+/**
+ * Provides the user with an alert that displays whether or not a
+ * password reset email could be sent.
+ * @param wasSuccess If an reset email was sent correctly.
+ */
+async function resetPasswordPopupDisplay(wasSuccess: boolean) {
+  // Grabbing where content will go
+  const template = document.getElementById("password-change-template") as HTMLTemplateElement;
+  const placeHolder = document.getElementById("password-change-placeholder");
+
+  // Adjusting the template based off if if the reset was successful
+  const templateClass = template.content.querySelector("#template-pass-class");
+  const templateText = template.content.querySelector("#template-pass-text"); 
+  if(wasSuccess){
+    templateClass.className = "alert alert-success alert-dismissible fade show";
+    templateText.textContent = "We've just sent you an email to change your password.";
+  }
+  else{
+    templateClass.className = "alert alert-danger alert-dismissible fade show";
+    templateText.textContent = "Error while resetting password! Please try again later.";
+  }
+
+  // Set up for a new user feedback popup
+  placeHolder.innerHTML = "";
+  const content = template.content.cloneNode(true);
+
+  // Applying the new alert
+  placeHolder.appendChild(content);
 }
 
 globalThis.Auth = Auth;

@@ -12071,6 +12071,23 @@ body {
   }
 }
 
+#password-change-confirm {
+  position: fixed;
+  top: 5%;
+  width: 100%;
+}
+#password-change-confirm #template-pass-text {
+  font-size: calc(1.255rem + 0.06vw);
+  font-family: "Barlow";
+  font: "Barlow";
+  color: black;
+}
+@media (min-width: 1200px) {
+  #password-change-confirm #template-pass-text {
+    font-size: 1.3rem;
+  }
+}
+
 .has-scrollbar {
   padding-right: 0% !important;
   overflow-y: scroll !important;
