@@ -93,7 +93,6 @@ function configAccountWarning(email, password) {
             warning.style.visibility = "hidden";
             return true;
         }
-        //TODO: Should this check for existing accounts and do a search?
     });
 }
 /**

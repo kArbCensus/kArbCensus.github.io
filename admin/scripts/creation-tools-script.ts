@@ -104,10 +104,6 @@ async function configAccountWarning(email: string, password: string) {
         return true;
     }
 
-    //TODO: Should this check for existing accounts and do a search?
-
-
-
 }
 
 
