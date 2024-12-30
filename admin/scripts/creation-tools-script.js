@@ -64,8 +64,16 @@ function createNewTreeSpecies() {
     return __awaiter(this, void 0, void 0, function* () {
         // Getting the new tree species
         let newTree = document.getElementById("new-tree").value;
-        // Removing capitalization and whitespace as a factor
+        // Removing random capitalization and whitespace as a factor
         newTree = newTree.toLowerCase().trim();
+        /*
+        Making the first letter of each word capitalized with regex
+            For context and future debugging, the regex statement is comprised of:
+            "/ /g" => the inside escape characters are global and as such continuously looked for
+            "\b" => looking for a only the starting characters (boundary chars) and...
+            "\w" => looking at every word character
+        */
+        newTree = newTree.replace(/\b\w/g, (firstLetter) => firstLetter.toUpperCase());
         // Ensuring the same plot doesn't already exist
         if (yield configTreeWarning(newTree)) {
             // TODO: Post request to the DB with the new tree species
@@ -157,9 +165,8 @@ function configTreeWarning(species) {
             return false;
         }
         //TODO: Make this an API call where you get each of the trees species
-        // Make the API call convert trees to all upper case or all lower case
         // TEMP hard coded trees for testing
-        const allSpecies = ["american elm", "beech", "bitternut hickory", "black cherry", "black locust", "black oak", "dogwood", "hickory", "maple", "oak", "red maple", "red oak", "red pine", "sassafras", "shagbark hickory", "sugar maple", "unknown", "white oak", "white pine"];
+        const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
         // Checking if the user entered number is within the existing plots
         let binSearchFound = yield genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
         // Setting a warning if applicable
