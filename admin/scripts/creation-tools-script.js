@@ -39,6 +39,9 @@ function createNewAccount() {
                 method: "POST",
                 body: JSON.stringify(payload)
             });
+            // Clearing out modal's input boxes
+            document.getElementById("new-email").value = "";
+            document.getElementById("new-pas").value = "KArbPassword123";
         }
     });
 }
@@ -59,6 +62,9 @@ function createNewPlot() {
             // TODO: Post request to the DB with the new plot number
             // Testing
             console.log(newPlot);
+            // Clearing out modal's input boxes
+            document.getElementById("new-plot").value = "";
+            document.getElementById("new-cover-type").value = "";
         }
     });
 }
@@ -84,6 +90,8 @@ function createNewTreeSpecies() {
             // TODO: Post request to the DB with the new tree species
             // Testing
             console.log(newTree);
+            // Clearing out modal's input box
+            document.getElementById("new-tree").value = "";
         }
     });
 }

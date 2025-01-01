@@ -35,7 +35,11 @@ async function createNewAccount() {
             headers,
             method: "POST",
             body: JSON.stringify(payload)
-        })
+        });
+
+        // Clearing out modal's input boxes
+        (document.getElementById("new-email") as HTMLInputElement).value = "";
+        (document.getElementById("new-pas") as HTMLInputElement).value = "KArbPassword123";
     }
 }
 
@@ -62,6 +66,9 @@ async function createNewPlot() {
         // Testing
         console.log(newPlot);
 
+        // Clearing out modal's input boxes
+        (document.getElementById("new-plot") as HTMLInputElement).value = "";
+        (document.getElementById("new-cover-type") as HTMLInputElement).value = "";
     }
 
 }
@@ -94,6 +101,8 @@ async function createNewTreeSpecies() {
         // Testing
         console.log(newTree);
 
+        // Clearing out modal's input box
+        (document.getElementById("new-tree") as HTMLInputElement).value = "";
     }
 
 }
