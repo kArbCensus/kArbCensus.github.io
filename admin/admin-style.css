@@ -12052,4 +12052,16 @@ input {
 
 .modal-top {
   margin-top: 3%;
+}
+
+.plot-creation-input {
+  height: 2.5rem;
+}
+
+#db-focal-notice {
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-family: "Barlow";
+  font: "Barlow";
+  font-style: italic;
 }/*# sourceMappingURL=admin-style.css.map */
