@@ -59,9 +59,26 @@ function createNewPlot() {
         let focalTreeID = null;
         // Ensuring the same plot doesn't already exist
         if (yield configPlotWarning(newPlot, coverType)) {
-            // TODO: Post request to the DB with the new plot number
-            // Testing
-            console.log(newPlot);
+            // Wait for auth token to be ready and get API endpoint
+            yield globalThis.authTokenReady;
+            const plotIdUrl = (yield globalThis.baseApiUrl) + "plot-ids";
+            // Create a new plot object
+            const plotValues = {
+                plotId: newPlot,
+                landCoverType: coverType,
+                focalTree: focalTreeID,
+            };
+            // Make API call with authentication token
+            const headers = {
+                "Authorization": `Bearer ${globalThis.authToken}`
+            };
+            const apiRes = yield fetch(plotIdUrl, {
+                body: JSON.stringify(plotValues),
+                headers,
+                method: "POST",
+            });
+            if (!apiRes.ok)
+                throw new Error("Error during plot creation request: " + (yield apiRes.text()));
             // Clearing out modal's input boxes
             document.getElementById("new-plot").value = "";
             document.getElementById("new-cover-type").value = "";

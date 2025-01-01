@@ -61,10 +61,27 @@ async function createNewPlot() {
 
     // Ensuring the same plot doesn't already exist
     if (await configPlotWarning(newPlot, coverType)) {
-        // TODO: Post request to the DB with the new plot number
+        // Wait for auth token to be ready and get API endpoint
+        await globalThis.authTokenReady;
+        const plotIdUrl = await globalThis.baseApiUrl + "plot-ids";
 
-        // Testing
-        console.log(newPlot);
+        // Create a new plot object
+        const plotValues: NewPlotValues = {
+            plotId: newPlot,
+            landCoverType: coverType,
+            focalTree: focalTreeID,
+        }
+
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = await fetch(plotIdUrl, {
+            body: JSON.stringify(plotValues),
+            headers,
+            method: "POST",
+        });
+        if (!apiRes.ok) throw new Error("Error during plot creation request: " + await apiRes.text());
 
         // Clearing out modal's input boxes
         (document.getElementById("new-plot") as HTMLInputElement).value = "";
@@ -278,4 +295,10 @@ async function genericBinarySearch<T extends any>(array: T[], lookFor: T, start:
 interface NewUserInfo {
     email: string;
     password: string;
+}
+
+interface NewPlotValues {
+    plotId: number;
+    landCoverType: string;
+    focalTree: string;
 }
