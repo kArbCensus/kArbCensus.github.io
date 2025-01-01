@@ -49,8 +49,13 @@ function createNewPlot() {
     return __awaiter(this, void 0, void 0, function* () {
         // Getting the entered plot number
         let newPlot = parseFloat(document.getElementById("new-plot").value);
+        // Getting the land cover type
+        let coverType = document.getElementById("new-cover-type").value;
+        coverType = coverType.trim();
+        // For clarity, showing that the focal tree tree-id will be null
+        let focalTreeID = null;
         // Ensuring the same plot doesn't already exist
-        if (yield configPlotWarning(newPlot)) {
+        if (yield configPlotWarning(newPlot, coverType)) {
             // TODO: Post request to the DB with the new plot number
             // Testing
             console.log(newPlot);
@@ -108,7 +113,7 @@ function configAccountWarning(email, password) {
  * @param plot The plot id the user is trying to enter into the database
  * @returns Gives whether or not if its ok to use the specified plot number
  */
-function configPlotWarning(plot) {
+function configPlotWarning(plot, coverType) {
     return __awaiter(this, void 0, void 0, function* () {
         // Getting this modals warning label
         const warning = document.getElementById("plot-warning");
@@ -116,6 +121,13 @@ function configPlotWarning(plot) {
         if (Number.isNaN(plot)) {
             warning.innerHTML = "";
             warning.appendChild(document.createTextNode("Invalid plot number: entered plot has no value"));
+            warning.style.visibility = "visible";
+            return false;
+        }
+        // Ensuring a land cover type was entered
+        if (coverType === "") {
+            warning.innerHTML = "";
+            warning.appendChild(document.createTextNode("Invalid cover type: entered type has no value"));
             warning.style.visibility = "visible";
             return false;
         }
