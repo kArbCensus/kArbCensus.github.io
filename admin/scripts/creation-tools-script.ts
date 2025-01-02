@@ -113,10 +113,23 @@ async function createNewTreeSpecies() {
 
     // Ensuring the same plot doesn't already exist
     if (await configTreeWarning(newTree)) {
-        // TODO: Post request to the DB with the new tree species
+        // Wait for auth token to be ready and form URL
+        await globalThis.authTokenReady;
+        const speciesUrl = await globalThis.baseApiUrl + "species";
 
-        // Testing
-        console.log(newTree);
+        // Construct species object
+        const newSpecies = {species: newTree}
+
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = await fetch(speciesUrl, {
+            body: JSON.stringify(newSpecies),
+            headers,
+            method: "POST",
+        });
+        if (!apiRes.ok) throw new Error("Error during species creation request: " + await apiRes.text());
 
         // Clearing out modal's input box
         (document.getElementById("new-tree") as HTMLInputElement).value = "";
@@ -241,6 +254,7 @@ async function configTreeWarning(species: string): Promise<boolean> {
         headers,
         method: "GET",
     });
+    if (!apiRes.ok) throw new Error("Error while fetching species list: " + await apiRes.text());
 
     // Get list of all species from API call
     const allSpecies = await apiRes.json() as string[];

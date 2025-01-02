@@ -104,9 +104,22 @@ function createNewTreeSpecies() {
         newTree = newTree.replace(/\b\w/g, (firstLetter) => firstLetter.toUpperCase());
         // Ensuring the same plot doesn't already exist
         if (yield configTreeWarning(newTree)) {
-            // TODO: Post request to the DB with the new tree species
-            // Testing
-            console.log(newTree);
+            // Wait for auth token to be ready and form URL
+            yield globalThis.authTokenReady;
+            const speciesUrl = (yield globalThis.baseApiUrl) + "species";
+            // Construct species object
+            const newSpecies = { species: newTree };
+            // Make API call with authentication token
+            const headers = {
+                "Authorization": `Bearer ${globalThis.authToken}`
+            };
+            const apiRes = yield fetch(speciesUrl, {
+                body: JSON.stringify(newSpecies),
+                headers,
+                method: "POST",
+            });
+            if (!apiRes.ok)
+                throw new Error("Error during species creation request: " + (yield apiRes.text()));
             // Clearing out modal's input box
             document.getElementById("new-tree").value = "";
         }
@@ -212,6 +225,8 @@ function configTreeWarning(species) {
             headers,
             method: "GET",
         });
+        if (!apiRes.ok)
+            throw new Error("Error while fetching species list: " + (yield apiRes.text()));
         // Get list of all species from API call
         const allSpecies = yield apiRes.json();
         // Checking if the user entered number is within the existing plots
