@@ -201,9 +201,19 @@ function configTreeWarning(species) {
             warning.style.visibility = "visible";
             return false;
         }
-        //TODO: Make this an API call where you get each of the trees species
-        // TEMP hard coded trees for testing
-        const allSpecies = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+        // Wait for auth token to be ready and form URL
+        yield globalThis.authTokenReady;
+        const speciesUrl = (yield globalThis.baseApiUrl) + "species";
+        // Make API call with authentication token
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        const apiRes = yield fetch(speciesUrl, {
+            headers,
+            method: "GET",
+        });
+        // Get list of all species from API call
+        const allSpecies = yield apiRes.json();
         // Checking if the user entered number is within the existing plots
         let binSearchFound = yield genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
         // Setting a warning if applicable

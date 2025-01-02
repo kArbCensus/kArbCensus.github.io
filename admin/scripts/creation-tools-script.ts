@@ -229,10 +229,21 @@ async function configTreeWarning(species: string): Promise<boolean> {
         return false;
     }
 
-    //TODO: Make this an API call where you get each of the trees species
+    // Wait for auth token to be ready and form URL
+    await globalThis.authTokenReady;
+    const speciesUrl = await globalThis.baseApiUrl + "species";
 
-    // TEMP hard coded trees for testing
-    const allSpecies: string[] = ["American Elm", "Beech", "Bitternut Hickory", "Black Cherry", "Black Locust", "Black Oak", "Dogwood", "Hickory", "Maple", "Oak", "Red Maple", "Red Oak", "Red Pine", "Sassafras", "Shagbark Hickory", "Sugar Maple", "Unknown", "White Oak", "White Pine"];
+    // Make API call with authentication token
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+    const apiRes = await fetch(speciesUrl, {
+        headers,
+        method: "GET",
+    });
+
+    // Get list of all species from API call
+    const allSpecies = await apiRes.json() as string[];
 
     // Checking if the user entered number is within the existing plots
     let binSearchFound = await genericBinarySearch(allSpecies, species, 0, allSpecies.length - 1);
