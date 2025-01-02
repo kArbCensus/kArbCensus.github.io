@@ -226,7 +226,8 @@ async function updateSurveyTable() {
         // Each other aspect of an entry
         updater.appendChild(icon);
         let tag = document.createElement('td');
-        tag.appendChild(document.createTextNode("" + tree.recentTag));
+        const tagText = tree.recentTag === -1 ? "Missing" : "" + tree.recentTag;
+        tag.appendChild(document.createTextNode(tagText));
         let species = document.createElement('td');
         species.appendChild(document.createTextNode("" + tree.species));
         let size = document.createElement('td');
@@ -476,13 +477,13 @@ function refreshPopUp() {
 }
 
 
-// Setting the current array to contain the values from a json file
+// Setting the current array to contain the values from API object
 function changeArrFromJson(censusEntries: EntryResponsePayload[]) {
     currentTrees = censusEntries.map((entry) => (new tableItem(
         entry.treeId,
         entry.species,
         entry.year,
-        entry.recentTag,
+        entry.recentTag === null ? -1 : entry.recentTag,
         state[entry.status as keyof typeof state], // Convert status to state type
         nameToSizeClass.get(entry.sizeClass), // Convert sizeClass to size type
         entry.dbh,

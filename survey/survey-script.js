@@ -199,7 +199,8 @@ function updateSurveyTable() {
             // Each other aspect of an entry
             updater.appendChild(icon);
             let tag = document.createElement('td');
-            tag.appendChild(document.createTextNode("" + tree.recentTag));
+            const tagText = tree.recentTag === -1 ? "Missing" : "" + tree.recentTag;
+            tag.appendChild(document.createTextNode(tagText));
             let species = document.createElement('td');
             species.appendChild(document.createTextNode("" + tree.species));
             let size = document.createElement('td');
@@ -403,9 +404,9 @@ function refreshPopUp() {
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
 }
-// Setting the current array to contain the values from a json file
+// Setting the current array to contain the values from API object
 function changeArrFromJson(censusEntries) {
-    currentTrees = censusEntries.map((entry) => (new tableItem(entry.treeId, entry.species, entry.year, entry.recentTag, state[entry.status], // Convert status to state type
+    currentTrees = censusEntries.map((entry) => (new tableItem(entry.treeId, entry.species, entry.year, entry.recentTag === null ? -1 : entry.recentTag, state[entry.status], // Convert status to state type
     nameToSizeClass.get(entry.sizeClass), // Convert sizeClass to size type
     entry.dbh, entry.matchNum, entry.comments)));
 }
