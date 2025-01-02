@@ -61,9 +61,8 @@ function checkAuth() {
                 const configRes = yield fetch("/api_config.json");
                 const { urlBase } = (yield configRes.json());
                 resolveBaseApiUrl(urlBase);
-                // TODO: Remove debug logs in production
-                console.log("Access Token: ", token);
-                console.log(`Is admin? ${globalThis.isAdmin}`);
+                // console.log("Access Token: ", token);
+                // console.log(`Is admin? ${globalThis.isAdmin}`);
             }
             catch (error) {
                 console.error("Token renewal failed: ", error.message);
@@ -106,8 +105,7 @@ function isAdmin() {
         return false;
     }
     const decodedToken = jwtDecode(token);
-    // TODO: Remove debug log in production
-    console.log("Decoded Token: ", decodedToken);
+    // console.log("Decoded Token: ", decodedToken);
     return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
 authenticate();

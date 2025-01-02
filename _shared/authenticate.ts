@@ -86,9 +86,8 @@ async function checkAuth() {
       const { urlBase } = (await configRes.json()) as { urlBase: string };
       resolveBaseApiUrl(urlBase);
 
-      // TODO: Remove debug logs in production
-      console.log("Access Token: ", token);
-      console.log(`Is admin? ${globalThis.isAdmin}`);
+      // console.log("Access Token: ", token);
+      // console.log(`Is admin? ${globalThis.isAdmin}`);
     } catch (error) {
       console.error("Token renewal failed: ", (error as Error).message);
     }
@@ -132,8 +131,7 @@ function isAdmin(): boolean {
   }
 
   const decodedToken = jwtDecode<ArbJwtPayload>(token);
-  // TODO: Remove debug log in production
-  console.log("Decoded Token: ", decodedToken);
+  // console.log("Decoded Token: ", decodedToken);
 
   return decodedToken["https://kArbCensus.github.io/roles"].includes("admin");
 }
