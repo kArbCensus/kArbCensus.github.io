@@ -341,7 +341,7 @@ function updateCurrentTree(index: number) {
     matchNum.value = "" + selectedTableItem.matchNum;
 
     const comment = document.getElementById("given-comment") as HTMLInputElement;
-    comment.value = "" + selectedTableItem.comments;
+    comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
 
     // Adjusting to PUT to the API
     isNewTree = false;
