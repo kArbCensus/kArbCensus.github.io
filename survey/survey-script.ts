@@ -414,7 +414,7 @@ async function postNewTree(item: tableItem, plotId: number) {
         dbh: item.dbh,
         status: statusName.get(item.status),
         matchNum: item.matchNum,
-        comments: item.comments,
+        comments: item.comments === "" ? null : item.comments,
     };
 
     // Get the API endpoint
@@ -442,7 +442,7 @@ async function putCensusEntry(item: tableItem) {
         dbh: item.dbh,
         status: statusName.get(item.status),
         matchNum: item.matchNum,
-        comments: item.comments,
+        comments: item.comments === "" ? null : item.comments,
     }
 
     // Get the API endpoint

@@ -349,7 +349,7 @@ function postNewTree(item, plotId) {
             dbh: item.dbh,
             status: statusName.get(item.status),
             matchNum: item.matchNum,
-            comments: item.comments,
+            comments: item.comments === "" ? null : item.comments,
         };
         // Get the API endpoint
         const treesUrl = (yield globalThis.baseApiUrl) + "trees";
@@ -375,7 +375,7 @@ function putCensusEntry(item) {
             dbh: item.dbh,
             status: statusName.get(item.status),
             matchNum: item.matchNum,
-            comments: item.comments,
+            comments: item.comments === "" ? null : item.comments,
         };
         // Get the API endpoint
         const treesUrl = (yield globalThis.baseApiUrl) + "trees";
