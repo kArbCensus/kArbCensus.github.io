@@ -1,5 +1,7 @@
 // Getting the current date
-const currentYear = new Date().getFullYear();
+const currentYear = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/Detroit" }),
+).getFullYear();
 
 // The current census collected from the API
 let apiObj: CensusStatus;
