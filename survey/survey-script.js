@@ -345,7 +345,7 @@ function postNewTree(item, plotId) {
             sizeClass: sizeClassToName.get(item.sizeClass),
             plotId: plotId,
             year: item.year,
-            recentTag: item.recentTag,
+            recentTag: item.recentTag === -1 ? null : item.recentTag,
             dbh: item.dbh,
             status: statusName.get(item.status),
             matchNum: item.matchNum,
@@ -371,7 +371,7 @@ function putCensusEntry(item) {
         const payload = {
             year: item.year,
             treeId: item.treeId,
-            recentTag: item.recentTag,
+            recentTag: item.recentTag === -1 ? null : item.recentTag,
             dbh: item.dbh,
             status: statusName.get(item.status),
             matchNum: item.matchNum,

@@ -410,7 +410,7 @@ async function postNewTree(item: tableItem, plotId: number) {
         sizeClass: sizeClassToName.get(item.sizeClass),
         plotId: plotId,
         year: item.year,
-        recentTag: item.recentTag,
+        recentTag: item.recentTag === -1 ? null : item.recentTag,
         dbh: item.dbh,
         status: statusName.get(item.status),
         matchNum: item.matchNum,
@@ -438,7 +438,7 @@ async function putCensusEntry(item: tableItem) {
     const payload: EntryPutPayload = {
         year: item.year,
         treeId: item.treeId,
-        recentTag: item.recentTag,
+        recentTag: item.recentTag === -1 ? null : item.recentTag,
         dbh: item.dbh,
         status: statusName.get(item.status),
         matchNum: item.matchNum,
