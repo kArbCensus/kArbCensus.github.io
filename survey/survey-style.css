@@ -11980,9 +11980,19 @@ input {
   }
 }
 
-#given-date, #given-species, #given-size-class, .modal-text {
+#given-date,
+#given-species,
+#given-size-class,
+.modal-text {
   font-size: 1.2rem;
   margin-top: 7%;
+}
+
+#given-is-focal-tree {
+  accent-color: #357960;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 2.5%;
 }
 
 #select-plot-note {

@@ -10,11 +10,21 @@ input {
     border: 1px solid black;
 }
 
-#given-date, #given-species, #given-size-class, .modal-text
-{
+#given-date,
+#given-species,
+#given-size-class,
+.modal-text {
     @include font-size(1.2rem);
     margin-top: 7%;
 }
+
+#given-is-focal-tree {
+    accent-color: #357960;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-top: 2.5%;
+}
+
 
 #select-plot-note {
     color: White;
@@ -37,8 +47,7 @@ input {
     width: auto;
 }
 
-#filter-tag
-{
+#filter-tag {
     color: White;
     text-align: center;
     font-family: "Barlow";
@@ -47,8 +56,7 @@ input {
     @include font-size(1.5rem);
 }
 
-#filter-select
-{
+#filter-select {
     @include font-size(1rem);
     font-family: "Barlow";
     font: "Barlow";
@@ -58,7 +66,7 @@ input {
     position: relative;
     text-align: left;
     width: 100%;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 select {
