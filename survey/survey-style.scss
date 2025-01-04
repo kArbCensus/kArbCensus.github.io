@@ -93,6 +93,7 @@ input {
 }
 
 select {
+    appearance: none;
     border: .1rem solid black;
     border-radius: .25rem;
     width: 90%;
@@ -102,8 +103,8 @@ select {
     border-color: black;
     padding: 2%;
     color: black;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    background-color: white;
+
 }
 
 option {

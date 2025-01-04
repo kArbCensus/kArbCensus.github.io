@@ -12076,6 +12076,9 @@ input {
 }
 
 select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 0.1rem solid black;
   border-radius: 0.25rem;
   width: 90%;
@@ -12085,8 +12088,7 @@ select {
   border-color: black;
   padding: 2%;
   color: black;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  background-color: white;
 }
 
 option {
