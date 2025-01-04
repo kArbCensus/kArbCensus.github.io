@@ -241,7 +241,6 @@ function createNewTree() {
     // Adding in the ability to set a species name
     const species = document.createElement("select");
     species.ariaLabel = "Choose species name";
-    species.className = "center-select";
     populateSpecies(species);
     document.getElementById("give-species").appendChild(species);
     // Adding in the ability to set which size class the tree falls into

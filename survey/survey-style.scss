@@ -32,8 +32,8 @@ input {
     cursor: pointer;
 
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 
 
     // Finally actually using SCSS functionality
@@ -112,11 +112,11 @@ select {
     text-align-last: center;
 }
 
-.center-select
-{
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
+.center-select.center-select.center-select.center-select {
+    width: 90% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 option {
