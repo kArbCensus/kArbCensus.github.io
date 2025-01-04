@@ -12039,6 +12039,8 @@ input {
   border: none;
   position: relative;
   text-align: left;
+  -moz-text-align-last: left;
+       text-align-last: left;
   cursor: pointer;
   width: auto;
 }
@@ -12071,6 +12073,8 @@ input {
   border: none;
   position: relative;
   text-align: left;
+  -moz-text-align-last: left;
+       text-align-last: left;
   width: 100%;
   cursor: pointer;
 }
@@ -12092,6 +12096,9 @@ select {
   text-align: center;
   -moz-text-align-last: center;
        text-align-last: center;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center the text */
+  align-items: center; /* Center vertically */
 }
 
 option {

@@ -112,7 +112,7 @@
                                     <h4 class="modal-text">
                                         Species</h4>
                                 </div>
-                                <div class="col-4 text-center" id="give-species">
+                                <div class="col-4 text-center d-flex justify-content-center" id="give-species">
                                     <h4 id="given-species">Some Tree Name</h4>
                                 </div>
                                 <div class="col-2"></div>
@@ -130,7 +130,7 @@
                                     <h4 class="modal-text">
                                         Size Class</h4>
                                 </div>
-                                <div class="col-4 text-center" id="give-size-class">
+                                <div class="col-4 text-center d-flex justify-content-center" id="give-size-class">
                                     <select id="given-size-class" aria-label="Choose the tree size class">
                                         <option>Small</option>
                                         <option>Medium</option>
@@ -188,7 +188,7 @@
                                     <h4 class="modal-text">
                                         Status</h4>
                                 </div>
-                                <div class="col-4 text-center">
+                                <div class="col-4 text-center d-flex justify-content-center">
                                     <select id="given-status" aria-label="Choose status type">
                                         <option>Live</option>
                                         <option>Sick</option>
@@ -215,7 +215,7 @@
                                     <h4 class="modal-text">
                                         Match #</h4>
                                 </div>
-                                <div class="col-4 text-center">
+                                <div class="col-4 text-center d-flex justify-content-center">
                                     <select id="given-match-num" aria-label="Select the corresponding match number">
                                         <option>1</option>
                                         <option>2</option>
@@ -330,8 +330,8 @@
                 <div class="col-auto">
                     <h3 id="filter-tag" style="margin-top: 6%;">Sort By:</h3>
                 </div>
-                <div class="col-auto">
-                    <select name="" id="filter-select" class="form-select"
+                <div class="col-auto d-flex justify-content-center">
+                    <select id="filter-select" class="form-select"
                         aria-label="Alter the order of the survey table" onchange="updateSurveyTable()">
                         <option value="MostRecentTag">Recent Tag #</option>
                         <option value="Species">Species</option>
