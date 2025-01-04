@@ -100,13 +100,14 @@ select {
     border: .1rem solid black;
     border-radius: .25rem;
     width: 90%;
-    text-align: center;
     @include font-size(1.2rem);
     cursor: pointer;
     border-color: black;
     padding: 2%;
     color: black;
     background-color: white;
+    text-align: center;
+    align-items: center;
 
 }
 
