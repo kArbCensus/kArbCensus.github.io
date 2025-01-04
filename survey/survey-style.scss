@@ -110,10 +110,13 @@ select {
     background-color: white;
     text-align: center;
     text-align-last: center;
+}
 
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center the text */
-    align-items: center; /* Center vertically */
+.center-select
+{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 
 option {
