@@ -11968,11 +11968,12 @@ textarea.form-control-lg {
 input {
   font-family: "Barlow";
   font: "Barlow";
-  border-radius: 5px;
   text-align: center;
+  height: 1.9rem;
   width: 90%;
-  font-size: calc(1.255rem + 0.06vw);
   border: 1px solid black;
+  border-radius: 5px;
+  font-size: calc(1.255rem + 0.06vw);
 }
 @media (min-width: 1200px) {
   input {
@@ -11989,10 +11990,31 @@ input {
 }
 
 #given-is-focal-tree {
-  accent-color: #357960;
-  width: 1.3rem;
-  height: 1.3rem;
-  margin-top: 2.5%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#given-is-focal-tree:checked {
+  background-color: #357960;
+}
+#given-is-focal-tree:checked::after {
+  content: "✓";
+  color: white;
+  font-size: calc(1.255rem + 0.06vw);
+}
+@media (min-width: 1200px) {
+  #given-is-focal-tree:checked::after {
+    font-size: 1.3rem;
+  }
 }
 
 #select-plot-note {
@@ -12059,6 +12081,7 @@ select {
   width: 90%;
   text-align: center;
   font-size: 1.2rem;
+  cursor: pointer;
   border-color: black;
   padding: 2%;
   color: black;

@@ -3,11 +3,12 @@
 input {
     font-family: "Barlow";
     font: "Barlow";
-    border-radius: 5px;
     text-align: center;
+    height: 1.9rem;
     width: 90%;
-    @include font-size(1.3rem);
     border: 1px solid black;
+    border-radius: 5px;
+    @include font-size(1.3rem);
 }
 
 #given-date,
@@ -19,10 +20,32 @@ input {
 }
 
 #given-is-focal-tree {
-    accent-color: #357960;
-    width: 1.3rem;
-    height: 1.3rem;
-    margin-top: 2.5%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+
+
+    // Finally actually using SCSS functionality
+    &:checked {
+        background-color: #357960;
+
+        &::after {
+            content: "\2713";
+            color: white;
+            @include font-size(1.3rem);
+        }
+    }
 }
 
 
@@ -75,6 +98,7 @@ select {
     width: 90%;
     text-align: center;
     @include font-size(1.2rem);
+    cursor: pointer;
     border-color: black;
     padding: 2%;
     color: black;
