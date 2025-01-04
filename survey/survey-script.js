@@ -139,7 +139,7 @@ function sortTrees() {
     }
 }
 /**
- * Based on the currently selected plot chose, updates the potential
+ * Based on the currently selected plot, updates the potential
  * options within the survey table.
  */
 function updateSurveyTable() {
@@ -176,7 +176,7 @@ function updateSurveyTable() {
         // Update and sort current trees
         changeArrFromJson(apiObj);
         sortTrees();
-        //Clear out the current items in the table
+        // Clear out the current items in the table
         const body = document.getElementById("table-body");
         body.innerHTML = '';
         // Adds the new items to the body
@@ -286,6 +286,9 @@ function updateCurrentTree(index) {
     matchNum.value = "" + selectedTableItem.matchNum;
     const comment = document.getElementById("given-comment");
     comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
+    // TODO: Check if the current tree is a focal tree and update accordingly
+    const isFocalTree = document.getElementById("given-is-focal-tree");
+    isFocalTree.checked = false; // TEMPORARILY SETTING THIS TO FALSE
     // Adjusting to PUT to the API
     isNewTree = false;
 }
@@ -294,7 +297,7 @@ function updateCurrentTree(index) {
  */
 function confirmUpdate() {
     return __awaiter(this, void 0, void 0, function* () {
-        // Resetting for the new submission
+        // Resetting warning for new submissions
         offModalWarning();
         // Turns modal info into a tableItem by grabbing each element from the modal
         const selectPlot = document.getElementById("plot-select");
@@ -320,6 +323,7 @@ function confirmUpdate() {
         const dbh = parseFloat(document.getElementById("given-dbh").value);
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
+        const isFocalTree = document.getElementById("given-is-focal-tree").checked;
         // Ensuring no clearly inaccurate data isn't sent to the database
         if (configModalWarning(recentTag, dbh)) {
             offModalWarning();
@@ -332,6 +336,13 @@ function confirmUpdate() {
                 treeForAPI.treeId = selectedTableItem.treeId;
                 yield putCensusEntry(treeForAPI);
             }
+            // TODO: Update the plot focal tree if applicable
+            // if(isFocalTree)
+            // {
+            // }
+            // else if(!isFocalTree && isCurrentPlotsFocalTree)
+            // {
+            // }
             // Refresh survey table after update
             updateSurveyTable();
         }
@@ -403,6 +414,7 @@ function refreshPopUp() {
     document.getElementById("given-dbh").value = "0";
     document.getElementById("given-match-num").value = "1";
     document.getElementById("given-comment").value = "";
+    document.getElementById("given-is-focal-tree").checked = false;
 }
 // Setting the current array to contain the values from API object
 function changeArrFromJson(censusEntries) {

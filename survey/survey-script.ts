@@ -152,7 +152,7 @@ function sortTrees() {
 }
 
 /**
- * Based on the currently selected plot chose, updates the potential
+ * Based on the currently selected plot, updates the potential
  * options within the survey table.
  */
 async function updateSurveyTable() {
@@ -199,7 +199,7 @@ async function updateSurveyTable() {
     sortTrees();
 
 
-    //Clear out the current items in the table
+    // Clear out the current items in the table
     const body = document.getElementById("table-body");
     body.innerHTML = '';
 
@@ -344,6 +344,10 @@ function updateCurrentTree(index: number) {
     const comment = document.getElementById("given-comment") as HTMLInputElement;
     comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
 
+    // TODO: Check if the current tree is a focal tree and update accordingly
+    const isFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement)
+    isFocalTree.checked = false; // TEMPORARILY SETTING THIS TO FALSE
+
     // Adjusting to PUT to the API
     isNewTree = false;
 }
@@ -352,7 +356,7 @@ function updateCurrentTree(index: number) {
  * Adding the information from a filled out survey modal to our database
  */
 async function confirmUpdate() {
-    // Resetting for the new submission
+    // Resetting warning for new submissions
     offModalWarning();
 
     // Turns modal info into a tableItem by grabbing each element from the modal
@@ -384,6 +388,8 @@ async function confirmUpdate() {
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
+    const isFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement).checked;
+
     // Ensuring no clearly inaccurate data isn't sent to the database
     if (configModalWarning(recentTag, dbh)) {
         offModalWarning();
@@ -397,6 +403,18 @@ async function confirmUpdate() {
             treeForAPI.treeId = selectedTableItem.treeId;
             await putCensusEntry(treeForAPI);
         }
+
+
+        // TODO: Update the plot focal tree if applicable
+        // if(isFocalTree)
+        // {
+
+        // }
+        // else if(!isFocalTree && isCurrentPlotsFocalTree)
+        // {
+
+        // }
+
 
         // Refresh survey table after update
         updateSurveyTable();
@@ -473,6 +491,7 @@ function refreshPopUp() {
     (document.getElementById("given-dbh") as HTMLInputElement).value = "0";
     (document.getElementById("given-match-num") as HTMLSelectElement).value = "1";
     (document.getElementById("given-comment") as HTMLInputElement).value = "";
+    (document.getElementById("given-is-focal-tree") as HTMLInputElement).checked = false;
 
 }
 
