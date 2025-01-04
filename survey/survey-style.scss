@@ -93,6 +93,9 @@ input {
 }
 
 select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     border: .1rem solid black;
     border-radius: .25rem;

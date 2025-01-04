@@ -12076,9 +12076,10 @@ input {
 }
 
 select {
+  -o-appearance: none;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   border: 0.1rem solid black;
   border-radius: 0.25rem;
   width: 90%;
