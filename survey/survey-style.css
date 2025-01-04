@@ -11971,8 +11971,8 @@ input {
   text-align: center;
   height: 1.9rem;
   width: 90%;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 0.1rem solid black;
+  border-radius: 0.25rem;
   font-size: calc(1.255rem + 0.06vw);
 }
 @media (min-width: 1200px) {
@@ -11996,8 +11996,8 @@ input {
   appearance: none;
   width: 1.5rem;
   height: 1.5rem;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 0.1rem solid black;
+  border-radius: 0.25rem;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -12035,7 +12035,7 @@ input {
   font-size: calc(1.275rem + 0.3vw);
   font-family: "Barlow";
   font: "Barlow";
-  border-radius: 20px;
+  border-radius: 1rem;
   border: none;
   position: relative;
   text-align: left;
@@ -12067,7 +12067,7 @@ input {
   font-family: "Barlow";
   font: "Barlow";
   font-weight: bold;
-  border-radius: 15px;
+  border-radius: 0.8rem;
   border: none;
   position: relative;
   text-align: left;
@@ -12076,8 +12076,8 @@ input {
 }
 
 select {
-  border: 1px solid black;
-  border-radius: 5px;
+  border: 0.1rem solid black;
+  border-radius: 0.25rem;
   width: 90%;
   text-align: center;
   font-size: 1.2rem;
@@ -12103,7 +12103,7 @@ table {
   display: block;
   overflow-x: auto;
   white-space: nowrap;
-  border-radius: 5px;
+  border-radius: 0.25rem;
   margin-top: 1%;
 }
 
@@ -12136,7 +12136,7 @@ td {
   font-family: "Barlow";
   font: "Barlow";
   font-size: calc(1.275rem + 0.3vw);
-  border-radius: 15px;
+  border-radius: 0.8rem;
   padding: 1%;
   border: none;
   min-width: 130px;

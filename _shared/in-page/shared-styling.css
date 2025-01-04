@@ -11991,7 +11991,7 @@ textarea.form-control-lg {
   background: none;
   font-size: calc(1.325rem + 0.9vw);
   font-weight: bold;
-  margin-right: 40px;
+  margin-right: 2rem;
   cursor: pointer;
 }
 @media (min-width: 1200px) {
@@ -12028,7 +12028,7 @@ body {
 }
 
 .bs-linebreak {
-  height: 75px;
+  height: 3rem;
 }
 
 .btn {
