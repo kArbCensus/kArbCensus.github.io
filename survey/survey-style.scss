@@ -65,8 +65,8 @@ input {
     border-radius: 1rem;
     border: none;
     position: relative;
-    text-align: left;
-    text-align-last: left;
+    text-align: left !important;
+    text-align-last: left !important;
     cursor: pointer;
     width: auto;
 }
@@ -88,8 +88,8 @@ input {
     border-radius: .8rem;
     border: none;
     position: relative;
-    text-align: left;
-    text-align-last: left;
+    text-align: left !important;
+    text-align-last: left !important;
     width: 100%;
     cursor: pointer;
 }
@@ -108,8 +108,8 @@ select {
     padding: 2%;
     color: black;
     background-color: white;
-    text-align: center;
-    text-align-last: center;
+    text-align: center !important;
+    text-align-last: center !important;
 }
 
 

@@ -12038,9 +12038,9 @@ input {
   border-radius: 1rem;
   border: none;
   position: relative;
-  text-align: left;
-  -moz-text-align-last: left;
-       text-align-last: left;
+  text-align: left !important;
+  -moz-text-align-last: left !important;
+       text-align-last: left !important;
   cursor: pointer;
   width: auto;
 }
@@ -12072,9 +12072,9 @@ input {
   border-radius: 0.8rem;
   border: none;
   position: relative;
-  text-align: left;
-  -moz-text-align-last: left;
-       text-align-last: left;
+  text-align: left !important;
+  -moz-text-align-last: left !important;
+       text-align-last: left !important;
   width: 100%;
   cursor: pointer;
 }
@@ -12093,9 +12093,9 @@ select {
   padding: 2%;
   color: black;
   background-color: white;
-  text-align: center;
-  -moz-text-align-last: center;
-       text-align-last: center;
+  text-align: center !important;
+  -moz-text-align-last: center !important;
+       text-align-last: center !important;
 }
 
 option {
