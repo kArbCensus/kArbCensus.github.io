@@ -12090,7 +12090,8 @@ select {
   color: black;
   background-color: white;
   text-align: center;
-  align-items: center;
+  -moz-text-align-last: center;
+       text-align-last: center;
 }
 
 option {
