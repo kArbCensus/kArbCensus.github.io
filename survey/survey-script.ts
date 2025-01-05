@@ -421,6 +421,56 @@ async function confirmUpdate() {
     }
 }
 
+async function getFocalTree(plotId: number): Promise<number> {
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    let focalUrl = await globalThis.baseApiUrl + "focal-tree";
+
+    // Add query options
+    focalUrl += `?plot=${plotId}`;
+
+    // Add authentication token to headers
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+
+    // Make an API request for the focal tree of the plot
+    const apiRes = await fetch(focalUrl, {
+        headers,
+        method: "GET",
+    });
+    if (!apiRes.ok) throw new Error("Error fetching focal tree " + await apiRes.text());
+
+    const { focalTree } = await apiRes.json() as FocalTreeByPlot;
+
+    return focalTree;
+}
+
+async function setFocalTree(plotId: number, focalTree: number) {
+    await globalThis.authTokenReady;
+
+    // Get the API endpoint
+    let focalUrl = await globalThis.baseApiUrl + "focal-tree";
+
+    // Add authentication token to headers
+    const headers = {
+        "Authorization": `Bearer ${globalThis.authToken}`
+    };
+
+    // Create payload and make API request to set focal tree
+    const payload: FocalTreeByPlot = {
+        plotId,
+        focalTree,
+    }
+    const apiRes = await fetch(focalUrl, {
+        body: JSON.stringify(payload),
+        headers,
+        method: "PUT",
+    })
+    if (!apiRes.ok) throw new Error("Error setting focal tree " + await apiRes.text());
+}
+
 async function postNewTree(item: tableItem, plotId: number) {
     // Convert table item to payload
     const payload: TreePostPayload = {
@@ -550,6 +600,11 @@ function offModalWarning() {
 
 
 //////////// TYPES TO MAKE INFO FROM DB WORK ////////////
+
+interface FocalTreeByPlot {
+    plotId: number;
+    focalTree: number;
+}
 
 interface CensusStatus {
     year: number;

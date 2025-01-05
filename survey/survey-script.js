@@ -348,6 +348,51 @@ function confirmUpdate() {
         }
     });
 }
+function getFocalTree(plotId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield globalThis.authTokenReady;
+        // Get the API endpoint
+        let focalUrl = (yield globalThis.baseApiUrl) + "focal-tree";
+        // Add query options
+        focalUrl += `?plot=${plotId}`;
+        // Add authentication token to headers
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        // Make an API request for the focal tree of the plot
+        const apiRes = yield fetch(focalUrl, {
+            headers,
+            method: "GET",
+        });
+        if (!apiRes.ok)
+            throw new Error("Error fetching focal tree " + (yield apiRes.text()));
+        const { focalTree } = yield apiRes.json();
+        return focalTree;
+    });
+}
+function setFocalTree(plotId, focalTree) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield globalThis.authTokenReady;
+        // Get the API endpoint
+        let focalUrl = (yield globalThis.baseApiUrl) + "focal-tree";
+        // Add authentication token to headers
+        const headers = {
+            "Authorization": `Bearer ${globalThis.authToken}`
+        };
+        // Create payload and make API request to set focal tree
+        const payload = {
+            plotId,
+            focalTree,
+        };
+        const apiRes = yield fetch(focalUrl, {
+            body: JSON.stringify(payload),
+            headers,
+            method: "PUT",
+        });
+        if (!apiRes.ok)
+            throw new Error("Error setting focal tree " + (yield apiRes.text()));
+    });
+}
 function postNewTree(item, plotId) {
     return __awaiter(this, void 0, void 0, function* () {
         // Convert table item to payload
