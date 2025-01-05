@@ -309,7 +309,7 @@ function createNewTree() {
  * Sets up the modal to change information about a pre-existing tree.
  * @param index the index of the selected tree in our array of trees for the plot.
  */
-function updateCurrentTree(index: number) {
+async function updateCurrentTree(index: number) {
 
     refreshPopUp();
 
@@ -344,9 +344,11 @@ function updateCurrentTree(index: number) {
     const comment = document.getElementById("given-comment") as HTMLInputElement;
     comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
 
-    // TODO: Check if the current tree is a focal tree and update accordingly
+    const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
+    const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
+    const plotFocalTree = await getFocalTree(chosenPlot);
     const isFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement)
-    isFocalTree.checked = false; // TEMPORARILY SETTING THIS TO FALSE
+    isFocalTree.checked = (selectedTableItem.treeId === plotFocalTree);
 
     // Adjusting to PUT to the API
     isNewTree = false;
@@ -388,32 +390,37 @@ async function confirmUpdate() {
     const matchNum = ((document.getElementById("given-match-num") as HTMLSelectElement).selectedIndex) + 1;
     const comment = (document.getElementById("given-comment") as HTMLInputElement).value;
 
-    const isFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement).checked;
+    const isSetFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement).checked;
 
     // Ensuring no clearly inaccurate data isn't sent to the database
     if (configModalWarning(recentTag, dbh)) {
         offModalWarning();
 
         const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+        let treeId: number = -1;
+        
         // POST if a new tree, otherwise PUT
         if (isNewTree) {
-            await postNewTree(treeForAPI, chosenPlot);
+            treeId = await postNewTree(treeForAPI, chosenPlot);
         }
         else {
             treeForAPI.treeId = selectedTableItem.treeId;
+            treeId = treeForAPI.treeId;
             await putCensusEntry(treeForAPI);
         }
 
 
-        // TODO: Update the plot focal tree if applicable
-        // if(isFocalTree)
-        // {
+        // Update the plot focal tree if applicable
+        const focalTree = await getFocalTree(chosenPlot);
 
-        // }
-        // else if(!isFocalTree && isCurrentPlotsFocalTree)
-        // {
-
-        // }
+        if(isSetFocalTree && (treeId !== focalTree))
+        {
+            setFocalTree(chosenPlot, treeId)
+        }
+        else if(!isSetFocalTree && (treeId === focalTree))
+        {
+            setFocalTree(chosenPlot, null);
+        }
 
 
         // Refresh survey table after update
@@ -471,7 +478,7 @@ async function setFocalTree(plotId: number, focalTree: number) {
     if (!apiRes.ok) throw new Error("Error setting focal tree " + await apiRes.text());
 }
 
-async function postNewTree(item: tableItem, plotId: number) {
+async function postNewTree(item: tableItem, plotId: number) : Promise<number> {
     // Convert table item to payload
     const payload: TreePostPayload = {
         species: item.species,
@@ -494,11 +501,16 @@ async function postNewTree(item: tableItem, plotId: number) {
     };
 
     // Make an API request to add/update the census entry
-    await fetch(treesUrl, {
+    const apiRes = await fetch(treesUrl, {
         headers,
         method: "POST",
         body: JSON.stringify(payload)
     });
+
+    // Unpacking the returned tree ID for posting a new entry
+    const {treeId} = await apiRes.json();
+
+    return treeId;
 }
 
 async function putCensusEntry(item: tableItem) {

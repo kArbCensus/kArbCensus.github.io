@@ -263,34 +263,38 @@ function createNewTree() {
  * @param index the index of the selected tree in our array of trees for the plot.
  */
 function updateCurrentTree(index) {
-    refreshPopUp();
-    // Set tableItem variable for confirm update to use
-    selectedTableItem = currentTrees[index];
-    const species = document.createElement("h4");
-    species.appendChild(document.createTextNode("" + selectedTableItem.species));
-    species.id = "given-species";
-    document.getElementById("give-species").appendChild(species);
-    const year = document.getElementById("given-date");
-    year.innerHTML = "" + selectedTableItem.year;
-    const tag = document.getElementById("given-tag");
-    tag.value = "" + selectedTableItem.recentTag;
-    const status = document.getElementById("given-status");
-    status.value = statusName.get(selectedTableItem.status);
-    const sizeClass = document.createElement("h4");
-    sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
-    sizeClass.id = "given-size-class";
-    document.getElementById("give-size-class").appendChild(sizeClass);
-    const dbh = document.getElementById("given-dbh");
-    dbh.value = "" + selectedTableItem.dbh;
-    const matchNum = document.getElementById("given-match-num");
-    matchNum.value = "" + selectedTableItem.matchNum;
-    const comment = document.getElementById("given-comment");
-    comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
-    // TODO: Check if the current tree is a focal tree and update accordingly
-    const isFocalTree = document.getElementById("given-is-focal-tree");
-    isFocalTree.checked = false; // TEMPORARILY SETTING THIS TO FALSE
-    // Adjusting to PUT to the API
-    isNewTree = false;
+    return __awaiter(this, void 0, void 0, function* () {
+        refreshPopUp();
+        // Set tableItem variable for confirm update to use
+        selectedTableItem = currentTrees[index];
+        const species = document.createElement("h4");
+        species.appendChild(document.createTextNode("" + selectedTableItem.species));
+        species.id = "given-species";
+        document.getElementById("give-species").appendChild(species);
+        const year = document.getElementById("given-date");
+        year.innerHTML = "" + selectedTableItem.year;
+        const tag = document.getElementById("given-tag");
+        tag.value = "" + selectedTableItem.recentTag;
+        const status = document.getElementById("given-status");
+        status.value = statusName.get(selectedTableItem.status);
+        const sizeClass = document.createElement("h4");
+        sizeClass.appendChild(document.createTextNode(sizeClassToName.get(selectedTableItem.sizeClass)));
+        sizeClass.id = "given-size-class";
+        document.getElementById("give-size-class").appendChild(sizeClass);
+        const dbh = document.getElementById("given-dbh");
+        dbh.value = "" + selectedTableItem.dbh;
+        const matchNum = document.getElementById("given-match-num");
+        matchNum.value = "" + selectedTableItem.matchNum;
+        const comment = document.getElementById("given-comment");
+        comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
+        const selectPlot = document.getElementById("plot-select");
+        const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
+        const plotFocalTree = yield getFocalTree(chosenPlot);
+        const isFocalTree = document.getElementById("given-is-focal-tree");
+        isFocalTree.checked = (selectedTableItem.treeId === plotFocalTree);
+        // Adjusting to PUT to the API
+        isNewTree = false;
+    });
 }
 /**
  * Adding the information from a filled out survey modal to our database
@@ -323,26 +327,29 @@ function confirmUpdate() {
         const dbh = parseFloat(document.getElementById("given-dbh").value);
         const matchNum = (document.getElementById("given-match-num").selectedIndex) + 1;
         const comment = document.getElementById("given-comment").value;
-        const isFocalTree = document.getElementById("given-is-focal-tree").checked;
+        const isSetFocalTree = document.getElementById("given-is-focal-tree").checked;
         // Ensuring no clearly inaccurate data isn't sent to the database
         if (configModalWarning(recentTag, dbh)) {
             offModalWarning();
             const treeForAPI = new tableItem(-1, treeSpecies, currentCensusYear, recentTag, status, sizeClass, dbh, matchNum, comment);
+            let treeId = -1;
             // POST if a new tree, otherwise PUT
             if (isNewTree) {
-                yield postNewTree(treeForAPI, chosenPlot);
+                treeId = yield postNewTree(treeForAPI, chosenPlot);
             }
             else {
                 treeForAPI.treeId = selectedTableItem.treeId;
+                treeId = treeForAPI.treeId;
                 yield putCensusEntry(treeForAPI);
             }
-            // TODO: Update the plot focal tree if applicable
-            // if(isFocalTree)
-            // {
-            // }
-            // else if(!isFocalTree && isCurrentPlotsFocalTree)
-            // {
-            // }
+            // Update the plot focal tree if applicable
+            const focalTree = yield getFocalTree(chosenPlot);
+            if (isSetFocalTree && (treeId !== focalTree)) {
+                setFocalTree(chosenPlot, treeId);
+            }
+            else if (!isSetFocalTree && (treeId === focalTree)) {
+                setFocalTree(chosenPlot, null);
+            }
             // Refresh survey table after update
             updateSurveyTable();
         }
@@ -414,11 +421,14 @@ function postNewTree(item, plotId) {
             "Authorization": `Bearer ${globalThis.authToken}`
         };
         // Make an API request to add/update the census entry
-        yield fetch(treesUrl, {
+        const apiRes = yield fetch(treesUrl, {
             headers,
             method: "POST",
             body: JSON.stringify(payload)
         });
+        // Unpacking the returned tree ID for posting a new entry
+        const { treeId } = yield apiRes.json();
+        return treeId;
     });
 }
 function putCensusEntry(item) {
