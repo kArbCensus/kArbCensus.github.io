@@ -17,6 +17,8 @@ let isNewTree;
 let selectedTableItem;
 // Promise that resolves as the list of all tree species
 let speciesListPromise;
+// Selected tables focal tree id
+let focalTreeId;
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 /**
  * Adjusts the pop-up button based on whether or not there is an open census
@@ -176,6 +178,8 @@ function updateSurveyTable() {
         // Update and sort current trees
         changeArrFromJson(apiObj);
         sortTrees();
+        // Set the focal tree id for this plot
+        focalTreeId = yield getFocalTree(chosenPlot);
         // Clear out the current items in the table
         const body = document.getElementById("table-body");
         body.innerHTML = '';
@@ -287,11 +291,8 @@ function updateCurrentTree(index) {
         matchNum.value = "" + selectedTableItem.matchNum;
         const comment = document.getElementById("given-comment");
         comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
-        const selectPlot = document.getElementById("plot-select");
-        const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
-        const plotFocalTree = yield getFocalTree(chosenPlot);
         const isFocalTree = document.getElementById("given-is-focal-tree");
-        isFocalTree.checked = (selectedTableItem.treeId === plotFocalTree);
+        isFocalTree.checked = (selectedTableItem.treeId === focalTreeId);
         // Adjusting to PUT to the API
         isNewTree = false;
     });
@@ -343,11 +344,10 @@ function confirmUpdate() {
                 yield putCensusEntry(treeForAPI);
             }
             // Update the plot focal tree if applicable
-            const focalTree = yield getFocalTree(chosenPlot);
-            if (isSetFocalTree && (treeId !== focalTree)) {
+            if (isSetFocalTree && (treeId !== focalTreeId)) {
                 setFocalTree(chosenPlot, treeId);
             }
-            else if (!isSetFocalTree && (treeId === focalTree)) {
+            else if (!isSetFocalTree && (treeId === focalTreeId)) {
                 setFocalTree(chosenPlot, null);
             }
             // Refresh survey table after update

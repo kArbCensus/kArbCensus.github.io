@@ -13,6 +13,9 @@ let selectedTableItem: tableItem;
 // Promise that resolves as the list of all tree species
 let speciesListPromise: Promise<string[]> | null
 
+// Selected tables focal tree id
+let focalTreeId: number;
+
 
 //////////// LOAD IN PAGE FUNCTIONS ////////////
 
@@ -199,6 +202,10 @@ async function updateSurveyTable() {
     sortTrees();
 
 
+    // Set the focal tree id for this plot
+    focalTreeId = await getFocalTree(chosenPlot);
+
+
     // Clear out the current items in the table
     const body = document.getElementById("table-body");
     body.innerHTML = '';
@@ -344,11 +351,8 @@ async function updateCurrentTree(index: number) {
     const comment = document.getElementById("given-comment") as HTMLInputElement;
     comment.value = selectedTableItem.comments === "null" ? "" : selectedTableItem.comments;
 
-    const selectPlot = document.getElementById("plot-select") as HTMLSelectElement;
-    const chosenPlot = parseInt(selectPlot.options[selectPlot.selectedIndex].value);
-    const plotFocalTree = await getFocalTree(chosenPlot);
     const isFocalTree = (document.getElementById("given-is-focal-tree") as HTMLInputElement)
-    isFocalTree.checked = (selectedTableItem.treeId === plotFocalTree);
+    isFocalTree.checked = (selectedTableItem.treeId === focalTreeId);
 
     // Adjusting to PUT to the API
     isNewTree = false;
@@ -411,13 +415,11 @@ async function confirmUpdate() {
 
 
         // Update the plot focal tree if applicable
-        const focalTree = await getFocalTree(chosenPlot);
-
-        if(isSetFocalTree && (treeId !== focalTree))
+        if(isSetFocalTree && (treeId !== focalTreeId))
         {
             setFocalTree(chosenPlot, treeId)
         }
-        else if(!isSetFocalTree && (treeId === focalTree))
+        else if(!isSetFocalTree && (treeId === focalTreeId))
         {
             setFocalTree(chosenPlot, null);
         }
