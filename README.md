@@ -1,12 +1,17 @@
 # The Kalamazoo Arboretum Census App
 
-This repository was created as part of a final project for COMP 484/490: Computing for the Environment and Social Justice to assist in surveying the Lillian Anderson Arboretum. Our app serves as not only a way to conduct censuses of the arboretum but also as a way to interact with a current census (or the most recent one if no census is active) as a whole. 
+This repository was created as part of a final project for **COMP 484/490: Computing for the Environment and Social Justice** to assist in surveying the **Lillian Anderson Arboretum**. Our web app serves as not only a way to conduct censuses of the arboretum but also as a way to interact with a current census (or the most recent one if no census is active) as a whole. 
 
 Our [website](https://kArbCensus.github.io) is available, although currently only to authorized surveyors and admins.
 
 ## Youtube Demo
 
 [![YouTube demo thumbnail with a login page](https://img.youtube.com/vi/1PYRdEkiCJc/maxresdefault.jpg)](https://www.youtube.com/watch?v=1PYRdEkiCJc)
+
+## News Story
+
+Read the K College news story about how a biology major used our app in his senior project:
+[Teamwork Measures the Benefit of a Forest Through the Trees](https://www.kzoo.edu/news/forest-through-the-trees/).
 
 ## Understanding this Repository
 
