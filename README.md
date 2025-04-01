@@ -17,7 +17,7 @@ Read the K College news story about how a biology major used our app in his seni
 
 First, to figure out this repository, you must recognize what it contains. All of the code here is strictly related to the front end of the Kalamazoo Arboretum Census App. To preserve security, all other code (such as the API) will remain private for the foreseeable future.
 
-Second, we have tried to keep our files tidy within this repository. Each page has a folder where it holds all of the files exclusive to it. All shared files, such as scripts around authentication or the HTML for our banner, are located within the _shared folder. As for miscellaneous files, they have been left within the root of the directory, whether that be because they have no best spot or because they are typically left at the root by convention.
+Second, we have tried to keep our files tidy within this repository. Each page has a folder where it holds all of the files exclusive to it. All shared files, such as scripts around authentication or the HTML for our banner, are located within the `_shared` folder. As for miscellaneous files, they have been left within the root of the directory, whether that be because they have no best spot or because they are typically left at the root by convention.
 
 Lastly, we have tried to leave a lot of comments throughout our files to make comprehending our code easier. Hopefully, we were able to write our code concisely, but we would still highly advise reading through the provided comments when applicable. These comments are the best form of documentation we can provide, and considering the fact our team had only a few weeks to focus on this project, they might be the key you need to bring clarity to our madness.
 
