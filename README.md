@@ -4,6 +4,10 @@ This repository was created as part of a final project for COMP 484/490: Computi
 
 Our [website](https://kArbCensus.github.io) is available, although currently only to authorized surveyors and admins.
 
+## Youtube Demo
+
+[![YouTube demo thumbnail with a login page](https://img.youtube.com/vi/1PYRdEkiCJc/maxresdefault.jpg)](https://www.youtube.com/watch?v=1PYRdEkiCJc)
+
 ## Understanding this repository
 
 First, to figure out this repository, you must recognize what it contains. All of the code here is strictly related to the front end of the Kalamazoo Arboretum Census App. To preserve security, all other code (such as the API) will remain private for the foreseeable future.
