@@ -8,7 +8,7 @@ Our [website](https://kArbCensus.github.io) is available, although currently onl
 
 [![YouTube demo thumbnail with a login page](https://img.youtube.com/vi/1PYRdEkiCJc/maxresdefault.jpg)](https://www.youtube.com/watch?v=1PYRdEkiCJc)
 
-## Understanding this repository
+## Understanding this Repository
 
 First, to figure out this repository, you must recognize what it contains. All of the code here is strictly related to the front end of the Kalamazoo Arboretum Census App. To preserve security, all other code (such as the API) will remain private for the foreseeable future.
 
@@ -17,7 +17,7 @@ Second, we have tried to keep our files tidy within this repository. Each page h
 Lastly, we have tried to leave a lot of comments throughout our files to make comprehending our code easier. Hopefully, we were able to write our code concisely, but we would still highly advise reading through the provided comments when applicable. These comments are the best form of documentation we can provide, and considering the fact our team had only a few weeks to focus on this project, they might be the key you need to bring clarity to our madness.
 
 
-## Tech stack within this repository
+## Tech Stack
 
 The technologies we used in this repository are as follows:
 * Typescript - Our main programming language to add functionality to the app
@@ -32,12 +32,12 @@ The technologies we used in this repository are as follows:
 Further technologies can be noted in the creation of this app, namely the use of Supabase with a Postgres database for our back end. However, these technologies are not relevant to this repository;  being familiar with the languages and frameworks above will be enough for comprehension.  
 
 
-## Further contributions
+## Further Contributions
 
 Beyond the work done by our team whilst taking COMP 484/490, very few contributions are planned or are likely to occur by us for the foreseeable future. That said, feel free to expand on this project. Furthermore, if you are working with Dr. Girdler or as part of COMP 484/490 to improve this app, we will be more than willing to answer any questions you might have as well as provide assistance where reasonable.
 
 
-## Questions or concerns
+## Questions or Concerns
 
 If you have any further thoughts or inquiries surrounding this repository or the app as a whole, feel free to reach out to any of the following:
 * Teddy Jacobson at Teddy.Jacobson23@kzoo.edu
